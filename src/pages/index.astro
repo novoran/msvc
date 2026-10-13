@@ -1,39 +1,650 @@
 ---
 import '@/styles/global.css';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+	GraduationCap,
+	Search,
+	ChevronDown,
+	ArrowRight,
+	UserCheck,
+	Handshake,
+	Sliders,
+	ShieldCheck,
+	Star,
+	BookOpen,
+	Compass,
+	Award,
+	Building2,
+	Plane,
+	FileText,
+} from 'lucide-react';
+
+const destinations = [
+	{
+		country: 'Canada',
+		flag: '🇨🇦',
+		tagline: 'Quality Education, Better Opportunities',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDFPW5uEyC0uSKuD5izLCJ_sw_35_g11X2BsMGTnS4dsdFyzLiZjh9SLTQCiM77BVNnKvnF15XABGnkCUY5CI-LshnLVk-qouwla4gjre1xFEb1bybDpPndQT3SLL--Kv_upCjIXIMH3E1eWAVDNR2gipsU2U3i-c28ANRuont4WyGv8PE6hqvBAmTbrEXTDjGVVgFHR78aVoljog4o4dHsk1JWjlNTSP-HEOa4G30',
+	},
+	{
+		country: 'UK',
+		flag: '🇬🇧',
+		tagline: 'World-Class Universities, Global Recognition',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuB32eMev3IMclpc6-a989XHa_t0LKTe7AdS9Oyosuw12XDaQaD9SKsmkSIm4E7NZO3oGbfFJ1YdS4v_l_oB75EZBhpq3k-R96ClqZeYnaUYKyJ_GDC38IEuPWpvBuoyH02QbfFlltm5qfOeW7ENYCmOI26bfpaaN0RiwY6jAfxgnMGpY5pnD7RWjGmR7FzEyOtndx0XFhjKt9l5LIejJE5-v6wPO6KjWTnkmpemwFw',
+	},
+	{
+		country: 'Australia',
+		flag: '🇦🇺',
+		tagline: 'Innovative Learning, High Standard of Living',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuC2_p4QY6yf3eqjFjvW7yBZrBY2cuiBgVZtPYDRpPBw_ZQmVOeSKLZJMZF4Xrz5GbUZEyvu2YG7B9rTI-OUOh1j10Y-VbSQRYzgDiqrsDsEpVoP5RjHscUeLoh-IlH4yIjbBpP6m3AnRLVQ0_d6Zqu86K04t6hlfwc-iu40BMgDMnFdXflDoSGx7eTf9nsU3u5zMeberoeobh1SvbxzZq4v2z2ca2dlGDYOZ0GzxX0',
+	},
+	{
+		country: 'USA',
+		flag: '🇺🇸',
+		tagline: 'Top-Ranked Institutions, Diverse Culture',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuC_tZgBf9qZ7gV4cK1xVb9sUe0t7PzYd1g8mXoPnLqRtWsXyZv-67aQz8l1uB7hK2f3jD5aH6cE9g-mQ9eT3tYlK1oPbSdF',
+	},
+	{
+		country: 'Malaysia',
+		flag: '🇲🇾',
+		tagline: 'Affordable World-Class Degrees & Fast Visas',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuANo7dVaYC5OaY8KsqWvAeW87mmuu8MhdNyz15XQ2EIQkM-GzokS0v2iV8pymzycVdmm_Y3qoAb3MSXuxmNfYXkXfqldtXwwDnvYDZje9bsIqbU33ZtYkQ4hpsljFFAxnyxyrmBWb_9wKOdIvrOWl9dmOc3bbgc_Z-vaHGZE-bW_FvEunz77sqy3SaaPICfYNzYTItg0VF_snxFjdL5PLbEdzVcxz6uZLvLB8G92jc',
+	},
+];
+
+const services = [
+	{
+		title: 'University Admissions',
+		desc: 'Guiding you through applications and secure offers from accredited global universities.',
+		icon: GraduationCap,
+	},
+	{
+		title: 'Visa Processing & VAL',
+		desc: 'Comprehensive documentation, EMGS and single-entry student visa assistance with 99% success rate.',
+		icon: FileText,
+	},
+	{
+		title: 'Scholarship Guidance',
+		desc: 'Maximize your chances of securing partial tuition waivers and institutional scholarships.',
+		icon: Award,
+	},
+	{
+		title: 'Career & Course Selection',
+		desc: 'Personalized profiling to match your future career goals with premier higher-ed courses.',
+		icon: Compass,
+	},
+	{
+		title: 'Pre-Departure Briefing',
+		desc: 'Complete travel, currency, and living preparation before stepping onto the plane.',
+		icon: Plane,
+	},
+	{
+		title: 'Post-Arrival & Accommodation',
+		desc: 'On-ground assistance with airport reception and safe international student housing.',
+		icon: Building2,
+	},
+];
+
+const testimonials = [
+	{
+		quote:
+			'EEDU POINT made my study abroad journey so smooth and stress-free. Their guidance and support were excellent!',
+		name: 'Ayesha Rahman',
+		country: 'Canada',
+		avatar:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuAtwyASqexJTqhI-ZMKrILa0z-iYzGmseGXpCdSiWQzRD8BUNv3omrLEX5eXNsVw0EGY0V0TfdvuGmyHZxJsD_IDPmOVFQMjL8tpDKl9uANDoVIpPcI14IDOwHxRxepSDC6I23S69nMsXtHA0cDo2mYVaN8mp_qv6uIXOlyRl-qHGcpa-gYT7eMGImFtEXY6pWiG-5wYVAk6elLvPlaqjbSbdthv7hQwMv1fbvgrYo',
+	},
+	{
+		quote:
+			'From university selection to visa process, everything was handled professionally. Highly recommended!',
+		name: 'Tanvir Hasan',
+		country: 'UK',
+		avatar:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuBMksgGlLjgK5K7DSI-MxDtRKbG5gF7vPeEc1K-D-cwNnyxTBYGT5F_kRfPR53XPECxcAFmH1-whIcNsqTbkIinklestGBm0bEEUKu3JeyWOzQvjpUU_tEdYxrQQgzhfbJrqLeqlZZmFexZ5d0QZuIxVBq1D9HFJrEyoJmaCK4MQNGBo2_GrWYvKpoJ_CJru4QNB8iUEUJU5HOGkOb9zcqWiQwcWFWs2BEFGlM8BrI',
+	},
+	{
+		quote:
+			"The team was always there to support me. I'm now studying in Australia, and it wouldn't have been possible without them!",
+		name: 'Nusrat Jahan',
+		country: 'Australia',
+		avatar:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuCefEicDh48gdRQtCzQXLu10puzMdha1DT1CRHVu6vMtDW3mNdFxUPJUnxunyVVu9WkwDOhSBjInMjoIEzAVVt4hjWEzu99AkpXRwwQakFZEpR3puxI_-YnCzmGCIRPLO3Z6-ZgHBr70eHyZeL6IwBo3ZzYDljBQu-QOnnj8He4JABdDPuIB0q68LStK0JCNI-6lnPoH5BKuoRBOWkozrv42cgrKIid2Mcq90DPgG8',
+	},
+];
+
+const blogPosts = [
+	{
+		title: 'Top 10 Reasons to Study in Canada',
+		date: 'May 12, 2025',
+		tag: 'Study Tips',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDKGNcw3cBFsneEc3OwSxKsxLPjvZs4zhGA50_66ln649Kq_pb4X_H3Uf1wpKvBGB_q47e5TAT4z6_0N4ShngbuEPm53fKIr1kJq8Liv9xV0Qz2QXSNi6L8MAaKeCiIHuw3i2a8gK2wueerBgYqurKI_om82haOKkStXWJVVTDvc20DPQaKWVms4gnkNlfo3eQ58wE6jTjOc2jTPgv5sOYpDtybPwLg4UHntXlj41g',
+	},
+	{
+		title: 'Step-by-Step Guide to Get a Student Visa',
+		date: 'May 08, 2025',
+		tag: 'Visa Guide',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuCLLikqY-RpZzYZKCjYeA6FfFrWbbMUKrqYaeDLVYCHUHZawMyMn8FqadhJ2PK0OE0saaJ38Q_7IyZrosWkMhdoFTBHQhoZ6YwfMufEn4fw2TG-5OfFMU1V74dfIfMIHP9Y_vn9Cn-DTJU2ljFXkRiztU7RkVQgv9D1Q9j8w9LcC7Cq0TwuxiGBVF6TGxoYf8v5iSMNZ53qfSU-STUeg6xrgb7k07qkIkbV4gMNKuc',
+	},
+	{
+		title: 'Life as an International Student in the UK',
+		date: 'May 03, 2025',
+		tag: 'University Life',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDg7jfOc4SOsD6xpUpI_ph_jeeZ2u0Yd-vdtw4Tcd_o50-tHOb5zH0LpIm1iYvQiB0gquCC0Su2kbQlXj_SJIYtO0XLB5RbkfYpwlN3siHZ4rTsAayeE56rQePT8-VP1CEtV5Fos_m9cKsPcg63_cTQxoAhoEs2elxdbOGamjgoYDpz0FNEAn1ruSplYPMUznlG9qJp_z6og7gMVSB8jVoGVaRK69xonwQACgyRSUA',
+	},
+];
 ---
 
-<html lang="en">
+<html class="scroll-smooth" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>MSVC | Malaysia Student Visa Consultancy</title>
+		<title>EEDU POINT — Study Abroad Consultancy</title>
 		<meta
 			name="description"
-			content="MSVC - Malaysia Student Visa Consultancy. Launching soon."
+			content="EEDU POINT helps you explore global education opportunities, find the right university, and build a brighter future with expert guidance at every step."
 		/>
 	</head>
-	<body class="min-h-screen bg-white text-zinc-900 flex flex-col justify-between p-8 sm:p-12">
-		<header>
-			<span class="text-xl font-black tracking-tight text-zinc-900 select-none">MSVC</span>
-		</header>
+	<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+		<!-- BEGIN: MainHeader -->
+		<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+				<!-- Brand Logo -->
+				<a class="flex items-center gap-3 group" href="#">
+					<div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+						<GraduationCap className="w-5 h-5" />
+					</div>
+					<div class="flex flex-col">
+						<span class="font-extrabold text-xl leading-none tracking-tight text-brand-900 select-none">EEDU POINT</span>
+						<span class="text-[10px] text-slate-400 font-medium tracking-wider uppercase mt-1">Your Global Education Partner</span>
+					</div>
+				</a>
 
-		<main class="max-w-xl my-auto py-16">
-			<span class="inline-block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">
-				Malaysia Student Visa Consultancy
-			</span>
-			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4">
-				We are launching soon.
-			</h1>
-			<p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
-				Your gateway to higher education, admissions, and visa consultancy for studying in Malaysia.
-			</p>
+				<!-- Desktop Navigation Menu -->
+				<nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+					<a class="text-brand-600 hover:text-brand-700 transition-colors" href="#">Home</a>
+					<a class="hover:text-brand-600 transition-colors" href="#about">About</a>
+					<div class="relative group cursor-pointer flex items-center gap-1 hover:text-brand-600">
+						<span>Study Abroad</span>
+						<ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 transition-transform group-hover:rotate-180" />
+					</div>
+					<div class="relative group cursor-pointer flex items-center gap-1 hover:text-brand-600">
+						<span>Services</span>
+						<ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 transition-transform group-hover:rotate-180" />
+					</div>
+					<a class="hover:text-brand-600 transition-colors" href="#blog">Blog</a>
+					<a class="hover:text-brand-600 transition-colors" href="#contact">Contact</a>
+				</nav>
+
+				<!-- Right Header Actions -->
+				<div class="flex items-center gap-3">
+					<button aria-label="Search" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-slate-50 transition-colors">
+						<Search className="w-4 h-4" />
+					</button>
+					<a
+						href="#consultation"
+						class="rounded-full bg-brand-600 hover:bg-brand-700 text-white shadow-sm hover:shadow-md shadow-brand-600/20 font-semibold px-5 py-2 text-sm inline-flex items-center justify-center transition-all"
+					>
+						Book a Consultation
+					</a>
+				</div>
+			</div>
+		</header>
+		<!-- END: MainHeader -->
+
+		<main>
+			<!-- BEGIN: HeroSection -->
+			<section class="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-28 bg-gradient-to-b from-white via-blue-50/20 to-[#F8FAFC]">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+						<!-- Left Hero Column -->
+						<div class="lg:col-span-7 flex flex-col items-start z-10">
+							<Badge variant="secondary" className="px-3.5 py-1.5 rounded-full bg-blue-100/70 border-blue-200/50 text-brand-700 text-xs font-bold tracking-wide uppercase mb-6">
+								Study Abroad Consultancy
+							</Badge>
+
+							<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
+								Your Dream to Study Abroad, <span class="text-brand-600">Our Priority</span>
+							</h1>
+
+							<p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mb-8">
+								EEDU POINT helps you explore global education opportunities, find the right university, and build a brighter future — with expert guidance at every step.
+							</p>
+
+							<!-- CTA Buttons -->
+							<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-12">
+								<a
+									href="#consultation"
+									class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-lg shadow-brand-600/25 transition-all"
+								>
+									<span>Get Free Consultation</span>
+									<ArrowRight className="w-4 h-4 ml-2" />
+								</a>
+								<a
+									href="#destinations"
+									class="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-semibold text-sm transition-all"
+								>
+									Explore Universities
+								</a>
+							</div>
+
+							<!-- Stats Pill -->
+							<div class="w-full sm:w-auto inline-flex flex-wrap items-center gap-6 sm:gap-10 p-4 sm:px-6 sm:py-3.5 rounded-2xl bg-white border border-slate-100 card-shadow">
+								<div class="flex items-center gap-3">
+									<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+										<GraduationCap className="w-5 h-5" />
+									</div>
+									<div>
+										<div class="font-extrabold text-slate-900 text-base leading-none">10K+</div>
+										<div class="text-[11px] text-slate-400 font-medium mt-1">Students Guided</div>
+									</div>
+								</div>
+								<div class="h-8 w-px bg-slate-100 hidden sm:block"></div>
+								<div class="flex items-center gap-3">
+									<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+										<Building2 className="w-5 h-5" />
+									</div>
+									<div>
+										<div class="font-extrabold text-slate-900 text-base leading-none">500+</div>
+										<div class="text-[11px] text-slate-400 font-medium mt-1">Partner Universities</div>
+									</div>
+								</div>
+								<div class="h-8 w-px bg-slate-100 hidden sm:block"></div>
+								<div class="flex items-center gap-3">
+									<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+										<ShieldCheck className="w-5 h-5" />
+									</div>
+									<div>
+										<div class="font-extrabold text-slate-900 text-base leading-none">99%</div>
+										<div class="text-[11px] text-slate-400 font-medium mt-1">Visa Success</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Right Hero Visual -->
+						<div class="lg:col-span-5 flex justify-center items-center relative">
+							<div class="relative w-full max-w-[420px] aspect-[4/5] flex items-center justify-center">
+								<!-- Curved frame backdrop -->
+								<div class="absolute inset-x-2 bottom-6 top-8 rounded-3xl overflow-hidden border border-white shadow-2xl">
+									<img
+										alt="Famous global university and landmarks backdrop"
+										class="w-full h-full object-cover filter contrast-105 brightness-95 opacity-85"
+										src="https://lh3.googleusercontent.com/aida-public/AB6AXuANo7dVaYC5OaY8KsqWvAeW87mmuu8MhdNyz15XQ2EIQkM-GzokS0v2iV8pymzycVdmm_Y3qoAb3MSXuxmNfYXkXfqldtXwwDnvYDZje9bsIqbU33ZtYkQ4hpsljFFAxnyxyrmBWb_9wKOdIvrOWl9dmOc3bbgc_Z-vaHGZE-bW_FvEunz77sqy3SaaPICfYNzYTItg0VF_snxFjdL5PLbEdzVcxz6uZLvLB8G92jc"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-brand-900/40 via-transparent to-blue-900/10"></div>
+								</div>
+								<!-- Front Student Cutout -->
+								<div class="relative z-10 w-4/5 h-full flex items-end justify-center">
+									<img
+										alt="Smiling International Student"
+										class="w-full h-[90%] object-cover object-top rounded-2xl shadow-xl border-4 border-white transform transition-transform hover:scale-[1.02] duration-300"
+										src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQKfR7tUsRkBWq9nnR0Fma_fxBKkJxx6yzb23Gz92TknEe8qxCAgbEF-nur9Ej2m0ilbDYg9i1fIxCtD5nFKvY0pbmh4PvrJn3lRUy6CoJfWfufghAxiHSNOnVGf2Py9NMQaYFMFGGJ0AGAyt9rA-awgOESweAtpSklVk94-WjxMrQCWh2aYVViPJYruoqPmfxN2QVYJCJAuSuggGUVjHRwHeMeSlfy9Ib8JeybPM"
+									/>
+									<div class="absolute bottom-10 left-4 bg-brand-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-md flex items-center gap-1.5">
+										<BookOpen className="w-3.5 h-3.5" />
+										<span>EEDU POINT</span>
+									</div>
+								</div>
+								<!-- Floating Handwritten Badge -->
+								<div class="absolute -top-3 -right-3 sm:right-2 z-20 bg-white/95 backdrop-blur-sm px-4 py-2.5 rounded-2xl shadow-lg border border-slate-100 text-center transform rotate-6">
+									<span class="font-handwriting text-brand-600 text-xl font-bold block leading-tight">Better Education<br /><span class="text-brand-900">Brighter Future</span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- END: HeroSection -->
+
+			<!-- BEGIN: PopularDestinations -->
+			<section class="py-20 bg-white border-t border-slate-100" id="destinations">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+						<div>
+							<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Study Abroad</span>
+							<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Popular Destinations</h2>
+							<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-xl">
+								Explore top study destinations and find the perfect country for your academic journey.
+							</p>
+						</div>
+						<a class="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors group" href="#">
+							<span>View All Countries</span>
+							<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+						</a>
+					</div>
+
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+						{destinations.map((item) => (
+							<Card className="rounded-2xl border-slate-100 card-shadow card-hover overflow-hidden flex flex-col group p-0">
+								<div class="h-36 overflow-hidden relative">
+									<img
+										alt={item.country}
+										class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+										src={item.image}
+									/>
+								</div>
+								<CardContent className="p-4 flex flex-col flex-1 justify-between">
+									<div>
+										<div class="flex items-center gap-2 mb-2">
+											<span class="text-base leading-none">{item.flag}</span>
+											<h3 class="font-bold text-slate-900 text-base">{item.country}</h3>
+										</div>
+										<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">{item.tagline}</p>
+									</div>
+									<div class="pt-4 flex justify-end">
+										<span class="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-slate-400 text-xs transition-colors">
+											<ArrowRight className="w-3.5 h-3.5" />
+										</span>
+									</div>
+								</CardContent>
+							</Card>
+						))}
+					</div>
+				</div>
+			</section>
+			<!-- END: PopularDestinations -->
+
+			<!-- BEGIN: ServicesSection -->
+			<section class="py-20 bg-[#F8FAFC]" id="services">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="grid lg:grid-cols-12 gap-12 items-center">
+						<div class="lg:col-span-4">
+							<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Our Services</span>
+							<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug mb-4">
+								Comprehensive Study Abroad Solutions
+							</h2>
+							<p class="text-slate-500 text-sm sm:text-base leading-relaxed mb-8">
+								From initial counseling to post-arrival support, we provide complete, step-by-step assistance to make your journey hassle-free.
+							</p>
+							<a
+								href="#consultation"
+								class="rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-6 py-2.5 inline-flex items-center justify-center transition-all"
+							>
+								<span>All Services</span>
+								<ArrowRight className="w-4 h-4 ml-2" />
+							</a>
+						</div>
+
+						<div class="lg:col-span-8">
+							<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+								{services.map((service) => {
+									const Icon = service.icon;
+									return (
+										<div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow card-hover flex flex-col justify-between">
+											<div>
+												<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center text-base mb-4">
+													<Icon className="w-5 h-5" />
+												</div>
+												<h3 class="font-bold text-slate-900 text-sm leading-snug mb-1.5">{service.title}</h3>
+												<p class="text-xs text-slate-500 leading-relaxed">{service.desc}</p>
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- END: ServicesSection -->
+
+			<!-- BEGIN: WhyChooseUs -->
+			<section class="py-20 bg-white border-t border-slate-100 overflow-hidden" id="about">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="grid lg:grid-cols-12 gap-12 items-center">
+						<div class="lg:col-span-7">
+							<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Why Choose EEDU POINT</span>
+							<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug mb-4">
+								Your Success is Our Commitment
+							</h2>
+							<p class="text-slate-500 text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
+								We go beyond consultancy — we become your study abroad partner, offering personalized guidance, trusted support, and real opportunities.
+							</p>
+
+							<div class="grid sm:grid-cols-2 gap-6 mb-8">
+								<div class="flex items-start gap-4">
+									<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+										<UserCheck className="w-5 h-5" />
+									</div>
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm mb-1">Expert Guidance</h4>
+										<p class="text-xs text-slate-500 leading-relaxed">Experienced counselors with in-depth knowledge.</p>
+									</div>
+								</div>
+								<div class="flex items-start gap-4">
+									<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+										<Handshake className="w-5 h-5" />
+									</div>
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm mb-1">Trusted Partnerships</h4>
+										<p class="text-xs text-slate-500 leading-relaxed">Tie-ups with top universities worldwide.</p>
+									</div>
+								</div>
+								<div class="flex items-start gap-4">
+									<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+										<Sliders className="w-5 h-5" />
+									</div>
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm mb-1">Personalized Approach</h4>
+										<p class="text-xs text-slate-500 leading-relaxed">Every student's dream is unique. So is our support.</p>
+									</div>
+								</div>
+								<div class="flex items-start gap-4">
+									<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+										<ShieldCheck className="w-5 h-5" />
+									</div>
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm mb-1">High Visa Success Rate</h4>
+										<p class="text-xs text-slate-500 leading-relaxed">Proven track record of successful visa approvals.</p>
+									</div>
+								</div>
+							</div>
+
+							<a
+								href="#about"
+								class="rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-6 py-2.5 inline-flex items-center justify-center transition-all"
+							>
+								<span>Learn More</span>
+								<ArrowRight className="w-4 h-4 ml-2" />
+							</a>
+						</div>
+
+						<div class="lg:col-span-5 flex justify-center relative">
+							<div class="relative w-full max-w-[380px] aspect-[4/5]">
+								<div class="absolute inset-0 bg-brand-600/10 rounded-3xl transform rotate-3"></div>
+								<div class="absolute inset-0 bg-brand-600/20 rounded-3xl transform -rotate-2"></div>
+								<div class="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white shadow-xl bg-white">
+									<img
+										alt="Student with tablet"
+										class="w-full h-full object-cover"
+										src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXOqVU1_3D4cKW7eGVCpzl-RL4IWtLqdmrdcV1nkHhRaIkDJ9eeg0EmmDP9yGSLADdRL5EqlEVQkEGUpuYaJlFo2ltFmkZ2bu-_EsN4X9y6nQQE98wGuUQOewoQ732evwSceqQQNYUCWpxU4gqfk2JXe9xPgu18Dhgq2haF3wvySOtS7BQGTCqOeNs41xRUdx-av1ZPDR5pGPrxJub8AEphYQ2ntUzFdM0CQhg-D8"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-transparent"></div>
+								</div>
+								<div class="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg border border-slate-100 text-center transform rotate-6">
+									<span class="font-handwriting text-brand-600 text-lg font-bold block leading-tight">Global<br />Opportunities<br /><span class="text-slate-800">Awaits</span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- END: WhyChooseUs -->
+
+			<!-- BEGIN: TestimonialsSection -->
+			<section class="py-20 bg-[#F8FAFC]">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+						<div>
+							<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Student Stories</span>
+							<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">What Our Students Say</h2>
+							<p class="text-slate-500 text-sm sm:text-base mt-2">
+								Real stories. Real dreams. Hear from students who made it happen with EEDU POINT.
+							</p>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+						{testimonials.map((test) => (
+							<div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 card-shadow card-hover flex flex-col justify-between">
+								<p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+									"{test.quote}"
+								</p>
+								<div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+									<img alt={test.name} class="w-12 h-12 rounded-full object-cover" src={test.avatar} />
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm">{test.name}</h4>
+										<p class="text-[11px] text-slate-400 font-medium">{test.country}</p>
+										<div class="flex text-amber-400 text-[10px] gap-0.5 mt-1">
+											<Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+											<Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+											<Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+											<Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+											<Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+										</div>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+			<!-- END: TestimonialsSection -->
+
+			<!-- BEGIN: BannerCTA -->
+			<section class="py-14 bg-brand-900 text-white relative overflow-hidden" id="consultation">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+						<div class="max-w-2xl">
+							<span class="text-xs font-bold text-blue-300 tracking-wider uppercase mb-1.5 block">Take the First Step</span>
+							<h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+								Let's Build Your Global Future
+							</h2>
+							<p class="text-blue-100/80 text-sm sm:text-base mt-2">
+								Get expert advice, personalized guidance, and start your study abroad journey today.
+							</p>
+						</div>
+						<div class="shrink-0">
+							<a
+								href="#contact"
+								class="rounded-full bg-white hover:bg-blue-50 text-brand-900 font-bold text-sm shadow-lg shadow-black/10 px-6 py-3.5 inline-flex items-center justify-center transition-all"
+							>
+								<span>Book a Free Consultation</span>
+								<ArrowRight className="w-4 h-4 ml-2" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- END: BannerCTA -->
+
+			<!-- BEGIN: LatestUpdates -->
+			<section class="py-20 bg-white" id="blog">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+						<div>
+							<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Latest Updates</span>
+							<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Insights & Study Abroad Tips</h2>
+							<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-xl">
+								Get the latest news, tips, and guides to help you make the right decisions for your future.
+							</p>
+						</div>
+						<a class="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors group" href="#">
+							<span>View All Articles</span>
+							<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+						</a>
+					</div>
+
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+						{blogPosts.map((post) => (
+							<article class="bg-white rounded-2xl border border-slate-100 card-shadow card-hover overflow-hidden flex flex-col group">
+								<div class="h-48 overflow-hidden relative">
+									<img alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={post.image} />
+									<span class="absolute bottom-3 left-3 bg-brand-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
+										{post.tag}
+									</span>
+								</div>
+								<div class="p-5 flex flex-col flex-1 justify-between">
+									<div>
+										<h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition-colors mb-2 leading-snug">
+											<a href="#">{post.title}</a>
+										</h3>
+										<span class="text-xs text-slate-400 font-medium">{post.date}</span>
+									</div>
+									<div class="pt-4 flex justify-end">
+										<span class="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-slate-400 text-xs transition-colors">
+											<ArrowRight className="w-3.5 h-3.5" />
+										</span>
+									</div>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+			<!-- END: LatestUpdates -->
 		</main>
 
-		<footer class="text-xs text-zinc-400">
-			© {new Date().getFullYear()} MSVC. All rights reserved.
+		<!-- BEGIN: MainFooter -->
+		<footer class="bg-brand-footer text-slate-400 text-xs border-t border-slate-800" id="contact">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800">
+					<div class="flex items-center gap-3">
+						<div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
+							<GraduationCap className="w-5 h-5" />
+						</div>
+						<div>
+							<span class="font-extrabold text-lg text-white tracking-tight select-none">EEDU POINT</span>
+							<p class="text-[10px] text-slate-400">Your Global Education Partner</p>
+						</div>
+					</div>
+
+					<nav class="flex flex-wrap items-center justify-center gap-6 font-medium text-slate-300">
+						<a class="hover:text-white transition-colors" href="#">Home</a>
+						<a class="hover:text-white transition-colors" href="#about">About</a>
+						<a class="hover:text-white transition-colors" href="#destinations">Study Abroad</a>
+						<a class="hover:text-white transition-colors" href="#services">Services</a>
+						<a class="hover:text-white transition-colors" href="#blog">Blog</a>
+						<a class="hover:text-white transition-colors" href="#contact">Contact</a>
+					</nav>
+
+					<div class="flex items-center gap-3">
+						<a aria-label="Facebook" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-600 hover:text-white transition-colors" href="#">
+							<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+						</a>
+						<a aria-label="Instagram" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-600 hover:text-white transition-colors" href="#">
+							<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+						</a>
+						<a aria-label="LinkedIn" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-600 hover:text-white transition-colors" href="#">
+							<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+						</a>
+						<a aria-label="YouTube" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-600 hover:text-white transition-colors" href="#">
+							<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+						</a>
+					</div>
+				</div>
+
+				<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[11px] text-slate-500">
+					<p>© {new Date().getFullYear()} EEDU POINT. All rights reserved.</p>
+					<div class="flex items-center gap-6">
+						<a class="hover:text-slate-300 transition-colors" href="#">Privacy Policy</a>
+						<a class="hover:text-slate-300 transition-colors" href="#">Terms & Conditions</a>
+					</div>
+				</div>
+			</div>
 		</footer>
+		<!-- END: MainFooter -->
 	</body>
 </html>
