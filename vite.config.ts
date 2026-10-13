@@ -1,6 +1,13 @@
 import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
+  // Vite+ Task runner configuration
+  run: {
+    cache: {
+      scripts: true,
+    },
+  },
+
   // Formatting rules (Oxfmt)
   fmt: {
     singleQuote: true,

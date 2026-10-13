@@ -6,12 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "check": "vp check",
-    "check:fix": "vp check --fix",
     "check:astro": "astro check",
-    "lint": "vp lint",
-    "format": "vp fmt",
     "prepare": "vp hooks enable"
   },
   "dependencies": {
