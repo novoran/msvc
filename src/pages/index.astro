@@ -1,6 +1,5 @@
 ---
 import '@/styles/global.css';
-import { viteFeatureDemo } from '@/utils/demo';
 ---
 
 <html lang="en">
@@ -10,27 +9,31 @@ import { viteFeatureDemo } from '@/utils/demo';
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro + Vite + Tailwind CSS</title>
+		<title>MSVC | Malaysia Student Visa Consultancy</title>
+		<meta
+			name="description"
+			content="MSVC - Malaysia Student Visa Consultancy. Launching soon."
+		/>
 	</head>
-	<body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
-		<main class="max-w-xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
-			<div class="flex items-center gap-3 mb-6">
-				<span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 font-bold text-xl border border-indigo-500/20">🚀</span>
-				<div>
-					<h1 class="text-2xl font-bold tracking-tight text-white">Astro + Vite + Tailwind CSS</h1>
-					<p class="text-sm text-slate-400">Powered by Vite+ toolchain</p>
-				</div>
-			</div>
-			
-			<p class="text-slate-300 text-sm mb-4">Features configured and verified:</p>
-			<ul class="space-y-2">
-				{viteFeatureDemo.features.map((feature) => (
-					<li class="flex items-center gap-2 text-sm text-slate-200 bg-slate-800/60 px-3 py-2 rounded-lg border border-slate-700/50">
-						<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-						{feature}
-					</li>
-				))}
-			</ul>
+	<body class="min-h-screen bg-white text-zinc-900 flex flex-col justify-between p-8 sm:p-12">
+		<header>
+			<span class="text-xl font-black tracking-tight text-zinc-900">MSVC</span>
+		</header>
+
+		<main class="max-w-xl my-auto py-16">
+			<span class="inline-block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">
+				Malaysia Student Visa Consultancy
+			</span>
+			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4">
+				We are launching soon.
+			</h1>
+			<p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
+				Your gateway to higher education, admissions, and visa consultancy for studying in Malaysia.
+			</p>
 		</main>
+
+		<footer class="text-xs text-zinc-400">
+			© {new Date().getFullYear()} MSVC. All rights reserved.
+		</footer>
 	</body>
 </html>
