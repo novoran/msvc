@@ -1,4 +1,5 @@
 ---
+import { viteFeatureDemo } from '@/utils/demo';
 ---
 
 <html lang="en">
@@ -8,9 +9,17 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Astro + Vite</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main>
+			<h1>Astro + Vite Project</h1>
+			<p>Project initialized with Astro latest and enhanced Vite features:</p>
+			<ul>
+				{viteFeatureDemo.features.map((feature) => (
+					<li>{feature}</li>
+				))}
+			</ul>
+		</main>
 	</body>
 </html>
