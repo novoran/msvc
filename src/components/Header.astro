@@ -7,13 +7,13 @@ import Button from '@/components/ui/Button.astro';
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 		<!-- Brand Logo -->
-		<a class="flex items-center gap-3 group" href="#">
+		<a class="flex items-center gap-3" href="/" aria-label="MSVC Home">
 			<Image
 				src={logoImage}
 				alt="MSVC Logo"
 				width={44}
 				height={44}
-				class="w-11 h-11 object-contain group-hover:scale-105 transition-transform"
+				class="w-11 h-11 object-contain"
 			/>
 			<div class="flex flex-col">
 				<span class="font-extrabold text-xl leading-none tracking-tight text-brand-900 select-none">MSVC</span>
@@ -23,17 +23,17 @@ import Button from '@/components/ui/Button.astro';
 
 		<!-- Desktop Navigation Menu -->
 		<nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
-			<a class="hover:text-brand-600 transition-colors" href="#destinations">Destinations</a>
-			<a class="hover:text-brand-600 transition-colors" href="#destinations">Universities</a>
-			<a class="hover:text-brand-600 transition-colors" href="#services">Services</a>
-			<a class="hover:text-brand-600 transition-colors" href="#about">Visa (EMGS)</a>
-			<a class="hover:text-brand-600 transition-colors" href="#blog">Blog</a>
-			<a class="hover:text-brand-600 transition-colors" href="#about">About</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#destinations">Destinations</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#destinations">Universities</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#services">Services</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#about">Visa (EMGS)</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#blog">Blog</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#about">About</a>
 		</nav>
 
 		<!-- Right Header Actions -->
 		<div class="flex items-center gap-3">
-			<Button href="#consultation" variant="primary" size="md">
+			<Button href="/#consultation" variant="primary" size="md">
 				Book Free Consultation
 			</Button>
 		</div>

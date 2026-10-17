@@ -1,0 +1,150 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { AlertCircle, CheckCircle2, GraduationCap, Scale } from '@lucide/astro';
+
+const lastUpdated = 'October 15, 2026';
+---
+
+<BaseLayout
+	title="Terms & Conditions | MSVC - Malaysia Student Visa Consultancy"
+	description="Review the service terms, student responsibilities, fee transparency, and consultancy agreement for university admission and EMGS visa support with MSVC."
+>
+	<!-- Hero Header with same max-w-7xl grid as home page -->
+	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<Badge variant="brand" class="mb-6">
+					Service Agreement
+				</Badge>
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
+					Terms & <span class="text-brand-600">Conditions</span>
+				</h1>
+				<p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-4">
+					Clear, transparent guidelines outlining our consultancy services, student responsibilities, and official Malaysian visa procedures.
+				</p>
+				<span class="inline-block text-xs text-slate-400 font-medium">
+					Last Updated: {lastUpdated}
+				</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- Content Section matching home page max-w-7xl grid -->
+	<section class="pb-20">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- Quick Key Principles matching home page 3-col card grid -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
+					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+						<Scale class="w-5 h-5" />
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 text-sm mb-1">Transparent Guidance</h3>
+						<p class="text-xs text-slate-500 leading-relaxed">No hidden consultancy costs. Honest eligibility assessments.</p>
+					</div>
+				</div>
+
+				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
+					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+						<GraduationCap class="w-5 h-5" />
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 text-sm mb-1">Official Representation</h3>
+						<p class="text-xs text-slate-500 leading-relaxed">Direct channel with recognized Malaysian colleges & universities.</p>
+					</div>
+				</div>
+
+				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
+					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+						<AlertCircle class="w-5 h-5" />
+					</div>
+					<div>
+						<h3 class="font-bold text-slate-900 text-sm mb-1">Immigration Authority</h3>
+						<p class="text-xs text-slate-500 leading-relaxed">Final VAL approvals rest with Malaysian Immigration & EMGS.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main Article Body matching home page card style -->
+			<div class="bg-white rounded-2xl border border-slate-100 card-shadow p-6 sm:p-10 lg:p-12 space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						1. Agreement to Terms
+					</h2>
+					<p>
+						By engaging the counseling services of Malaysia Student Visa Consultancy (<strong>"MSVC"</strong>) or using this website, you agree to comply with and be bound by these Terms & Conditions. If you do not accept these terms, please refrain from submitting applications through our platform.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						2. Scope of Services
+					</h2>
+					<p class="mb-4">
+						MSVC provides advisory and processing assistance for international students, including:
+					</p>
+					<ul class="space-y-3 pl-2">
+						<li class="flex items-start gap-3">
+							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span>Academic course matching and submission of university applications.</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span>Guidance on EMGS documentation, medical screenings, and VAL application submissions.</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span>Pre-departure briefings, accommodation advice, and airport arrival coordination.</span>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						3. Student Responsibilities
+					</h2>
+					<p class="mb-3">To ensure a seamless admission and visa process, candidates must:</p>
+					<ul class="list-disc pl-6 space-y-2">
+						<li>Furnish genuine, authentic, and unaltered academic credentials and financial proofs.</li>
+						<li>Promptly remit required statutory fees (university application fees, EMGS processing fees) directly via official institutional invoice channels.</li>
+						<li>Comply with Malaysian Immigration laws and university attendance regulations upon arrival.</li>
+					</ul>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						4. Disclaimer on Admission & Visa Decisions
+					</h2>
+					<p>
+						While MSVC holds a proven track record exceeding 99% visa success rate, <strong>final admission decisions are made solely by the respective academic institutions</strong>, and <strong>Visa Approval Letters (VAL) / student pass decisions are made exclusively by Education Malaysia Global Services (EMGS) and the Malaysian Immigration Department</strong>. MSVC cannot legally guarantee positive outcomes where applicant criteria or governmental prerequisites are unfulfilled.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						5. Fees, Invoices & Refunds
+					</h2>
+					<p>
+						Initial consultations with MSVC counselors are free of charge. Where specialized processing or translation services are requested, all charges are clearly invoiced in advance. University tuition, EMGS processing fees, and government visa charges are subject to the refund policies of the respective universities and statutory bodies.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						6. Governing Law & Contact
+					</h2>
+					<p>
+						These terms are governed by the applicable laws of Malaysia. For inquiries or clarification regarding these Terms & Conditions, please contact us at <a href="mailto:ssss@gmail.com" class="font-semibold text-brand-600 hover:text-brand-700 underline underline-offset-2">ssss@gmail.com</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

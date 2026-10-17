@@ -6,7 +6,7 @@ import logoImage from '@/assets/logo.png';
 <footer class="bg-brand-footer text-slate-400 text-xs border-t border-slate-900" id="contact">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 		<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
-			<div class="flex items-center gap-3">
+			<a class="flex items-center gap-3 text-inherit no-underline" href="/" aria-label="MSVC Home">
 				<Image
 					src={logoImage}
 					alt="MSVC Logo"
@@ -18,15 +18,15 @@ import logoImage from '@/assets/logo.png';
 					<span class="font-black text-xl text-white tracking-tight select-none">MSVC</span>
 					<p class="text-[10px] text-slate-400 font-medium">Malaysia Student Visa Consultancy</p>
 				</div>
-			</div>
+			</a>
 
 			<nav class="flex flex-wrap items-center justify-center gap-6 font-medium text-slate-300">
-				<a class="hover:text-brand-400 transition-colors" href="#destinations">Destinations</a>
-				<a class="hover:text-brand-400 transition-colors" href="#destinations">Universities</a>
-				<a class="hover:text-brand-400 transition-colors" href="#services">Services</a>
-				<a class="hover:text-brand-400 transition-colors" href="#about">Visa (EMGS)</a>
-				<a class="hover:text-brand-400 transition-colors" href="#blog">Blog</a>
-				<a class="hover:text-brand-400 transition-colors" href="#about">About</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#destinations">Destinations</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#destinations">Universities</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#services">Services</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#about">Visa (EMGS)</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#blog">Blog</a>
+				<a class="hover:text-brand-400 transition-colors" href="/#about">About</a>
 			</nav>
 
 			<div class="flex items-center gap-3">
@@ -48,8 +48,8 @@ import logoImage from '@/assets/logo.png';
 		<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[11px] text-slate-500">
 			<p>© {new Date().getFullYear()} MSVC (Malaysia Student Visa Consultancy). All rights reserved.</p>
 			<div class="flex items-center gap-6">
-				<a class="hover:text-slate-300 transition-colors" href="#">Privacy Policy</a>
-				<a class="hover:text-slate-300 transition-colors" href="#">Terms & Conditions</a>
+				<a class="hover:text-slate-300 transition-colors" href="/privacy-policy">Privacy Policy</a>
+				<a class="hover:text-slate-300 transition-colors" href="/terms-and-conditions">Terms & Conditions</a>
 			</div>
 		</div>
 	</div>
