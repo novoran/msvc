@@ -46,10 +46,10 @@ const features = [
 	</section>
 
 	<!-- Content Section matching home page max-w-7xl grid -->
-	<section class="pb-20">
+	<section class="pt-4 pb-16 lg:pb-20">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<!-- Quick Trust Highlights using FeatureCard without shadow -->
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 lg:mb-12">
 				{features.map((f) => (
 					<FeatureCard
 						title={f.title}
@@ -60,7 +60,7 @@ const features = [
 			</div>
 
 			<!-- Main Article Body - Clean, unboxed text flow with no artificial bg, border, or shadow -->
-			<div class="space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
+			<div class="space-y-8 sm:space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
 				<div>
 					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
 						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
