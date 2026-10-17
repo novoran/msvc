@@ -8,6 +8,11 @@ export const contactConfig = {
 	// Official WhatsApp Direct Business Link
 	whatsappUrl: 'https://wa.me/message/VOYUW3VRYYT7N1',
 
+	// Social & Consultation Channels
+	facebookUrl: 'https://facebook.com',
+	linkedinUrl: 'https://linkedin.com',
+	youtubeUrl: 'https://youtube.com',
+
 	// Helper for university-specific inquiries (appends query param or fallback to direct link)
 	getUniversityWhatsappUrl: (_uniName?: string) =>
 		'https://wa.me/message/VOYUW3VRYYT7N1',
