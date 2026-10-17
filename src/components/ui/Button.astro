@@ -8,6 +8,8 @@ export interface Props extends HTMLAttributes<'button'> {
 	variant?: ButtonVariant;
 	size?: ButtonSize;
 	href?: string;
+	iconLeading?: any;
+	iconTrailing?: any;
 	class?: string;
 }
 
@@ -15,6 +17,8 @@ const {
 	variant = 'primary',
 	size = 'md',
 	href,
+	iconLeading: IconLeading,
+	iconTrailing: IconTrailing,
 	class: className = '',
 	...rest
 } = Astro.props;
@@ -24,7 +28,7 @@ const baseStyles =
 
 const variants: Record<ButtonVariant, string> = {
 	primary:
-		'bg-brand-600 text-white hover:bg-brand-700 shadow-md shadow-brand-600/20 active:scale-[0.98]',
+		'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-600/25 active:scale-[0.98]',
 	secondary:
 		'bg-blue-50 text-brand-700 hover:bg-blue-100/80 border border-blue-200/50',
 	outline:
@@ -38,21 +42,37 @@ const variants: Record<ButtonVariant, string> = {
 const sizes: Record<ButtonSize, string> = {
 	sm: 'text-xs px-3.5 py-1.5 gap-1.5',
 	md: 'text-sm px-6 py-3 gap-2',
-	lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5 shadow-lg shadow-brand-600/25',
+	lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5',
 	icon: 'w-8 h-8 p-0 rounded-full',
 };
 
+const iconSizes: Record<ButtonSize, string> = {
+	sm: 'w-3.5 h-3.5',
+	md: 'w-4 h-4',
+	lg: 'w-4 h-4 sm:w-4.5 sm:h-4.5',
+	icon: 'w-4 h-4',
+};
+
 const classes = [baseStyles, variants[variant], sizes[size], className].filter(Boolean).join(' ');
+const iconClass = iconSizes[size];
 ---
 
 {
 	href ? (
 		<a href={href} class={classes} {...(rest as HTMLAttributes<'a'>)}>
+			{IconLeading && <IconLeading class={iconClass} />}
+			<slot name="leading" />
 			<slot />
+			<slot name="trailing" />
+			{IconTrailing && <IconTrailing class={iconClass} />}
 		</a>
 	) : (
 		<button class={classes} {...rest}>
+			{IconLeading && <IconLeading class={iconClass} />}
+			<slot name="leading" />
 			<slot />
+			<slot name="trailing" />
+			{IconTrailing && <IconTrailing class={iconClass} />}
 		</button>
 	)
 }
