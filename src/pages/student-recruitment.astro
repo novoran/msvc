@@ -1,0 +1,378 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { recruitmentUniversities } from '@/data/recruitment';
+import { contactConfig } from '@/utils/contact';
+import {
+	GraduationCap,
+	CalendarCheck,
+	CheckCircle2,
+	Clock,
+	Award,
+	FileText,
+	ArrowRight,
+	Sparkles,
+	MapPin,
+	ShieldCheck,
+	HelpCircle,
+	DollarSign,
+	Building2,
+	Mail,
+} from '@lucide/astro';
+
+const steps = [
+	{
+		step: '01',
+		title: 'Free Profile & Document Review',
+		desc: 'Send your academic certificates (SSC, HSC, transcripts) to MSVC. We verify eligibility for your target program within 24 hours.',
+	},
+	{
+		step: '02',
+		title: 'Fast-Track Offer Letter (LOA)',
+		desc: 'We submit your application directly to the university admissions board to secure your unconditional or conditional Offer Letter.',
+	},
+	{
+		step: '03',
+		title: 'EMGS Visa Approval Letter (VAL)',
+		desc: 'Our visa specialists lodge your EMGS application with full medical report and immigration vetting. Track your yellow/green approval bar.',
+	},
+	{
+		step: '04',
+		title: 'Single Entry Visa (e-Visa) & Fly',
+		desc: 'Receive your eVAL, apply for e-Visa at the Malaysian High Commission, book flights, and receive MSVC airport pickup assistance.',
+	},
+];
+
+const perks = [
+	{
+		icon: Clock,
+		title: '48-Hour Offer Letters',
+		desc: 'Direct liaison with university admission desks means priority processing without third-party bottlenecks.',
+	},
+	{
+		icon: Award,
+		title: 'Up to 50% Scholarships',
+		desc: 'Merit-based scholarships and fee waivers assessed directly upon submitting your application with MSVC.',
+	},
+	{
+		icon: ShieldCheck,
+		title: '100% EMGS Compliance',
+		desc: 'Error-free document preparation guarantees prompt VAL processing by Education Malaysia Global Services.',
+	},
+	{
+		icon: Building2,
+		title: 'Hostel & Airport Meet',
+		desc: 'Airport pick-up from KLIA 1/2 and confirmed on-campus or partner student accommodation before you depart.',
+	},
+];
+---
+
+<BaseLayout
+	title="Student Recruitment 2026/2027 | MSVC - Direct Partner Malaysian Universities"
+	description="Official student recruitment portal for Malaysian universities. Apply for INTI, Lincoln, UOW Malaysia, and APU with fast-track offer letters, up to 50% scholarship matching, and EMGS visa clearance."
+>
+	<!-- Hero Section -->
+	<section class="relative overflow-hidden pt-12 pb-14 lg:pt-16 lg:pb-16 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC] border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<Badge
+					variant="blue"
+					size="sm"
+					iconLeading={Sparkles}
+					class="mb-4"
+				>
+					Official University Admissions 2026 / 2027
+				</Badge>
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.12] mb-6">
+					Student Recruitment <br class="hidden sm:inline" />
+					<span class="text-brand-600">for Top Universities</span>
+				</h1>
+				<p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
+					Direct application channel with recognized Malaysian institutions. Fast-track admission letters, merit scholarship assessments, and end-to-end EMGS Student Visa management.
+				</p>
+				<div class="flex flex-wrap items-center gap-4">
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="lg"
+					>
+						Apply For Upcoming Intake
+					</Button>
+					<Button
+						href="#universities"
+						variant="secondary"
+						size="lg"
+					>
+						View Universities & Intakes
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Key Student Benefits -->
+	<section class="py-12 bg-white border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{perks.map((p) => (
+					<div class="flex flex-col p-6 rounded-2xl bg-slate-50/70 border border-slate-100 hover:border-brand-200 transition-colors">
+						<div class="w-10 h-10 rounded-xl bg-brand-600/10 text-brand-600 flex items-center justify-center mb-4">
+							<p.icon class="w-5 h-5" />
+						</div>
+						<h3 class="font-bold text-slate-900 text-base mb-1.5">{p.title}</h3>
+						<p class="text-slate-500 text-xs sm:text-sm leading-relaxed">{p.desc}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Partner Universities Detailed Directory -->
+	<section class="py-16 lg:py-20 bg-[#F8FAFC]" id="universities">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Partner Institutions</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1">Active Recruitment Programs</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Explore current admission criteria, open intakes, approximate tuition fees, and scholarship availability.
+				</p>
+			</div>
+
+			<div class="space-y-8">
+				{recruitmentUniversities.map((uni) => (
+					<article class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden hover:border-brand-300 transition-all flex flex-col lg:flex-row">
+						<!-- Image & Badges -->
+						<div class="relative lg:w-2/5 min-h-[260px] lg:min-h-full">
+							<img
+								src={uni.image}
+								alt={uni.name}
+								class="w-full h-full object-cover"
+								loading="lazy"
+							/>
+							<div class="absolute inset-0 bg-linear-to-t from-slate-950/70 via-slate-950/20 to-transparent lg:hidden" />
+							<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+								<Badge variant="dark" size="xs">{uni.badge}</Badge>
+								{uni.scholarshipAvailable && (
+									<Badge variant="emerald" size="xs" iconLeading={Award}>
+										Scholarship Open
+									</Badge>
+								)}
+							</div>
+							<div class="absolute bottom-4 left-4 right-4 text-white lg:hidden">
+								<h3 class="text-xl font-bold">{uni.name}</h3>
+								<p class="text-xs text-slate-200 mt-0.5">{uni.location}</p>
+							</div>
+						</div>
+
+						<!-- Details Content -->
+						<div class="p-6 sm:p-8 lg:w-3/5 flex flex-col justify-between">
+							<div>
+								<div class="hidden lg:flex items-center justify-between gap-4 mb-2">
+									<h3 class="text-2xl font-extrabold text-slate-900">{uni.name}</h3>
+								</div>
+								<div class="hidden lg:flex items-center gap-1.5 text-xs text-slate-500 mb-3 font-medium">
+									<MapPin class="w-3.5 h-3.5 text-brand-600 shrink-0" />
+									<span>{uni.location} • Campuses: {uni.campuses.join(', ')}</span>
+								</div>
+
+								<p class="text-slate-600 text-sm leading-relaxed mb-6">
+									{uni.overview}
+								</p>
+
+								<!-- Meta Grid: Intakes, Fees, Requirements -->
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 pt-4 border-t border-slate-100 text-xs sm:text-sm">
+									<div>
+										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+											<CalendarCheck class="w-3.5 h-3.5 text-brand-600" />
+											Upcoming Intakes
+										</span>
+										<div class="flex flex-wrap gap-1.5 mt-1">
+											{uni.intakes.map((intake) => (
+												<Badge variant="blue" size="xs">
+													{intake}
+												</Badge>
+											))}
+										</div>
+									</div>
+
+									<div>
+										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+											<DollarSign class="w-3.5 h-3.5 text-emerald-600" />
+											Est. Tuition Fees
+										</span>
+										<p class="font-bold text-slate-800 mt-1">{uni.tuitionRange}</p>
+									</div>
+
+									<div class="sm:col-span-2">
+										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+											<GraduationCap class="w-3.5 h-3.5 text-brand-600" />
+											Minimum Admission Criteria
+										</span>
+										<p class="font-medium text-slate-700">{uni.minRequirement}</p>
+									</div>
+
+									<div class="sm:col-span-2">
+										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+											<CheckCircle2 class="w-3.5 h-3.5 text-brand-600" />
+											Popular Faculties
+										</span>
+										<div class="flex flex-wrap gap-1.5 mt-1">
+											{uni.popularFields.map((field) => (
+												<Badge variant="slate" size="xs">
+													{field}
+												</Badge>
+											))}
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Action Buttons -->
+							<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
+								<span class="text-xs text-slate-500 font-medium">
+									⚡ Free offer letter assessment via MSVC
+								</span>
+								<Button
+									href={uni.applyUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									variant="primary"
+									size="md"
+									iconTrailing={ArrowRight}
+								>
+									Apply to {uni.shortName}
+								</Button>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Step by Step Recruitment Roadmap -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14">
+				<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Application Roadmap</span>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">How to Apply with MSVC</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					A transparent 4-step journey from submitting your academic transcripts to receiving your student visa and landing in Malaysia.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+				{steps.map((s) => (
+					<div class="relative p-6 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex flex-col justify-between">
+						<div>
+							<span class="text-3xl font-black text-brand-600/30 mb-3 block">{s.step}</span>
+							<h3 class="text-base font-bold text-slate-900 mb-2">{s.title}</h3>
+							<p class="text-slate-500 text-xs sm:text-sm leading-relaxed">{s.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Documents Checklist Section -->
+	<section class="py-16 bg-[#F8FAFC] border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl mx-auto rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-10">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+						<FileText class="w-5 h-5" />
+					</div>
+					<div>
+						<h3 class="text-xl sm:text-2xl font-bold text-slate-900">Required Documents Checklist</h3>
+						<p class="text-xs sm:text-sm text-slate-500">Prepare soft copies (PDF/Clear Scans) for immediate assessment</p>
+					</div>
+				</div>
+
+				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Passport all pages (min. 18 months validity)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>High School / HSC / O & A-Level Certificate & Transcripts</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Passport-size photo with white background (35x45mm)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Bachelor Degree Certificate & Transcripts (for Master/PhD)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>IELTS / TOEFL / PTE score sheet (if already taken)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CheckCircle2 class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Updated CV / Resume (for postgraduate applicants)</span>
+					</li>
+				</ul>
+
+				<div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+					<span class="text-xs text-slate-500 text-center sm:text-left">
+						Need help scanning or checking your certificate equivalents?
+					</span>
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="sm"
+					>
+						Send Documents via WhatsApp
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Bottom Consultation Banner -->
+	<section class="py-16 bg-white border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="bg-linear-to-r from-brand-900 to-brand-800 rounded-3xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8">
+				<div class="max-w-2xl">
+					<span class="text-brand-300 text-xs font-bold tracking-wider uppercase mb-2 block">Direct Admission Assistance</span>
+					<h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
+						Ready to Begin Your Malaysian Degree?
+					</h2>
+					<p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+						Speak directly with an MSVC senior counselor on WhatsApp. We will evaluate your profile, recommend the highest scholarship options, and guide you through the EMGS visa timeline.
+					</p>
+				</div>
+				<div class="shrink-0 flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="white"
+						size="lg"
+						iconTrailing={ArrowRight}
+						class="w-full sm:w-auto justify-center"
+					>
+						Chat on WhatsApp
+					</Button>
+					<Button
+						href={`mailto:${contactConfig.email}?subject=Student%20Recruitment%20Inquiry`}
+						variant="ghost"
+						size="lg"
+						iconLeading={Mail}
+						class="w-full sm:w-auto justify-center text-white/90 hover:text-white bg-white/10 hover:bg-white/15 border border-white/15 shadow-sm"
+					>
+						Email Us
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import Badge from '@/components/ui/Badge.astro';
+
 export interface Props {
 	name: string;
 	location: string;
@@ -37,9 +39,11 @@ const {
 			loading="lazy"
 		/>
 		{badge && (
-			<span class="absolute top-3 left-3 bg-brand-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-white/20">
-				{badge}
-			</span>
+			<div class="absolute top-3 left-3">
+				<Badge variant="dark" size="xs">
+					{badge}
+				</Badge>
+			</div>
 		)}
 	</div>
 	<div class="p-4 flex flex-col flex-1 justify-between">
