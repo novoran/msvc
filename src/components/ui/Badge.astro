@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import type { AstroComponent } from '@lucide/astro';
 
 export type BadgeVariant =
 	| 'brand'
@@ -13,11 +14,13 @@ export type BadgeVariant =
 
 export type BadgeSize = 'xs' | 'sm' | 'md';
 
+export type BadgeIcon = AstroComponent;
+
 export interface Props extends HTMLAttributes<'span'> {
 	variant?: BadgeVariant;
 	size?: BadgeSize;
-	iconLeading?: any;
-	iconTrailing?: any;
+	iconLeading?: BadgeIcon;
+	iconTrailing?: BadgeIcon;
 	class?: string;
 }
 

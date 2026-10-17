@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FeatureCard from '@/components/cards/FeatureCard.astro';
-import { AlertCircle, CheckCircle2, GraduationCap, Scale } from '@lucide/astro';
+import { CircleAlert, CircleCheck, GraduationCap, Scale } from '@lucide/astro';
 
 const lastUpdated = 'October 15, 2026';
 
@@ -19,7 +19,7 @@ const features = [
 	{
 		title: 'Immigration Authority',
 		desc: 'Final VAL approvals rest with Malaysian Immigration & EMGS.',
-		icon: AlertCircle,
+		icon: CircleAlert,
 	},
 ];
 ---
@@ -81,15 +81,15 @@ const features = [
 					</p>
 					<ul class="space-y-3 pl-2">
 						<li class="flex items-start gap-3">
-							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
 							<span>Academic course matching and submission of university applications.</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
 							<span>Guidance on EMGS documentation, medical screenings, and VAL application submissions.</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<CheckCircle2 class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
 							<span>Pre-departure briefings, accommodation advice, and airport arrival coordination.</span>
 						</li>
 					</ul>
