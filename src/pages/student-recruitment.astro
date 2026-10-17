@@ -2,20 +2,16 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/ui/Button.astro';
 import Badge from '@/components/ui/Badge.astro';
+import UniversityCardSlider from '@/components/cards/UniversityCardSlider.astro';
 import { recruitmentUniversities } from '@/data/recruitment';
 import { contactConfig } from '@/utils/contact';
 import {
-	GraduationCap,
-	CalendarCheck,
 	CircleCheck,
 	Clock,
 	Award,
 	FileText,
-	ArrowRight,
 	Sparkles,
-	MapPin,
 	ShieldCheck,
-	DollarSign,
 	Building,
 	Mail,
 } from '@lucide/astro';
@@ -142,111 +138,7 @@ const perks = [
 
 			<div class="space-y-8">
 				{recruitmentUniversities.map((uni) => (
-					<article class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden hover:border-brand-300 transition-all flex flex-col lg:flex-row">
-						<!-- Image & Badges -->
-						<div class="relative lg:w-2/5 min-h-[260px] lg:min-h-full">
-							<img
-								src={uni.image}
-								alt={uni.name}
-								class="w-full h-full object-cover"
-								loading="lazy"
-							/>
-							<div class="absolute inset-0 bg-linear-to-t from-slate-950/70 via-slate-950/20 to-transparent lg:hidden" />
-							<div class="absolute top-4 left-4 flex flex-wrap gap-2">
-								<Badge variant="dark" size="xs">{uni.badge}</Badge>
-								{uni.scholarshipAvailable && (
-									<Badge variant="emerald" size="xs" iconLeading={Award}>
-										Scholarship Open
-									</Badge>
-								)}
-							</div>
-							<div class="absolute bottom-4 left-4 right-4 text-white lg:hidden">
-								<h3 class="text-xl font-bold">{uni.name}</h3>
-								<p class="text-xs text-slate-200 mt-0.5">{uni.location}</p>
-							</div>
-						</div>
-
-						<!-- Details Content -->
-						<div class="p-6 sm:p-8 lg:w-3/5 flex flex-col justify-between">
-							<div>
-								<div class="hidden lg:flex items-center justify-between gap-4 mb-2">
-									<h3 class="text-2xl font-extrabold text-slate-900">{uni.name}</h3>
-								</div>
-								<div class="hidden lg:flex items-center gap-1.5 text-xs text-slate-500 mb-3 font-medium">
-									<MapPin class="w-3.5 h-3.5 text-brand-600 shrink-0" />
-									<span>{uni.location} • Campuses: {uni.campuses.join(', ')}</span>
-								</div>
-
-								<p class="text-slate-600 text-sm leading-relaxed mb-6">
-									{uni.overview}
-								</p>
-
-								<!-- Meta Grid: Intakes, Fees, Requirements -->
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 pt-4 border-t border-slate-100 text-xs sm:text-sm">
-									<div>
-										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
-											<CalendarCheck class="w-3.5 h-3.5 text-brand-600" />
-											Upcoming Intakes
-										</span>
-										<div class="flex flex-wrap gap-1.5 mt-1">
-											{uni.intakes.map((intake) => (
-												<Badge variant="blue" size="xs">
-													{intake}
-												</Badge>
-											))}
-										</div>
-									</div>
-
-									<div>
-										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
-											<DollarSign class="w-3.5 h-3.5 text-emerald-600" />
-											Est. Tuition Fees
-										</span>
-										<p class="font-bold text-slate-800 mt-1">{uni.tuitionRange}</p>
-									</div>
-
-									<div class="sm:col-span-2">
-										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
-											<GraduationCap class="w-3.5 h-3.5 text-brand-600" />
-											Minimum Admission Criteria
-										</span>
-										<p class="font-medium text-slate-700">{uni.minRequirement}</p>
-									</div>
-
-									<div class="sm:col-span-2">
-										<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
-											<CircleCheck class="w-3.5 h-3.5 text-brand-600" />
-											Popular Faculties
-										</span>
-										<div class="flex flex-wrap gap-1.5 mt-1">
-											{uni.popularFields.map((field) => (
-												<Badge variant="slate" size="xs">
-													{field}
-												</Badge>
-											))}
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Action Buttons -->
-							<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
-								<span class="text-xs text-slate-500 font-medium">
-									⚡ Free offer letter assessment via MSVC
-								</span>
-								<Button
-									href={uni.applyUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-									variant="primary"
-									size="md"
-									iconTrailing={ArrowRight}
-								>
-									Apply to {uni.shortName}
-								</Button>
-							</div>
-						</div>
-					</article>
+					<UniversityCardSlider university={uni} />
 				))}
 			</div>
 		</div>
