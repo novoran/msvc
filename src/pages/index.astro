@@ -8,7 +8,6 @@ import Services from '@/components/sections/Services.astro';
 import WhyChooseUs from '@/components/sections/WhyChooseUs.astro';
 import Testimonials from '@/components/sections/Testimonials.astro';
 import CtaBanner from '@/components/sections/CtaBanner.astro';
-import LatestUpdates from '@/components/sections/LatestUpdates.astro';
 
 import {
 	GraduationCap,
@@ -130,30 +129,6 @@ const testimonials = [
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuCefEicDh48gdRQtCzQXLu10puzMdha1DT1CRHVu6vMtDW3mNdFxUPJUnxunyVVu9WkwDOhSBjInMjoIEzAVVt4hjWEzu99AkpXRwwQakFZEpR3puxI_-YnCzmGCIRPLO3Z6-ZgHBr70eHyZeL6IwBo3ZzYDljBQu-QOnnj8He4JABdDPuIB0q68LStK0JCNI-6lnPoH5BKuoRBOWkozrv42cgrKIid2Mcq90DPgG8',
 	},
 ];
-
-const blogPosts = [
-	{
-		title: 'Complete Guide to EMGS Student Visa in Malaysia',
-		date: 'May 12, 2025',
-		tag: 'Visa Guide',
-		image:
-			'https://lh3.googleusercontent.com/aida-public/AB6AXuCLLikqY-RpZzYZKCjYeA6FfFrWbbMUKrqYaeDLVYCHUHZawMyMn8FqadhJ2PK0OE0saaJ38Q_7IyZrosWkMhdoFTBHQhoZ6YwfMufEn4fw2TG-5OfFMU1V74dfIfMIHP9Y_vn9Cn-DTJU2ljFXkRiztU7RkVQgv9D1Q9j8w9LcC7Cq0TwuxiGBVF6TGxoYf8v5iSMNZ53qfSU-STUeg6xrgb7k07qkIkbV4gMNKuc',
-	},
-	{
-		title: 'Top Malaysian Universities for International Students',
-		date: 'May 08, 2025',
-		tag: 'University Life',
-		image:
-			'https://lh3.googleusercontent.com/aida-public/AB6AXuDKGNcw3cBFsneEc3OwSxKsxLPjvZs4zhGA50_66ln649Kq_pb4X_H3Uf1wpKvBGB_q47e5TAT4z6_0N4ShngbuEPm53fKIr1kJq8Liv9xV0Qz2QXSNi6L8MAaKeCiIHuw3i2a8gK2wueerBgYqurKI_om82haOKkStXWJVVTDvc20DPQaKWVms4gnkNlfo3eQ58wE6jTjOc2jTPgv5sOYpDtybPwLg4UHntXlj41g',
-	},
-	{
-		title: 'Cost of Living & Part-Time Work Guide in Malaysia',
-		date: 'May 03, 2025',
-		tag: 'Student Tips',
-		image:
-			'https://lh3.googleusercontent.com/aida-public/AB6AXuDg7jfOc4SOsD6xpUpI_ph_jeeZ2u0Yd-vdtw4Tcd_o50-tHOb5zH0LpIm1iYvQiB0gquCC0Su2kbQlXj_SJIYtO0XLB5RbkfYpwlN3siHZ4rTsAayeE56rQePT8-VP1CEtV5Fos_m9cKsPcg63_cTQxoAhoEs2elxdbOGamjgoYDpz0FNEAn1ruSplYPMUznlG9qJp_z6og7gMVSB8jVoGVaRK69xonwQACgyRSUA',
-	},
-];
 ---
 
 <html class="scroll-smooth" lang="en">
@@ -180,7 +155,6 @@ const blogPosts = [
 			<WhyChooseUs />
 			<Testimonials testimonials={testimonials} />
 			<CtaBanner />
-			<LatestUpdates blogPosts={blogPosts} />
 		</main>
 
 		<Footer />
