@@ -1,6 +1,7 @@
 ---
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
+import ImageCarousel from '@/components/ui/ImageCarousel.astro';
 import type { UniversityData } from '@/data/recruitment';
 import {
 	MapPin,
@@ -9,8 +10,6 @@ import {
 	DollarSign,
 	GraduationCap,
 	Award,
-	ChevronLeft,
-	ChevronRight,
 	ExternalLink,
 	ArrowRight,
 } from '@lucide/astro';
@@ -25,75 +24,28 @@ const { university: u, class: className = '' } = Astro.props;
 
 <article
 	class:list={[
-		'bg-white rounded-3xl border border-slate-200/90 overflow-hidden hover:border-brand-300 transition-all flex flex-col lg:flex-row university-compact-card',
+		'bg-white rounded-3xl border border-slate-200/90 overflow-hidden hover:border-brand-300 transition-all flex flex-col lg:flex-row',
 		className,
 	]}
 	data-university-id={u.id}
 >
-	<!-- Left / Top: Interactive Embla Image Slider -->
-	<div class="relative lg:w-5/12 min-h-[260px] sm:min-h-[300px] lg:min-h-full bg-slate-900 overflow-hidden flex flex-col justify-between">
-		<!-- Embla Viewport -->
-		<div class="embla w-full h-full absolute inset-0 overflow-hidden cursor-grab active:cursor-grabbing">
-			<div class="embla__container flex h-full">
-				{u.galleryImages.map((imgUrl, idx) => (
-					<div class="embla__slide relative flex-[0_0_100%] min-w-0 h-full">
-						<img
-							src={imgUrl}
-							alt={`${u.name} campus view ${idx + 1}`}
-							class="w-full h-full object-cover select-none"
-							loading="lazy"
-						/>
-						<div class="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
-					</div>
-				))}
+	<!-- Left / Top: Reusable ImageCarousel component -->
+	<div class="lg:w-5/12 min-h-65 sm:min-h-75 lg:min-h-full">
+		<ImageCarousel
+			images={u.galleryImages}
+			altPrefix={`${u.name} campus view`}
+			class="h-full w-full min-h-65 sm:min-h-75 lg:min-h-full"
+		>
+			<!-- Floating Badges passed via slot -->
+			<div slot="overlay" class="flex flex-wrap gap-2">
+				<Badge variant="dark" size="xs">{u.badge}</Badge>
+				{u.scholarshipAvailable && (
+					<Badge variant="emerald" size="xs" iconLeading={Award}>
+						Scholarship Open
+					</Badge>
+				)}
 			</div>
-		</div>
-
-		<!-- Top Floating Badges -->
-		<div class="relative z-10 p-4 flex flex-wrap gap-2 pointer-events-none">
-			<Badge variant="dark" size="xs">{u.badge}</Badge>
-			{u.scholarshipAvailable && (
-				<Badge variant="emerald" size="xs" iconLeading={Award}>
-					Scholarship Open
-				</Badge>
-			)}
-		</div>
-
-		<!-- Bottom Slider Controls & Dots -->
-		<div class="relative z-10 p-4 flex items-center justify-between pointer-events-auto">
-			<!-- Slider Arrows -->
-			<div class="flex items-center gap-1.5">
-				<button
-					type="button"
-					aria-label="Previous slide"
-					class="embla__prev w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
-				>
-					<ChevronLeft class="w-4 h-4" />
-				</button>
-				<button
-					type="button"
-					aria-label="Next slide"
-					class="embla__next w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
-				>
-					<ChevronRight class="w-4 h-4" />
-				</button>
-			</div>
-
-			<!-- Dots Pagination Indicator -->
-			<div class="embla__dots flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-				{u.galleryImages.map((_, idx) => (
-					<button
-						type="button"
-						aria-label={`Go to slide ${idx + 1}`}
-						data-slide-index={idx}
-						class:list={[
-							'embla__dot w-2 h-2 rounded-full transition-all cursor-pointer',
-							idx === 0 ? 'bg-white w-4' : 'bg-white/40',
-						]}
-					/>
-				))}
-			</div>
-		</div>
+		</ImageCarousel>
 	</div>
 
 	<!-- Right / Bottom: Compact Academic Overview & Requirements -->
@@ -194,53 +146,3 @@ const { university: u, class: className = '' } = Astro.props;
 		</div>
 	</div>
 </article>
-
-<script>
-	import EmblaCarousel from 'embla-carousel';
-
-	function initSliders() {
-		const cards = document.querySelectorAll<HTMLElement>('.university-compact-card');
-
-		cards.forEach((card) => {
-			const emblaNode = card.querySelector<HTMLElement>('.embla');
-			const prevBtn = card.querySelector<HTMLButtonElement>('.embla__prev');
-			const nextBtn = card.querySelector<HTMLButtonElement>('.embla__next');
-			const dots = card.querySelectorAll<HTMLButtonElement>('.embla__dot');
-
-			if (!emblaNode) return;
-
-			const embla = EmblaCarousel(emblaNode, {
-				loop: true,
-				align: 'start',
-				containScroll: 'trimSnaps',
-			});
-
-			const updateDots = () => {
-				const selectedIndex = embla.selectedScrollSnap();
-				dots.forEach((dot, idx) => {
-					if (idx === selectedIndex) {
-						dot.classList.add('bg-white', 'w-4');
-						dot.classList.remove('bg-white/40', 'w-2');
-					} else {
-						dot.classList.remove('bg-white', 'w-4');
-						dot.classList.add('bg-white/40', 'w-2');
-					}
-				});
-			};
-
-			prevBtn?.addEventListener('click', () => embla.scrollPrev());
-			nextBtn?.addEventListener('click', () => embla.scrollNext());
-
-			dots.forEach((dot, idx) => {
-				dot.addEventListener('click', () => embla.scrollTo(idx));
-			});
-
-			embla.on('select', updateDots);
-			embla.on('init', updateDots);
-		});
-	}
-
-	// Initialize on initial load and View Transitions
-	initSliders();
-	document.addEventListener('astro:page-load', initSliders);
-</script>

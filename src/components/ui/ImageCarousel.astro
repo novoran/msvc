@@ -1,0 +1,165 @@
+---
+import { ChevronLeft, ChevronRight } from '@lucide/astro';
+
+export interface Props {
+	images: string[];
+	altPrefix?: string;
+	aspectRatio?: 'video' | 'square' | 'auto' | 'custom';
+	showArrows?: boolean;
+	showDots?: boolean;
+	autoplay?: boolean;
+	loop?: boolean;
+	class?: string;
+}
+
+const {
+	images = [],
+	altPrefix = 'Gallery image',
+	aspectRatio = 'auto',
+	showArrows = true,
+	showDots = true,
+	loop = true,
+	class: className = '',
+} = Astro.props;
+
+const aspectClasses: Record<string, string> = {
+	video: 'aspect-video',
+	square: 'aspect-square',
+	auto: 'h-full w-full',
+	custom: '',
+};
+---
+
+<div
+	class:list={[
+		'relative bg-slate-900 overflow-hidden flex flex-col justify-between group/carousel image-carousel-root select-none',
+		aspectClasses[aspectRatio],
+		className,
+	]}
+	data-loop={loop ? 'true' : 'false'}
+>
+	<!-- Embla Viewport -->
+	<div class="embla w-full h-full absolute inset-0 overflow-hidden cursor-grab active:cursor-grabbing">
+		<div class="embla__container flex h-full">
+			{images.map((imgUrl, idx) => (
+				<div class="embla__slide relative flex-[0_0_100%] min-w-0 h-full">
+					<img
+						src={imgUrl}
+						alt={`${altPrefix} ${idx + 1}`}
+						class="w-full h-full object-cover select-none pointer-events-none"
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
+				</div>
+			))}
+		</div>
+	</div>
+
+	<!-- Top Overlay Slot (e.g. Floating Badges / Labels) -->
+	<div class="relative z-10 p-4 pointer-events-none flex flex-wrap gap-2">
+		<slot name="overlay" />
+	</div>
+
+	<!-- Bottom Controls (Arrows + Dots) -->
+	<div class="relative z-10 p-4 flex items-center justify-between pointer-events-auto">
+		{showArrows && images.length > 1 ? (
+			<div class="flex items-center gap-1.5">
+				<button
+					type="button"
+					aria-label="Previous image"
+					class="embla__prev w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10 active:scale-95"
+				>
+					<ChevronLeft class="w-4 h-4" />
+				</button>
+				<button
+					type="button"
+					aria-label="Next image"
+					class="embla__next w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10 active:scale-95"
+				>
+					<ChevronRight class="w-4 h-4" />
+				</button>
+			</div>
+		) : <div />}
+
+		{showDots && images.length > 1 && (
+			<div class="embla__dots flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+				{images.map((_, idx) => (
+					<button
+						type="button"
+						aria-label={`Go to slide ${idx + 1}`}
+						data-slide-index={idx}
+						class:list={[
+							'embla__dot w-2 h-2 rounded-full transition-all cursor-pointer',
+							idx === 0 ? 'bg-white w-4' : 'bg-white/40',
+						]}
+					/>
+				))}
+			</div>
+		)}
+	</div>
+</div>
+
+<script>
+	import EmblaCarousel from 'embla-carousel';
+
+	function initCarousels() {
+		const carousels = document.querySelectorAll<HTMLElement>('.image-carousel-root');
+
+		carousels.forEach((root) => {
+			// Avoid double initialization
+			if (root.dataset.initialized === 'true') return;
+
+			const emblaNode = root.querySelector<HTMLElement>('.embla');
+			const prevBtn = root.querySelector<HTMLButtonElement>('.embla__prev');
+			const nextBtn = root.querySelector<HTMLButtonElement>('.embla__next');
+			const dots = root.querySelectorAll<HTMLButtonElement>('.embla__dot');
+			const isLoop = root.dataset.loop !== 'false';
+
+			if (!emblaNode) return;
+
+			const embla = EmblaCarousel(emblaNode, {
+				loop: isLoop,
+				align: 'start',
+				containScroll: 'trimSnaps',
+			});
+
+			const updateDots = () => {
+				const selectedIndex = embla.selectedScrollSnap();
+				dots.forEach((dot, idx) => {
+					if (idx === selectedIndex) {
+						dot.classList.add('bg-white', 'w-4');
+						dot.classList.remove('bg-white/40', 'w-2');
+					} else {
+						dot.classList.remove('bg-white', 'w-4');
+						dot.classList.add('bg-white/40', 'w-2');
+					}
+				});
+			};
+
+			prevBtn?.addEventListener('click', (e) => {
+				e.preventDefault();
+				embla.scrollPrev();
+			});
+
+			nextBtn?.addEventListener('click', (e) => {
+				e.preventDefault();
+				embla.scrollNext();
+			});
+
+			dots.forEach((dot, idx) => {
+				dot.addEventListener('click', (e) => {
+					e.preventDefault();
+					embla.scrollTo(idx);
+				});
+			});
+
+			embla.on('select', updateDots);
+			embla.on('init', updateDots);
+
+			root.dataset.initialized = 'true';
+		});
+	}
+
+	initCarousels();
+	document.addEventListener('astro:page-load', initCarousels);
+</script>
