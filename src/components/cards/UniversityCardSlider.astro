@@ -4,14 +4,14 @@ import Button from '@/components/ui/Button.astro';
 import ImageCarousel from '@/components/ui/ImageCarousel.astro';
 import type { UniversityData } from '@/data/recruitment';
 import {
-	MapPin,
-	CalendarCheck,
-	CircleCheck,
-	DollarSign,
-	GraduationCap,
-	Award,
-	ExternalLink,
-	ArrowRight,
+ArrowRight,
+Award,
+CalendarCheck,
+CircleCheck,
+DollarSign,
+ExternalLink,
+GraduationCap,
+MapPin,
 } from '@lucide/astro';
 
 export interface Props {
@@ -80,7 +80,7 @@ const { university: u, class: className = '' } = Astro.props;
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5 pt-3.5 border-t border-slate-100 text-xs">
 				<!-- Intakes -->
 				<div>
-					<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
 						<CalendarCheck class="w-3.5 h-3.5 text-brand-600" />
 						Upcoming Intakes
 					</span>
@@ -95,7 +95,7 @@ const { university: u, class: className = '' } = Astro.props;
 
 				<!-- Tuition Fees -->
 				<div>
-					<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
 						<DollarSign class="w-3.5 h-3.5 text-emerald-600" />
 						Est. Tuition Fees
 					</span>
@@ -104,7 +104,7 @@ const { university: u, class: className = '' } = Astro.props;
 
 				<!-- Admission Criteria -->
 				<div class="sm:col-span-2">
-					<span class="text-slate-400 font-medium block text-xs mb-1 flex items-center gap-1">
+					<span class="text-slate-400 font-medium text-xs mb-1 flex items-center gap-1">
 						<GraduationCap class="w-3.5 h-3.5 text-brand-600" />
 						Minimum Entry Criteria
 					</span>
@@ -113,7 +113,7 @@ const { university: u, class: className = '' } = Astro.props;
 
 				<!-- Popular Faculties -->
 				<div class="sm:col-span-2">
-					<span class="text-slate-400 font-medium block text-xs mb-1.5 flex items-center gap-1">
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
 						<CircleCheck class="w-3.5 h-3.5 text-brand-600" />
 						Popular Programs
 					</span>
