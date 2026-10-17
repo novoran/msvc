@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import logoImage from '@/assets/logo.png';
 import Button from '@/components/ui/Button.astro';
+import { contactConfig } from '@/utils/contact';
 ---
 
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md">
@@ -33,7 +34,13 @@ import Button from '@/components/ui/Button.astro';
 
 		<!-- Right Header Actions -->
 		<div class="flex items-center gap-3">
-			<Button href="/#consultation" variant="primary" size="md">
+			<Button
+				href={contactConfig.whatsappUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				variant="primary"
+				size="md"
+			>
 				Book Free Consultation
 			</Button>
 		</div>

@@ -2,6 +2,7 @@
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
 import { ArrowRight, BookOpen, Building, GraduationCap, ShieldCheck } from '@lucide/astro';
+import { contactConfig } from '@/utils/contact';
 ---
 
 <section class="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-28 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
@@ -26,7 +27,15 @@ import { ArrowRight, BookOpen, Building, GraduationCap, ShieldCheck } from '@luc
 
 				<!-- CTA Buttons -->
 				<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-12">
-					<Button href="#consultation" variant="primary" size="lg" iconTrailing={ArrowRight} class="w-full sm:w-auto">
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="lg"
+						iconTrailing={ArrowRight}
+						class="w-full sm:w-auto"
+					>
 						Get Free Consultation
 					</Button>
 					<Button href="#destinations" variant="outline" size="lg" class="w-full sm:w-auto">

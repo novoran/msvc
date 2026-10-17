@@ -1,6 +1,7 @@
 ---
 import { ArrowRight } from '@lucide/astro';
 import Button from '@/components/ui/Button.astro';
+import { contactConfig } from '@/utils/contact';
 ---
 
 <section class="py-14 bg-brand-900 text-white relative overflow-hidden" id="consultation">
@@ -16,7 +17,14 @@ import Button from '@/components/ui/Button.astro';
 				</p>
 			</div>
 			<div class="shrink-0">
-				<Button href="#consultation" variant="white" size="lg" iconTrailing={ArrowRight}>
+				<Button
+					href={contactConfig.whatsappUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					variant="white"
+					size="lg"
+					iconTrailing={ArrowRight}
+				>
 					Book Free Consultation
 				</Button>
 			</div>
