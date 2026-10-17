@@ -1,9 +1,27 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Badge from '@/components/ui/Badge.astro';
+import FeatureCard from '@/components/cards/FeatureCard.astro';
 import { AlertCircle, CheckCircle2, GraduationCap, Scale } from '@lucide/astro';
 
 const lastUpdated = 'October 15, 2026';
+
+const features = [
+	{
+		title: 'Transparent Guidance',
+		desc: 'No hidden consultancy costs. Honest eligibility assessments.',
+		icon: Scale,
+	},
+	{
+		title: 'Official Representation',
+		desc: 'Direct channel with recognized Malaysian colleges & universities.',
+		icon: GraduationCap,
+	},
+	{
+		title: 'Immigration Authority',
+		desc: 'Final VAL approvals rest with Malaysian Immigration & EMGS.',
+		icon: AlertCircle,
+	},
+];
 ---
 
 <BaseLayout
@@ -14,9 +32,6 @@ const lastUpdated = 'October 15, 2026';
 	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<Badge variant="brand" class="mb-6">
-					Service Agreement
-				</Badge>
 				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
 					Terms & <span class="text-brand-600">Conditions</span>
 				</h1>
@@ -33,41 +48,19 @@ const lastUpdated = 'October 15, 2026';
 	<!-- Content Section matching home page max-w-7xl grid -->
 	<section class="pb-20">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<!-- Quick Key Principles matching home page 3-col card grid -->
+			<!-- Quick Key Principles using FeatureCard without shadow -->
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<Scale class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">Transparent Guidance</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">No hidden consultancy costs. Honest eligibility assessments.</p>
-					</div>
-				</div>
-
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<GraduationCap class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">Official Representation</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">Direct channel with recognized Malaysian colleges & universities.</p>
-					</div>
-				</div>
-
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<AlertCircle class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">Immigration Authority</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">Final VAL approvals rest with Malaysian Immigration & EMGS.</p>
-					</div>
-				</div>
+				{features.map((f) => (
+					<FeatureCard
+						title={f.title}
+						desc={f.desc}
+						icon={f.icon}
+					/>
+				))}
 			</div>
 
-			<!-- Main Article Body matching home page card style -->
-			<div class="bg-white rounded-2xl border border-slate-100 card-shadow p-6 sm:p-10 lg:p-12 space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
+			<!-- Main Article Body - Clean, unboxed text flow with no artificial bg, border, or shadow -->
+			<div class="space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
 				<div>
 					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
 						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>

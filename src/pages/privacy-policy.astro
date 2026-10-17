@@ -1,9 +1,27 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Badge from '@/components/ui/Badge.astro';
+import FeatureCard from '@/components/cards/FeatureCard.astro';
 import { CheckCircle2, Eye, Lock, ShieldCheck } from '@lucide/astro';
 
 const lastUpdated = 'October 15, 2026';
+
+const features = [
+	{
+		title: 'Encrypted Storage',
+		desc: 'Passport & academic scans are stored with strict access controls.',
+		icon: Lock,
+	},
+	{
+		title: 'Official EMGS Use',
+		desc: 'Documents shared strictly with accredited universities & EMGS.',
+		icon: ShieldCheck,
+	},
+	{
+		title: 'No Third-Party Sale',
+		desc: 'We will never sell or rent your personal data to marketing brokers.',
+		icon: Eye,
+	},
+];
 ---
 
 <BaseLayout
@@ -14,9 +32,6 @@ const lastUpdated = 'October 15, 2026';
 	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<Badge variant="brand" class="mb-6">
-					Data Protection & Trust
-				</Badge>
 				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
 					Privacy <span class="text-brand-600">Policy</span>
 				</h1>
@@ -33,41 +48,19 @@ const lastUpdated = 'October 15, 2026';
 	<!-- Content Section matching home page max-w-7xl grid -->
 	<section class="pb-20">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<!-- Quick Trust Highlights matching home page 3-col card grid -->
+			<!-- Quick Trust Highlights using FeatureCard without shadow -->
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<Lock class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">Encrypted Storage</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">Passport & academic scans are stored with strict access controls.</p>
-					</div>
-				</div>
-
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<ShieldCheck class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">Official EMGS Use</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">Documents shared strictly with accredited universities & EMGS.</p>
-					</div>
-				</div>
-
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex items-start gap-4">
-					<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
-						<Eye class="w-5 h-5" />
-					</div>
-					<div>
-						<h3 class="font-bold text-slate-900 text-sm mb-1">No Third-Party Sale</h3>
-						<p class="text-xs text-slate-500 leading-relaxed">We will never sell or rent your personal data to marketing brokers.</p>
-					</div>
-				</div>
+				{features.map((f) => (
+					<FeatureCard
+						title={f.title}
+						desc={f.desc}
+						icon={f.icon}
+					/>
+				))}
 			</div>
 
-			<!-- Main Article Body matching home page card style -->
-			<div class="bg-white rounded-2xl border border-slate-100 card-shadow p-6 sm:p-10 lg:p-12 space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
+			<!-- Main Article Body - Clean, unboxed text flow with no artificial bg, border, or shadow -->
+			<div class="space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
 				<div>
 					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
 						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
