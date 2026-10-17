@@ -64,7 +64,7 @@ export const malaysianUniversities: UniversityData[] = [
 		featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Kelana_Jaya_campus.jpg/1280px-Kelana_Jaya_campus.jpg',
 		galleryImages: [
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Kelana_Jaya_campus.jpg/1280px-Kelana_Jaya_campus.jpg',
-			'https://upload.wikimedia.org/wikipedia/commons/e/ec/Lincoln_University_College_%28220708%29_01.jpg',
+			'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
 		],
 		overview:
