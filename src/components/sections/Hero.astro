@@ -1,0 +1,107 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import { ArrowRight, BookOpen, Building, GraduationCap, ShieldCheck } from '@lucide/astro';
+---
+
+<section class="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-28 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+			<!-- Left Hero Column -->
+			<div class="lg:col-span-7 flex flex-col items-start z-10">
+				<!-- Badge -->
+				<Badge variant="brand" class="mb-6">
+					Malaysia Student Visa Consultancy
+				</Badge>
+
+				<!-- Headline -->
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
+					Your Dream to Study in Malaysia, <span class="text-brand-600">Our Priority</span>
+				</h1>
+
+				<!-- Subtitle -->
+				<p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mb-8">
+					MSVC provides complete guidance for international admissions, EMGS student pass applications, and visa documentation for accredited Malaysian institutions.
+				</p>
+
+				<!-- CTA Buttons -->
+				<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-12">
+					<Button href="#consultation" variant="primary" size="lg" class="w-full sm:w-auto">
+						<span>Get Free Consultation</span>
+						<ArrowRight class="w-4 h-4" />
+					</Button>
+					<Button href="#destinations" variant="outline" size="lg" class="w-full sm:w-auto">
+						Explore Universities
+					</Button>
+				</div>
+
+				<!-- Stats Bar -->
+				<div class="w-full sm:w-auto inline-flex flex-wrap items-center gap-6 sm:gap-10 p-4 sm:px-6 sm:py-3.5 rounded-2xl bg-white border border-slate-100 card-shadow">
+					<div class="flex items-center gap-3">
+						<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+							<GraduationCap class="w-5 h-5" />
+						</div>
+						<div>
+							<div class="font-extrabold text-slate-900 text-base leading-none">10K+</div>
+							<div class="text-xs text-slate-500 font-medium mt-1">Students Guided</div>
+						</div>
+					</div>
+					<div class="hidden sm:block w-px h-8 bg-slate-200"></div>
+					<div class="flex items-center gap-3">
+						<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+							<Building class="w-5 h-5" />
+						</div>
+						<div>
+							<div class="font-extrabold text-slate-900 text-base leading-none">100+</div>
+							<div class="text-xs text-slate-500 font-medium mt-1">Partner Institutions</div>
+						</div>
+					</div>
+					<div class="hidden sm:block w-px h-8 bg-slate-200"></div>
+					<div class="flex items-center gap-3">
+						<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-brand-600">
+							<ShieldCheck class="w-5 h-5" />
+						</div>
+						<div>
+							<div class="font-extrabold text-slate-900 text-base leading-none">99%</div>
+							<div class="text-xs text-slate-500 font-medium mt-1">Visa Success</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right Hero Column (Visual Composition) -->
+			<div class="lg:col-span-5 relative flex justify-center items-center">
+				<div class="relative w-full max-w-115 aspect-4/5 flex items-center justify-center">
+					<!-- Subtle Background Glow -->
+					<div class="absolute inset-0 bg-blue-100/60 rounded-full filter blur-3xl transform -translate-y-4"></div>
+					<!-- Collage Architecture Landmark Backdrop -->
+					<div class="absolute inset-x-2 bottom-6 top-8 rounded-3xl overflow-hidden border border-white shadow-2xl">
+						<img
+							alt="Famous global university and landmarks backdrop"
+							class="w-full h-full object-cover filter contrast-105 brightness-95 opacity-85"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuANo7dVaYC5OaY8KsqWvAeW87mmuu8MhdNyz15XQ2EIQkM-GzokS0v2iV8pymzycVdmm_Y3qoAb3MSXuxmNfYXkXfqldtXwwDnvYDZje9bsIqbU33ZtYkQ4hpsljFFAxnyxyrmBWb_9wKOdIvrOWl9dmOc3bbgc_Z-vaHGZE-bW_FvEunz77sqy3SaaPICfYNzYTItg0VF_snxFjdL5PLbEdzVcxz6uZLvLB8G92jc"
+						/>
+						<div class="absolute inset-0 bg-linear-to-t from-brand-900/40 via-transparent to-blue-900/10"></div>
+					</div>
+					<!-- Front Student Cutout -->
+					<div class="relative z-10 w-4/5 h-full flex items-end justify-center">
+						<img
+							alt="Smiling International Student"
+							class="w-full h-[90%] object-cover object-top rounded-2xl shadow-xl border-4 border-white transform transition-transform hover:scale-[1.02] duration-300"
+							src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQKfR7tUsRkBWq9nnR0Fma_fxBKkJxx6yzb23Gz92TknEe8qxCAgbEF-nur9Ej2m0ilbDYg9i1fIxCtD5nFKvY0pbmh4PvrJn3lRUy6CoJfWfufghAxiHSNOnVGf2Py9NMQaYFMFGGJ0AGAyt9rA-awgOESweAtpSklVk94-WjxMrQCWh2aYVViPJYruoqPmfxN2QVYJCJAuSuggGUVjHRwHeMeSlfy9Ib8JeybPM"
+						/>
+						<!-- Brand Notebook Badge Overlay -->
+						<div class="absolute bottom-10 left-4 bg-brand-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-md flex items-center gap-1.5">
+							<BookOpen class="w-3.5 h-3.5" />
+							<span>MSVC</span>
+						</div>
+					</div>
+					<!-- Floating Handwritten Badge -->
+					<div class="absolute -top-3 -right-3 sm:right-2 z-20 bg-white/95 backdrop-blur-sm px-4 py-2.5 rounded-2xl shadow-lg border border-slate-100 text-center transform rotate-6">
+						<span class="font-handwriting text-brand-600 text-xl font-bold block leading-tight">Better Education<br /><span class="text-brand-900">Brighter Future</span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

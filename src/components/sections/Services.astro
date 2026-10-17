@@ -1,0 +1,55 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import Button from '@/components/ui/Button.astro';
+
+export interface ServiceItem {
+	title: string;
+	desc: string;
+	icon: any;
+}
+
+export interface Props {
+	services: ServiceItem[];
+}
+
+const { services } = Astro.props;
+---
+
+<section class="py-20 bg-[#F8FAFC]" id="services">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="grid lg:grid-cols-12 gap-12 items-start">
+			<div class="lg:col-span-4">
+				<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Our Services</span>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug mb-4">
+					Complete Support for Your Study Abroad Journey
+				</h2>
+				<p class="text-slate-500 text-sm sm:text-base leading-relaxed mb-8">
+					From Malaysian university selection to EMGS student pass approval, we provide end-to-end support to make your dream a reality.
+				</p>
+				<Button href="#services" variant="primary" size="md">
+					<span>Explore Our Services</span>
+					<ArrowRight class="w-4 h-4" />
+				</Button>
+			</div>
+
+			<div class="lg:col-span-8">
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+					{services.map((s) => {
+						const Icon = s.icon;
+						return (
+							<div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow card-hover flex flex-col justify-between">
+								<div>
+									<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center text-base mb-4">
+										<Icon class="w-5 h-5" />
+									</div>
+									<h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">{s.title}</h3>
+									<p class="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
