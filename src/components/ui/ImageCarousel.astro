@@ -1,9 +1,10 @@
 ---
+import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { ChevronLeft, ChevronRight } from '@lucide/astro';
 
 export interface Props {
-	images: string[];
+	images: (ImageMetadata | string)[];
 	altPrefix?: string;
 	aspectRatio?: 'video' | 'square' | 'auto' | 'custom';
 	showArrows?: boolean;
@@ -44,14 +45,25 @@ const aspectClasses: Record<string, string> = {
 		<div class="embla__container flex h-full">
 			{images.map((imgUrl, idx) => (
 				<div class="embla__slide relative flex-[0_0_100%] min-w-0 h-full">
-					<Image
-						src={imgUrl}
-						alt={`${altPrefix} ${idx + 1}`}
-						class="w-full h-full object-cover select-none pointer-events-none"
-						width={900}
-						height={600}
-						loading="lazy"
-					/>
+					{typeof imgUrl === 'string' ? (
+						<Image
+							src={imgUrl}
+							alt={`${altPrefix} ${idx + 1}`}
+							class="w-full h-full object-cover select-none pointer-events-none"
+							width={900}
+							height={600}
+							loading="lazy"
+						/>
+					) : (
+						<Image
+							src={imgUrl}
+							alt={`${altPrefix} ${idx + 1}`}
+							class="w-full h-full object-cover select-none pointer-events-none"
+							width={900}
+							height={600}
+							loading="lazy"
+						/>
+					)}
 					<div class="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 				</div>
 			))}

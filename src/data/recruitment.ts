@@ -1,4 +1,10 @@
+import type { ImageMetadata } from 'astro';
 import { contactConfig } from '@/utils/contact';
+import intiNilaiImg from '@/assets/images/universities/inti-nilai.png';
+import lincolnCampusImg from '@/assets/images/universities/lincoln-campus.jpg';
+import uowKduImg from '@/assets/images/universities/uow-kdu.jpg';
+import apuExteriorImg from '@/assets/images/universities/apu-exterior.jpg';
+import apuInteriorImg from '@/assets/images/universities/apu-interior.jpg';
 
 export interface UniversityData {
 	id: string;
@@ -9,8 +15,8 @@ export interface UniversityData {
 	badge: string;
 	tagline: string;
 	// Official image footage of the university campus
-	featuredImage: string;
-	galleryImages: string[];
+	featuredImage: ImageMetadata | string;
+	galleryImages: (ImageMetadata | string)[];
 	overview: string;
 	intakes: string[];
 	popularFields: string[];
@@ -31,9 +37,9 @@ export const malaysianUniversities: UniversityData[] = [
 		badge: 'UK/US Dual Degrees',
 		tagline: 'World-recognized dual award UK & US degree transfer programs.',
 		// Real campus footage from Wikimedia Commons & public campus repository
-		featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/5/50/INTI_Nilai_Student_Centre.png',
+		featuredImage: intiNilaiImg,
 		galleryImages: [
-			'https://upload.wikimedia.org/wikipedia/commons/5/50/INTI_Nilai_Student_Centre.png',
+			intiNilaiImg,
 			'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
 		],
@@ -61,9 +67,9 @@ export const malaysianUniversities: UniversityData[] = [
 		badge: 'Medicine & Healthcare',
 		tagline: 'Premier healthcare, medicine, nursing, pharmacy and business degrees.',
 		// Real campus footage of Petaling Jaya / Kelana Jaya building
-		featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Kelana_Jaya_campus.jpg/1280px-Kelana_Jaya_campus.jpg',
+		featuredImage: lincolnCampusImg,
 		galleryImages: [
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Kelana_Jaya_campus.jpg/1280px-Kelana_Jaya_campus.jpg',
+			lincolnCampusImg,
 			'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
 		],
@@ -91,9 +97,9 @@ export const malaysianUniversities: UniversityData[] = [
 		badge: 'Australian Degree',
 		tagline: 'Australian accredited curriculum at affordable Malaysian tuition fees.',
 		// Real footage of Utropolis Glenmarie campus from Wikimedia Commons
-		featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/KDU_University_College%2C_Utropolis.jpg',
+		featuredImage: uowKduImg,
 		galleryImages: [
-			'https://upload.wikimedia.org/wikipedia/commons/9/9c/KDU_University_College%2C_Utropolis.jpg',
+			uowKduImg,
 			'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=1200&q=80',
 			'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80',
 		],
@@ -121,10 +127,10 @@ export const malaysianUniversities: UniversityData[] = [
 		badge: 'Top Computing & AI',
 		tagline: '#1 tech & computing university in Malaysia with 100% employability.',
 		// Real campus building footage of APU Technology Park campus
-		featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/UCTI_Exterior.jpg',
+		featuredImage: apuExteriorImg,
 		galleryImages: [
-			'https://upload.wikimedia.org/wikipedia/commons/7/7f/UCTI_Exterior.jpg',
-			'https://upload.wikimedia.org/wikipedia/commons/c/c4/UCTI_Interior.jpg',
+			apuExteriorImg,
+			apuInteriorImg,
 			'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
 		],
 		overview:
