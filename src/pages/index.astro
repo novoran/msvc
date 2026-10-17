@@ -1,7 +1,5 @@
 ---
-import '@/styles/global.css';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import PopularDestinations from '@/components/sections/PopularDestinations.astro';
 import Services from '@/components/sections/Services.astro';
@@ -131,32 +129,14 @@ const testimonials = [
 ];
 ---
 
-<html class="scroll-smooth" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<title>MSVC | Malaysia Student Visa Consultancy</title>
-		<meta
-			name="description"
-			content="MSVC (Malaysia Student Visa Consultancy) is your trusted advisor for university admissions, EMGS visa approval, and global study guidance."
-		/>
-	</head>
-	<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
-		<Header />
-
-		<main>
-			<Hero />
-			<PopularDestinations universities={universities} />
-			<Services services={services} />
-			<WhyChooseUs />
-			<Testimonials testimonials={testimonials} />
-			<CtaBanner />
-		</main>
-
-		<Footer />
-	</body>
-</html>
+<BaseLayout
+	title="MSVC | Malaysia Student Visa Consultancy"
+	description="MSVC (Malaysia Student Visa Consultancy) is your trusted advisor for university admissions, EMGS visa approval, and global study guidance."
+>
+	<Hero />
+	<PopularDestinations universities={universities} />
+	<Services services={services} />
+	<WhyChooseUs />
+	<Testimonials testimonials={testimonials} />
+	<CtaBanner />
+</BaseLayout>
