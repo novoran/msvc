@@ -1,15 +1,20 @@
 ---
-import { GraduationCap } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import logoImage from '@/assets/logo.png';
 import Button from '@/components/ui/Button.astro';
 ---
 
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 		<!-- Brand Logo -->
 		<a class="flex items-center gap-3 group" href="#">
-			<div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-				<GraduationCap class="w-5 h-5" />
-			</div>
+			<Image
+				src={logoImage}
+				alt="MSVC Logo"
+				width={44}
+				height={44}
+				class="w-11 h-11 object-contain group-hover:scale-105 transition-transform"
+			/>
 			<div class="flex flex-col">
 				<span class="font-extrabold text-xl leading-none tracking-tight text-brand-900 select-none">MSVC</span>
 				<span class="text-[10px] text-slate-400 font-medium tracking-wider uppercase mt-1">Malaysia Student Visa Consultancy</span>

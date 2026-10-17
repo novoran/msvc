@@ -1,17 +1,22 @@
 ---
-import { GraduationCap } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import logoImage from '@/assets/logo.png';
 ---
 
 <footer class="bg-brand-footer text-slate-400 text-xs border-t border-slate-900" id="contact">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 		<div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
 			<div class="flex items-center gap-3">
-				<div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-					<GraduationCap class="w-5 h-5" />
-				</div>
+				<Image
+					src={logoImage}
+					alt="MSVC Logo"
+					width={40}
+					height={40}
+					class="w-10 h-10 object-contain rounded-xl bg-white p-1 shadow-sm"
+				/>
 				<div>
-					<span class="font-extrabold text-lg text-white tracking-tight select-none">MSVC</span>
-					<p class="text-[10px] text-slate-400">Malaysia Student Visa Consultancy</p>
+					<span class="font-black text-xl text-white tracking-tight select-none">MSVC</span>
+					<p class="text-[10px] text-slate-400 font-medium">Malaysia Student Visa Consultancy</p>
 				</div>
 			</div>
 
