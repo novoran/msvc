@@ -3,6 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/ui/Button.astro';
 import Badge from '@/components/ui/Badge.astro';
 import { contactConfig } from '@/utils/contact';
+import { Image } from 'astro:assets';
+import livingCostDonutImg from '@/assets/images/malaysia-cost-of-living-donut.webp';
 import {
 	CircleCheck,
 	Clock,
@@ -17,13 +19,11 @@ import {
 	Briefcase,
 	ChevronRight,
 	Globe,
-	Landmark,
 	ArrowRight,
 } from '@lucide/astro';
 
 const quickNavLinks = [
 	{ label: 'Why Malaysia', href: '#why-malaysia' },
-	{ label: 'Universities', href: '#universities' },
 	{ label: 'Courses & Fees', href: '#courses' },
 	{ label: 'Costs & Living', href: '#costs' },
 	{ label: 'Scholarships', href: '#scholarships' },
@@ -114,72 +114,42 @@ const popularCourses = [
 		level: "Master's",
 		feeMYR: 'RM 30,000 - 70,000+',
 		feeBDT: 'BDT 777,000 - 1,813,000+',
-		universities: "Taylor's University, SEGi University, HELP University, APU",
+		universities: "INTI, APU, UOW Malaysia, Lincoln University College",
 	},
 	{
 		name: 'Computer Science & Software Engineering',
 		level: "Bachelor's / Master's",
 		feeMYR: 'RM 15,000 - 60,000',
 		feeBDT: 'BDT 388,500 - 1,554,000',
-		universities: "Taylor's University, APU, University of Malaya",
+		universities: "APU, INTI, UOW Malaysia",
 	},
 	{
 		name: 'Engineering (Mechanical, Civil, Electrical)',
 		level: "Bachelor's / Master's",
 		feeMYR: 'RM 20,000 - 60,000',
 		feeBDT: 'BDT 518,000 - 1,554,000',
-		universities: 'Universiti Teknologi Malaysia, Universiti Putra Malaysia',
+		universities: 'INTI, UOW Malaysia, APU',
 	},
 	{
-		name: 'Medicine & Healthcare Sciences (MBBS)',
+		name: 'Medicine & Healthcare Sciences (MBBS, Nursing)',
 		level: "Bachelor's / Master's",
 		feeMYR: 'RM 40,000 - 80,000',
 		feeBDT: 'BDT 1,036,000 - 2,072,000',
-		universities: "University of Malaya, Taylor's University, SEGi University",
+		universities: "Lincoln University College, INTI",
 	},
 	{
 		name: 'Banking, Accounting & Finance',
 		level: "Bachelor's / Master's",
 		feeMYR: 'RM 20,000 - 60,000',
 		feeBDT: 'BDT 518,000 - 1,554,000',
-		universities: "Taylor's University, APU, University of Malaya",
+		universities: "INTI, APU, UOW Malaysia",
 	},
-];
-
-const publicUniversities = [
-	{ name: 'University of Malaya (UM)', rank: '#58 Globally', note: 'Top public research university in Malaysia' },
-	{ name: 'Universiti Kebangsaan Malaysia (UKM)', rank: '#126 Globally', note: 'National University with leading STEM faculties' },
-	{ name: 'Universiti Sains Malaysia (USM)', rank: '#134 Globally', note: 'Premier apex research institution' },
-	{ name: 'Universiti Putra Malaysia (UPM)', rank: '#134 Globally', note: 'Global leader in agriculture and engineering' },
-	{ name: 'Universiti Teknologi Malaysia (UTM)', rank: '#153 Globally', note: 'Pioneer technical and innovation campus' },
-	{ name: 'Universiti Teknologi Petronas (UTP)', rank: '#251 Globally', note: 'Industry-partnered energy and computing hub' },
-];
-
-const privateUniversities = [
-	{ name: "Taylor's University", rank: '#253 Globally', note: 'Top non-government university in Southeast Asia' },
-	{ name: 'Sunway University', rank: '#410 Globally', note: 'Rapidly rising institution with Lancaster dual awards' },
-	{ name: 'Asia Pacific University (APU)', rank: 'Premier Tech Tier', note: 'Malaysia premier digital technology university' },
-	{ name: 'Lincoln University College', rank: 'Top Tier Medical/Health', note: 'Renowned for healthcare, medicine & nursing' },
-	{ name: 'INTI International University', rank: 'UK/US Dual Degrees', note: 'Direct partnerships with Hertfordshire & SNHU' },
-];
-
-const branchCampuses = [
-	{ name: 'University of Nottingham Malaysia', rank: 'UK Top 20 / World #100', note: 'Direct UK degree awarded in Semenyih campus' },
-	{ name: 'University of Wollongong Malaysia (UOW)', rank: 'Australia Top 10 / World #167', note: 'Prestigious Australian curriculum & credentials' },
-	{ name: 'Swinburne University of Technology Malaysia', rank: 'Australia Top Tier / World #291', note: 'Sarawak branch campus with Melbourne degrees' },
-	{ name: 'Monash University Malaysia', rank: 'Group of Eight / World #37', note: 'Sunway campus offering Australian Group of 8 degrees' },
 ];
 
 const privateIntakes = [
 	{ session: 'April Session', deadline: 'February', recommended: '3 months prior' },
 	{ session: 'June Session', deadline: 'April', recommended: '3 months prior' },
 	{ session: 'November Session', deadline: 'September', recommended: '3 months prior' },
-];
-
-const publicCostTable = [
-	{ level: 'Undergraduate Programs', myr: 'RM 9,800 - 22,050', bdt: 'BDT 253,820 - 571,095' },
-	{ level: 'Postgraduate Programs', myr: 'RM 2,450 - 19,600', bdt: 'BDT 63,455 - 507,640' },
-	{ level: 'PhD Programs', myr: 'RM 7,000 - 12,000', bdt: 'BDT 181,300 - 310,800' },
 ];
 
 const privateCostTable = [
@@ -190,24 +160,24 @@ const privateCostTable = [
 
 const scholarshipsList = [
 	{
-		title: 'Malaysian Technical Cooperation Programme (MTCP)',
-		type: 'Government Full Scholarship',
-		details: 'Covers full tuition fees and monthly allowances worth RM 3,500 (BDT 90,650), plus return economy airfare. Open for developing countries including Bangladesh.',
+		title: 'Early Bird & Merit Fee Waivers (20% – 50%)',
+		type: 'Direct Private University Grant',
+		details: 'Fee reductions directly applied to first-year or entire tuition granted by institutions like INTI, APU, and UOW Malaysia based on SSC/HSC results.',
 	},
 	{
-		title: 'Malaysia International Scholarship (MIS)',
-		type: 'Government Award',
-		details: 'Funded by the Ministry of Higher Education Malaysia for outstanding postgraduate and PhD candidates.',
+		title: 'Postgraduate MBA & Master Fee Relief',
+		type: 'Institutional Award',
+		details: 'Discounts and progression scholarships for students with strong academic transcripts or qualifying professional experience.',
 	},
 	{
-		title: 'Commonwealth & University Merit Scholarships',
-		type: 'Merit Fee Waiver (20% – 50%)',
-		details: 'Direct waivers on first-year or entire tuition granted by institutions like Taylor’s, Sunway, APU, and INTI based on HSC/A-Level results.',
+		title: 'Sibling & Alumni Loyalty Waivers',
+		type: 'Family Discount',
+		details: 'Special tuition deductions for siblings studying simultaneously or progressing from diploma to bachelor degree at the same campus.',
 	},
 	{
-		title: 'Graduate Research & Teaching Assistantships',
-		type: 'Stipend + Tuition Relief',
-		details: 'Available for Master by Research and PhD students covering living stipends and research support.',
+		title: 'Sports & Leadership Excellence Awards',
+		type: 'Extracurricular Scholarship',
+		details: 'Awarded to students with notable achievements in athletics, debate, community leadership, or Olympiad competitions.',
 	},
 ];
 
@@ -249,7 +219,7 @@ const faqs = [
 
 <BaseLayout
 	title="Study Destination Malaysia 2026/2027 | MSVC Official Guide"
-	description="Comprehensive guide for Bangladeshi students to study in Malaysia. Explore top public & private universities, course fees in BDT, admission requirements, intakes, scholarships, and EMGS visa support."
+	description="Comprehensive guide for Bangladeshi students to study in Malaysia. Explore top accredited private universities, course fees in BDT, admission requirements, intakes, scholarships, and EMGS visa support."
 >
 	<!-- Hero Section -->
 	<section class="relative overflow-hidden pt-12 pb-16 lg:pt-16 lg:pb-20 bg-linear-to-b from-white via-blue-50/20 to-slate-50 border-b border-slate-100">
@@ -282,11 +252,11 @@ const faqs = [
 						Book Free Consultation
 					</Button>
 					<Button
-						href="#universities"
+						href="#courses"
 						variant="outline"
 						size="lg"
 					>
-						Explore Universities & Courses
+						Explore Courses & Fees
 					</Button>
 				</div>
 			</div>
@@ -309,29 +279,29 @@ const faqs = [
 		</div>
 	</div>
 
-	<!-- Key Overview Stats -->
-	<section class="py-12 bg-white border-b border-slate-100">
+	<!-- Key Overview Stats Strip -->
+	<section class="py-10 bg-white border-b border-slate-100">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 card-shadow">
-					<span class="text-3xl font-extrabold text-brand-600">#2</span>
-					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Student Origin</h3>
-					<p class="text-sm font-bold text-slate-900 mt-0.5">Bangladesh #2 Worldwide</p>
+			<div class="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+				<div class="py-4 sm:py-2 px-4 sm:px-6 text-center sm:text-left">
+					<span class="text-3xl sm:text-4xl font-extrabold text-brand-600 tracking-tight">#2</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mt-1">Student Origin</h3>
+					<p class="text-sm font-semibold text-slate-800 mt-0.5">Bangladesh #2 Worldwide</p>
 				</div>
-				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 card-shadow">
-					<span class="text-3xl font-extrabold text-brand-600">29</span>
-					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">QS Ranked Unis</h3>
-					<p class="text-sm font-bold text-slate-900 mt-0.5">In World Top Rankings</p>
+				<div class="py-4 sm:py-2 px-4 sm:px-6 text-center sm:text-left">
+					<span class="text-3xl sm:text-4xl font-extrabold text-brand-600 tracking-tight">29</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mt-1">QS Ranked Unis</h3>
+					<p class="text-sm font-semibold text-slate-800 mt-0.5">In World Top Rankings</p>
 				</div>
-				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 card-shadow">
-					<span class="text-3xl font-extrabold text-brand-600">#2</span>
-					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Peace Index</h3>
-					<p class="text-sm font-bold text-slate-900 mt-0.5">2nd Most Peaceful in Asia</p>
+				<div class="py-4 sm:py-2 px-4 sm:px-6 text-center sm:text-left">
+					<span class="text-3xl sm:text-4xl font-extrabold text-brand-600 tracking-tight">#2</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mt-1">Peace Index</h3>
+					<p class="text-sm font-semibold text-slate-800 mt-0.5">2nd Most Peaceful in Asia</p>
 				</div>
-				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 card-shadow">
-					<span class="text-3xl font-extrabold text-brand-600">590+</span>
-					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Institutions</h3>
-					<p class="text-sm font-bold text-slate-900 mt-0.5">Higher Education Centers</p>
+				<div class="py-4 sm:py-2 px-4 sm:px-6 text-center sm:text-left">
+					<span class="text-3xl sm:text-4xl font-extrabold text-brand-600 tracking-tight">590+</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mt-1">Institutions</h3>
+					<p class="text-sm font-semibold text-slate-800 mt-0.5">Higher Education Centers</p>
 				</div>
 			</div>
 		</div>
@@ -397,110 +367,8 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- 2. Top Universities in Malaysia (Moved earlier for discovery) -->
-	<section class="py-20 bg-slate-50 border-t border-slate-100" id="universities">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-				<div>
-					<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Global Rankings</span>
-					<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Top Universities in Malaysia</h2>
-					<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl">
-						Featuring 29 QS World Ranked institutions across prestigious Public research universities, Private centres of excellence, and International Branch Campuses.
-					</p>
-				</div>
-			</div>
-
-			<div class="space-y-8">
-				<!-- Public Universities -->
-				<div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 card-shadow">
-					<div class="flex items-center gap-3 mb-6">
-						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
-							<Landmark class="w-5 h-5" />
-						</div>
-						<div>
-							<h3 class="text-lg font-bold text-slate-900">Public Universities</h3>
-							<p class="text-xs text-slate-500">Government research institutions with world-renowned faculties and affordable fees</p>
-						</div>
-					</div>
-
-					<div class="overflow-x-auto rounded-xl bg-slate-50/50 border border-slate-100">
-						<table class="w-full text-left text-sm border-collapse">
-							<thead>
-								<tr class="bg-slate-100/70 border-b border-slate-200/60 text-slate-700 font-semibold">
-									<th class="py-3 px-4">University Name</th>
-									<th class="py-3 px-4">QS World Rank</th>
-									<th class="py-3 px-4">Institutional Profile</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y divide-slate-100">
-								{publicUniversities.map((u) => (
-									<tr class="hover:bg-white transition-colors">
-										<td class="py-3 px-4 font-semibold text-slate-900">{u.name}</td>
-										<td class="py-3 px-4"><Badge variant="blue" size="xs">{u.rank}</Badge></td>
-										<td class="py-3 px-4 text-slate-600 text-xs sm:text-sm">{u.note}</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<!-- Private Universities & International Branch Campuses -->
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-					<!-- Private Universities -->
-					<div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 card-shadow">
-						<div class="flex items-center gap-3 mb-6">
-							<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
-								<GraduationCap class="w-5 h-5" />
-							</div>
-							<div>
-								<h3 class="text-lg font-bold text-slate-900">Private Universities</h3>
-								<p class="text-xs text-slate-500">Industry-aligned modern campuses with dual award degrees</p>
-							</div>
-						</div>
-						<div class="space-y-3">
-							{privateUniversities.map((u) => (
-								<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start justify-between gap-4">
-									<div>
-										<h4 class="font-bold text-slate-900 text-sm">{u.name}</h4>
-										<p class="text-xs text-slate-500 mt-0.5">{u.note}</p>
-									</div>
-									<Badge variant="blue" size="xs" class="shrink-0">{u.rank}</Badge>
-								</div>
-							))}
-						</div>
-					</div>
-
-					<!-- International Branch Campuses -->
-					<div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 card-shadow">
-						<div class="flex items-center gap-3 mb-6">
-							<div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-								<Globe class="w-5 h-5" />
-							</div>
-							<div>
-								<h3 class="text-lg font-bold text-slate-900">International Branch Campuses</h3>
-								<p class="text-xs text-slate-500">UK and Australian universities awarding direct parent-institution degrees</p>
-							</div>
-						</div>
-						<div class="space-y-3">
-							{branchCampuses.map((u) => (
-								<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start justify-between gap-4">
-									<div>
-										<h4 class="font-bold text-slate-900 text-sm">{u.name}</h4>
-										<p class="text-xs text-slate-500 mt-0.5">{u.note}</p>
-									</div>
-									<Badge variant="emerald" size="xs" class="shrink-0">{u.rank}</Badge>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- 3. Top Courses & Popular Course Details and Fees -->
-	<section class="py-20 bg-white border-t border-slate-100" id="courses">
+	<!-- 2. Top Courses & Popular Course Details and Fees -->
+	<section class="py-20 bg-slate-50 border-t border-slate-100" id="courses">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
 				<div>
@@ -577,90 +445,116 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- 4. Cost of Studying in Malaysia (Grouped directly after courses) -->
+	<!-- 4. Cost of Studying in Malaysia (Tuition Fees & Intakes Side-by-Side, Cost Breakdown Full Width) -->
 	<section class="py-20 bg-slate-50 border-t border-slate-100" id="costs">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
 				<div>
-					<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Tuition & Living Budgets</span>
-					<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Cost of Studying in Malaysia</h2>
+					<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Tuition & Intakes</span>
+					<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Tuition Fees & Intake Sessions</h2>
 					<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl">
-						Affordable tuition benchmarks in Malaysian Ringgit (MYR) with direct Bangladeshi Taka (BDT) equivalent calculations.
+						Tuition fee estimates across private university programs and flexible admissions windows throughout the academic year.
 					</p>
 				</div>
 			</div>
 
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-				<!-- Public Universities Tuition -->
-				<div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 card-shadow">
-					<h3 class="text-lg font-bold text-slate-900 mb-1">Public Universities Tuition Fees</h3>
-					<p class="text-xs text-slate-500 mb-5">Subsidized government university standard rates</p>
-					<div class="overflow-x-auto rounded-xl border border-slate-100">
-						<table class="w-full text-left text-xs sm:text-sm border-collapse">
-							<thead>
-								<tr class="bg-slate-50 border-b border-slate-100 text-slate-700 font-semibold">
-									<th class="py-2.5 px-3">Study Level</th>
-									<th class="py-2.5 px-3">Annual Fees (MYR)</th>
-									<th class="py-2.5 px-3">BDT Equivalent</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y divide-slate-100">
-								{publicCostTable.map((t) => (
-									<tr>
-										<td class="py-3 px-3 font-medium text-slate-900">{t.level}</td>
-										<td class="py-3 px-3 font-mono text-brand-700">{t.myr}</td>
-										<td class="py-3 px-3 font-mono text-emerald-700 font-semibold">{t.bdt}</td>
+			<!-- Side-by-Side: Tuition Fees & Intake Sessions -->
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-16">
+				<!-- Private Universities Tuition -->
+				<div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 card-shadow flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-3">
+								<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
+									<GraduationCap class="w-5 h-5" />
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-slate-900">Private University Tuition Fees</h3>
+									<p class="text-xs text-slate-500">Accredited partner institutions with UK/Australian dual-awards</p>
+								</div>
+							</div>
+							<Badge variant="brand" size="xs">2026 / 2027</Badge>
+						</div>
+						<div class="overflow-x-auto rounded-xl border border-slate-100">
+							<table class="w-full text-left text-xs sm:text-sm border-collapse">
+								<thead>
+									<tr class="bg-slate-50 border-b border-slate-100 text-slate-700 font-semibold">
+										<th class="py-2.5 px-3">Study Level</th>
+										<th class="py-2.5 px-3">Annual Fees (MYR)</th>
+										<th class="py-2.5 px-3">BDT Equivalent</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
+								</thead>
+								<tbody class="divide-y divide-slate-100">
+									{privateCostTable.map((t) => (
+										<tr class="hover:bg-slate-50/50">
+											<td class="py-3 px-3 font-medium text-slate-900">{t.level}</td>
+											<td class="py-3 px-3 font-mono text-brand-700">{t.myr}</td>
+											<td class="py-3 px-3 font-mono text-emerald-700 font-semibold">{t.bdt}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 
-				<!-- Private Universities Tuition -->
-				<div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 card-shadow">
-					<h3 class="text-lg font-bold text-slate-900 mb-1">Private Universities Tuition Fees</h3>
-					<p class="text-xs text-slate-500 mb-5">Independent institutions & dual-award universities</p>
-					<div class="overflow-x-auto rounded-xl border border-slate-100">
-						<table class="w-full text-left text-xs sm:text-sm border-collapse">
-							<thead>
-								<tr class="bg-slate-50 border-b border-slate-100 text-slate-700 font-semibold">
-									<th class="py-2.5 px-3">Study Level</th>
-									<th class="py-2.5 px-3">Annual Fees (MYR)</th>
-									<th class="py-2.5 px-3">BDT Equivalent</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y divide-slate-100">
-								{privateCostTable.map((t) => (
-									<tr>
-										<td class="py-3 px-3 font-medium text-slate-900">{t.level}</td>
-										<td class="py-3 px-3 font-mono text-brand-700">{t.myr}</td>
-										<td class="py-3 px-3 font-mono text-emerald-700 font-semibold">{t.bdt}</td>
+				<!-- Private Universities Intakes -->
+				<div class="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 card-shadow flex flex-col justify-between" id="intakes">
+					<div>
+						<div class="flex items-center justify-between mb-4">
+							<div class="flex items-center gap-3">
+								<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
+									<Clock class="w-5 h-5" />
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-slate-900">Flexible Intake Sessions</h3>
+									<p class="text-xs text-slate-500">Fast enrollment windows across our partner private campuses</p>
+								</div>
+							</div>
+							<Badge variant="emerald" size="xs">3 Windows / Yr</Badge>
+						</div>
+						<div class="overflow-x-auto rounded-xl border border-slate-100">
+							<table class="w-full text-left text-xs sm:text-sm border-collapse">
+								<thead>
+									<tr class="bg-slate-50 border-b border-slate-100 text-slate-700 font-semibold">
+										<th class="py-2.5 px-3">Intake Period</th>
+										<th class="py-2.5 px-3">Application Deadline</th>
+										<th class="py-2.5 px-3">Recommended Submission</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
+								</thead>
+								<tbody class="divide-y divide-slate-100">
+									{privateIntakes.map((i) => (
+										<tr class="hover:bg-slate-50/50">
+											<td class="py-3 px-3 font-semibold text-slate-900">{i.session}</td>
+											<td class="py-3 px-3 text-red-600 font-medium">{i.deadline}</td>
+											<td class="py-3 px-3 text-slate-600">{i.recommended}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Living Costs Summary Callout -->
-			<div class="p-6 sm:p-8 rounded-2xl bg-white border border-slate-100 card-shadow grid grid-cols-1 md:grid-cols-3 gap-6">
-				<div>
-					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Accommodation</span>
-					<h4 class="text-base font-bold text-slate-900">RM 400 – RM 1,000 / mo</h4>
-					<p class="text-xs text-slate-500 mt-1">On-campus university halls or off-campus condominiums near metro lines (LRT/MRT).</p>
+			<!-- Full Width Cost Breakdown Section -->
+			<div class="pt-8 border-t border-slate-200/70" id="cost-breakdown">
+				<div class="mb-8">
+					<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-1 block">Living Budgets</span>
+					<h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Average Monthly Cost of Living in Malaysia</h3>
+					<p class="text-slate-500 text-sm mt-1.5 max-w-2xl">
+						Estimated living expenses breakdown for international students in Malaysia covering accommodation, food, transportation, utilities, and daily needs.
+					</p>
 				</div>
-				<div>
-					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Food & Groceries</span>
-					<h4 class="text-base font-bold text-slate-900">RM 600 – RM 900 / mo</h4>
-					<p class="text-xs text-slate-500 mt-1">Extensive halal food stalls, mamak cafes, and Bangladeshi dining venues across town.</p>
-				</div>
-				<div>
-					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Total Monthly Budget</span>
-					<h4 class="text-base font-bold text-emerald-700">~RM 1,200 – RM 1,800 / mo</h4>
-					<p class="text-xs text-slate-500 mt-1">Total living cost is approximately BDT 32,000 to 48,000 per month including local transit.</p>
-				</div>
+
+				<Image
+					src={livingCostDonutImg}
+					alt="Average Monthly Cost in Malaysia 730 to 1740 MYR - Accommodation, Food, Transportation, Utilities, Personal Expenses"
+					width={1400}
+					height={733}
+					class="w-full h-auto object-contain"
+					loading="lazy"
+				/>
 			</div>
 		</div>
 	</section>
@@ -705,34 +599,34 @@ const faqs = [
 				</div>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 				<!-- Undergraduate -->
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex flex-col justify-between">
+				<div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 card-shadow flex flex-col justify-between">
 					<div>
 						<span class="text-[11px] uppercase font-bold tracking-wider text-brand-600 block mb-2">Bachelor Degree</span>
 						<h3 class="text-lg font-bold text-slate-900 mb-3">Undergraduate Programs</h3>
 						<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>HSC / A-Level / Alim with minimum GPA of 3.50 out of 5.00</span>
+								<span>HSC / A-Level / Alim with minimum GPA of 2.50 to 3.00+</span>
 							</li>
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>12 years of formal schooling or recognized foundation equivalent</span>
+								<span>Study gaps accepted with valid explanation or work history</span>
 							</li>
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Program prerequisites (e.g. Math for CS/Engineering)</span>
+								<span>Credit transfer options to UK, Australia & Canada partner campuses</span>
 							</li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Postgraduate -->
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex flex-col justify-between">
+				<div class="bg-white p-6 sm:p-7 rounded-2xl border border-slate-100 card-shadow flex flex-col justify-between">
 					<div>
 						<span class="text-[11px] uppercase font-bold tracking-wider text-brand-600 block mb-2">Master Degree</span>
-						<h3 class="text-lg font-bold text-slate-900 mb-3">Postgraduate Programs</h3>
+						<h3 class="text-lg font-bold text-slate-900 mb-3">Postgraduate (Master's / MBA)</h3>
 						<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -740,33 +634,11 @@ const faqs = [
 							</li>
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Two academic or professional reference letters</span>
+								<span>CGPA below 2.50 accepted with relevant professional experience</span>
 							</li>
 							<li class="flex items-start gap-2">
 								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Relevant work experience and CV (specifically for MBAs)</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<!-- Doctoral -->
-				<div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow flex flex-col justify-between">
-					<div>
-						<span class="text-[11px] uppercase font-bold tracking-wider text-brand-600 block mb-2">Doctorate (PhD)</span>
-						<h3 class="text-lg font-bold text-slate-900 mb-3">Doctoral Programs</h3>
-						<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
-							<li class="flex items-start gap-2">
-								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Master’s degree with documented research coursework/thesis</span>
-							</li>
-							<li class="flex items-start gap-2">
-								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Comprehensive Research Proposal aligned with faculty</span>
-							</li>
-							<li class="flex items-start gap-2">
-								<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-								<span>Published peer-reviewed journal papers (where available)</span>
+								<span>Fast 1 to 1.5 year completion with evening & weekend schedules</span>
 							</li>
 						</ul>
 					</div>
@@ -796,83 +668,6 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- 7. Intakes & Timelines to Study in Malaysia -->
-	<section class="py-20 bg-white border-t border-slate-100" id="intakes">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-				<div>
-					<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Calendar & Deadlines</span>
-					<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Intakes to Study in Malaysia</h2>
-					<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl">
-						Plan your academic timeline. Apply at least 3 months ahead of your intended intake session to allow for seamless EMGS visa clearance.
-					</p>
-				</div>
-			</div>
-
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-				<!-- Public Universities Intakes -->
-				<div class="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-100 card-shadow flex flex-col justify-between">
-					<div>
-						<div class="flex items-center gap-3 mb-4">
-							<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
-								<Calendar class="w-5 h-5" />
-							</div>
-							<div>
-								<h3 class="text-lg font-bold text-slate-900">Public Universities (2 Intakes/Year)</h3>
-								<p class="text-xs text-slate-500">Government admissions calendar</p>
-							</div>
-						</div>
-						<div class="space-y-3 mt-4">
-							<div class="p-4 rounded-xl bg-white border border-slate-100">
-								<span class="text-xs font-bold text-brand-600 uppercase">Main Intake Season</span>
-								<h4 class="font-bold text-slate-900 text-base mt-0.5">September / October</h4>
-								<p class="text-xs text-slate-500 mt-1">Offers the complete roster of undergraduate, master's, and STEM research courses.</p>
-							</div>
-							<div class="p-4 rounded-xl bg-white border border-slate-100">
-								<span class="text-xs font-bold text-slate-600 uppercase">Secondary Intake</span>
-								<h4 class="font-bold text-slate-900 text-base mt-0.5">February / March</h4>
-								<p class="text-xs text-slate-500 mt-1">Select faculties, postgraduate by research, and modular admissions.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Private Universities Intakes -->
-				<div class="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-100 card-shadow">
-					<div class="flex items-center gap-3 mb-4">
-						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
-							<Clock class="w-5 h-5" />
-						</div>
-						<div>
-							<h3 class="text-lg font-bold text-slate-900">Private Universities (Flexible 3 Intakes/Year)</h3>
-							<p class="text-xs text-slate-500">Fast enrollment windows throughout the year</p>
-						</div>
-					</div>
-
-					<div class="overflow-x-auto mt-4 rounded-xl bg-white border border-slate-100">
-						<table class="w-full text-left text-xs sm:text-sm border-collapse">
-							<thead>
-								<tr class="bg-slate-50 border-b border-slate-100 text-slate-700 font-semibold">
-									<th class="py-2.5 px-3">Intake Period</th>
-									<th class="py-2.5 px-3">Application Deadline</th>
-									<th class="py-2.5 px-3">Recommended Submission</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y divide-slate-100">
-								{privateIntakes.map((i) => (
-									<tr class="hover:bg-slate-50/50">
-										<td class="py-3 px-3 font-semibold text-slate-900">{i.session}</td>
-										<td class="py-3 px-3 text-red-600 font-medium">{i.deadline}</td>
-										<td class="py-3 px-3 text-slate-600">{i.recommended}</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<!-- 8. Step by Step Recruitment Roadmap (Moved UP before FAQs) -->
 	<section class="py-20 bg-slate-50 border-t border-slate-100" id="how-to-apply">
@@ -915,7 +710,7 @@ const faqs = [
 	<!-- 9. Documents Checklist Section (Grouped right after roadmap) -->
 	<section class="py-20 bg-white border-t border-slate-100" id="documents">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="max-w-3xl mx-auto rounded-2xl bg-slate-50 border border-slate-100 p-8 sm:p-10 card-shadow">
+			<div class="w-full rounded-2xl bg-slate-50 border border-slate-100 p-8 sm:p-10 card-shadow">
 				<div class="flex items-center gap-3 mb-6">
 					<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
 						<FileText class="w-5 h-5" />
@@ -926,7 +721,7 @@ const faqs = [
 					</div>
 				</div>
 
-				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+				<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-slate-700">
 					<li class="flex items-start gap-2.5">
 						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
 						<span>Passport all pages (min. 18 months validity)</span>
@@ -1029,17 +824,21 @@ const faqs = [
 				</div>
 			</div>
 
-			<div class="max-w-4xl mx-auto space-y-4">
+			<div class="w-full space-y-4">
 				{faqs.map((faq) => (
-					<details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden card-shadow">
-						<summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition-colors">
+					<details class="faq-item group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden card-shadow transition-colors duration-200">
+						<summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition-colors list-none">
 							<span>{faq.q}</span>
-							<span class="w-7 h-7 rounded-full bg-white group-open:bg-blue-50 text-slate-500 group-open:text-brand-600 flex items-center justify-center shrink-0 ml-4 group-open:rotate-90 transition-transform border border-slate-200">
+							<span class="w-7 h-7 rounded-full bg-white group-open:bg-blue-50 text-slate-500 group-open:text-brand-600 flex items-center justify-center shrink-0 ml-4 group-open:rotate-90 transition-transform duration-300 border border-slate-200">
 								<ChevronRight class="w-4 h-4" />
 							</span>
 						</summary>
-						<div class="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-200/50">
-							{faq.a}
+						<div class="faq-content grid grid-rows-[0fr] transition-all duration-300 ease-out group-open:grid-rows-[1fr]">
+							<div class="overflow-hidden">
+								<div class="px-5 sm:px-6 pb-6 pt-2 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-200/50">
+									{faq.a}
+								</div>
+							</div>
 						</div>
 					</details>
 				))}
@@ -1088,3 +887,53 @@ const faqs = [
 		</div>
 	</section>
 </BaseLayout>
+
+<script>
+	// Smooth open/close accordion animation
+	const faqDetails = document.querySelectorAll<HTMLDetailsElement>('details.faq-item');
+
+	faqDetails.forEach((targetDetail) => {
+		const summary = targetDetail.querySelector('summary');
+		const content = targetDetail.querySelector('.faq-content') as HTMLElement | null;
+
+		if (!summary || !content) return;
+
+		summary.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			// If it's open, animate close
+			if (targetDetail.open) {
+				content.classList.remove('group-open:grid-rows-[1fr]');
+				content.classList.add('grid-rows-[0fr]');
+				targetDetail.classList.remove('open');
+				
+				// Wait for animation to finish before removing open attribute
+				setTimeout(() => {
+					targetDetail.removeAttribute('open');
+				}, 280);
+			} else {
+				// Close other open accordions optionally for a clean look
+				faqDetails.forEach((d) => {
+					if (d !== targetDetail && d.open) {
+						const otherContent = d.querySelector('.faq-content') as HTMLElement | null;
+						if (otherContent) {
+							otherContent.classList.remove('group-open:grid-rows-[1fr]');
+							otherContent.classList.add('grid-rows-[0fr]');
+						}
+						setTimeout(() => {
+							d.removeAttribute('open');
+						}, 280);
+					}
+				});
+
+				// Open target with animation
+				targetDetail.setAttribute('open', '');
+				// Small tick for CSS transition
+				requestAnimationFrame(() => {
+					content.classList.remove('grid-rows-[0fr]');
+					content.classList.add('group-open:grid-rows-[1fr]');
+				});
+			}
+		});
+	});
+</script>
