@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/Hero.astro';
 import PopularDestinations from '@/components/sections/PopularDestinations.astro';
 import Services from '@/components/sections/Services.astro';
+import EmgsProcess from '@/components/sections/EmgsProcess.astro';
 import WhyChooseUs from '@/components/sections/WhyChooseUs.astro';
 import Testimonials from '@/components/sections/Testimonials.astro';
 import CtaBanner from '@/components/sections/CtaBanner.astro';
@@ -17,9 +18,9 @@ import {
 } from '@lucide/astro';
 
 import { contactConfig } from '@/utils/contact';
-import avatarRahim from '@/assets/images/avatar-rahim.png';
-import avatarPriya from '@/assets/images/avatar-priya.png';
-import avatarTanvir from '@/assets/images/avatar-tanvir.png';
+import studentBoy1 from '@/assets/images/student-boy-1.webp';
+import studentBoy2 from '@/assets/images/student-boy-2.webp';
+import studentGirl from '@/assets/images/student-girl.webp';
 import intiNilaiImg from '@/assets/images/universities/inti-nilai.png';
 import lincolnCampusImg from '@/assets/images/universities/lincoln-campus.jpg';
 import uowKduImg from '@/assets/images/universities/uow-kdu.jpg';
@@ -107,24 +108,27 @@ const services = [
 const testimonials = [
 	{
 		quote:
-			'MSVC made my student visa process for Malaysia completely stress-free. Received my VAL in record time!',
+			'Honestly didn’t expect things to move this fast. Bhai helped me fix all my academic papers properly for EMGS, and got my SEV within 2 hours with no interview! Really grateful.',
+		name: 'Siyam Bhuiyan',
+		country: 'Cumilla, Bangladesh',
+		rating: 5,
+		avatar: studentBoy1,
+	},
+	{
+		quote:
+			'Applied for APU with MSVC. Zero file charge or hidden fees, directly guided me through the bank statement and clinic medical clearance. Reached KL safely last week.',
+		name: 'Rahim Ahmed',
+		country: 'Bhola, Bangladesh',
+		rating: 4.5,
+		avatar: studentBoy2,
+	},
+	{
+		quote:
+			'I was really worried about my 2-year study gap and not having IELTS. Vaiya suggested the right university options and handled the whole paperwork. Got my offer letter within 24 hours and VAL cleared smoothly.',
 		name: 'Ayesha Rahman',
-		country: 'Kuala Lumpur',
-		avatar: avatarRahim,
-	},
-	{
-		quote:
-			'From choosing the right university in Malaysia to visa approval, everything was handled professionally. Highly recommended!',
-		name: 'Tanvir Hasan',
-		country: 'Cyberjaya',
-		avatar: avatarTanvir,
-	},
-	{
-		quote:
-			"The MSVC counseling team guided me through every step of EMGS requirements. Best consultancy for Malaysian universities!",
-		name: 'Nusrat Jahan',
-		country: 'Penang',
-		avatar: avatarPriya,
+		country: 'Chattogram, Bangladesh',
+		rating: 4.5,
+		avatar: studentGirl,
 	},
 ];
 ---
@@ -136,6 +140,7 @@ const testimonials = [
 	<Hero />
 	<PopularDestinations universities={universities} />
 	<Services services={services} />
+	<EmgsProcess />
 	<WhyChooseUs />
 	<Testimonials testimonials={testimonials} />
 	<CtaBanner />
