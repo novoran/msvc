@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, Handshake, ShieldCheck, SlidersHorizontal, UserCheck } from '@lucide/astro';
+import { contactConfig } from '@/utils/contact';
+import whyChooseUsImg from '@/assets/images/why-choose-us.png';
+---
+
+<section class="py-20 bg-slate-50 border-t border-slate-100 overflow-hidden" id="about">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="grid lg:grid-cols-12 gap-12 items-center">
+			<div class="lg:col-span-7">
+				<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Why Choose MSVC</span>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug mb-4">
+					Your Success is Our Commitment
+				</h2>
+				<p class="text-slate-500 text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
+					We go beyond consultancy — we become your dedicated education partner in Malaysia, offering personalized guidance, direct university partnerships, and end-to-end visa tracking.
+				</p>
+
+				<div class="grid sm:grid-cols-2 gap-6 mb-8">
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+							<UserCheck class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 text-sm mb-1">Official EMGS Guidance</h3>
+							<p class="text-xs text-slate-500 leading-relaxed">Direct consultation on VAL approvals, medical clearance, and immigration rules.</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+							<Handshake class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 text-sm mb-1">Top Malaysian Universities</h3>
+							<p class="text-xs text-slate-500 leading-relaxed">Direct representations with premier accredited private universities in KL & across Malaysia.</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+							<SlidersHorizontal class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 text-sm mb-1">Transparent Step-by-Step</h3>
+							<p class="text-xs text-slate-500 leading-relaxed">No hidden charges. Clear roadmap from offer letter to airport arrival in Malaysia.</p>
+						</div>
+					</div>
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
+						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
+							<ShieldCheck class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 text-sm mb-1">High Approval Track Record</h3>
+							<p class="text-xs text-slate-500 leading-relaxed">Over 99% student visa success rate with zero application discrepancies.</p>
+						</div>
+					</div>
+				</div>
+
+				<a
+					href={contactConfig.whatsappUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors group"
+				>
+					<span>Speak with an Advisor on WhatsApp</span>
+					<ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+				</a>
+			</div>
+
+			<div class="lg:col-span-5 flex justify-center relative">
+				<div class="relative w-full max-w-[380px] aspect-[4/5]">
+					<!-- Blue abstract backdrop -->
+					<div class="absolute inset-0 bg-brand-600/10 rounded-3xl transform rotate-3"></div>
+					<div class="absolute inset-0 bg-brand-600/20 rounded-3xl transform -rotate-2"></div>
+					<!-- Student Photo -->
+					<div class="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white shadow-xl bg-white">
+						<Image
+							alt="Student with tablet"
+							width={400}
+							height={500}
+							class="w-full h-full object-cover"
+							src={whyChooseUsImg}
+							loading="lazy"
+						/>
+						<div class="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-transparent"></div>
+					</div>
+					<!-- Decorative Text Badge -->
+					<div class="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg border border-slate-100 text-center transform rotate-6">
+						<span class="font-handwriting text-brand-600 text-lg font-bold block leading-tight">Global<br />Opportunities<br /><span class="text-slate-800">Awaits</span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

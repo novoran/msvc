@@ -1,0 +1,57 @@
+---
+export interface Props {
+	country: string;
+	flag: string;
+	tagline: string;
+	image: string;
+	href?: string;
+	class?: string;
+}
+
+const { country, flag, tagline, image, href = '#', class: className = '' } = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		'bg-white rounded-2xl border border-slate-100 card-shadow card-hover overflow-hidden flex-col group block text-inherit no-underline',
+		className,
+	]}
+>
+	<div class="h-36 overflow-hidden relative">
+		<img
+			alt={country}
+			class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+			src={image}
+			loading="lazy"
+		/>
+	</div>
+	<div class="p-4 flex flex-col flex-1 justify-between">
+		<div>
+			<div class="flex items-center gap-2 mb-2">
+				<span class="text-base leading-none">{flag}</span>
+				<h3 class="font-bold text-slate-900 text-base">{country}</h3>
+			</div>
+			<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">{tagline}</p>
+		</div>
+		<div class="pt-4 flex justify-end">
+			<span
+				class="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-slate-400 text-xs transition-all duration-300 ease-out"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+				>
+					<path d="M5 12h14"></path>
+					<path d="m12 5 7 7-7 7"></path>
+				</svg>
+			</span>
+		</div>
+	</div>
+</a>

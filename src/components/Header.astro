@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import logoImage from '@/assets/logo.png';
+import Button from '@/components/ui/Button.astro';
+import { contactConfig } from '@/utils/contact';
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+		<!-- Brand Logo -->
+		<a class="flex items-center gap-3" href="/" aria-label="MSVC Home">
+			<Image
+				src={logoImage}
+				alt="MSVC Logo"
+				width={44}
+				height={44}
+				loading="eager"
+				fetchpriority="high"
+				class="w-11 h-11 object-contain"
+			/>
+			<div class="flex flex-col">
+				<span class="font-extrabold text-xl leading-none tracking-tight text-brand-900 select-none">MSVC</span>
+				<span class="text-[10px] text-slate-400 font-medium tracking-wider uppercase mt-1">Malaysia Student Visa Consultancy</span>
+			</div>
+		</a>
+
+		<!-- Desktop Navigation Menu -->
+		<nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+			<a class="hover:text-brand-600 transition-colors" href="/destination">Destination</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#destinations">Universities</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#services">Services</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#emgs">Visa (EMGS)</a>
+			<a class="hover:text-brand-600 transition-colors" href="/#about">About</a>
+		</nav>
+
+		<!-- Right Header Actions -->
+		<div class="flex items-center gap-3">
+			<Button
+				href={contactConfig.whatsappUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				variant="primary"
+				size="md"
+			>
+				Book Free Consultation
+			</Button>
+		</div>
+	</div>
+</header>

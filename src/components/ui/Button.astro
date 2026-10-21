@@ -1,0 +1,95 @@
+---
+import type { AstroComponent } from '@lucide/astro';
+import type { HTMLAttributes } from 'astro/types';
+
+export type ButtonVariant =
+	| 'primary'
+	| 'secondary'
+	| 'outline'
+	| 'ghost'
+	| 'destructive'
+	| 'warning'
+	| 'success';
+
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
+
+export type ButtonIcon = AstroComponent;
+
+export interface Props extends HTMLAttributes<'button'> {
+	variant?: ButtonVariant;
+	size?: ButtonSize;
+	href?: string;
+	target?: string;
+	rel?: string;
+	iconLeading?: ButtonIcon;
+	iconTrailing?: ButtonIcon;
+	class?: string;
+}
+
+const {
+	variant = 'primary',
+	size = 'md',
+	href,
+	iconLeading: IconLeading,
+	iconTrailing: IconTrailing,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const baseStyles =
+	'inline-flex items-center justify-center font-semibold transition-all rounded-full select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 disabled:pointer-events-none disabled:opacity-50';
+
+const variants: Record<ButtonVariant, string> = {
+	primary:
+		'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-600/25 active:scale-[0.98]',
+	secondary:
+		'bg-blue-50 text-brand-700 hover:bg-blue-100/80 border border-blue-200/50',
+	outline:
+		'bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50',
+	ghost:
+		'text-brand-600 hover:text-brand-700 hover:bg-blue-50/50',
+	destructive:
+		'bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-600/25 focus-visible:ring-red-500 active:scale-[0.98]',
+	warning:
+		'bg-amber-500 text-white hover:bg-amber-600 shadow-lg shadow-amber-500/25 focus-visible:ring-amber-500 active:scale-[0.98]',
+	success:
+		'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/25 focus-visible:ring-emerald-500 active:scale-[0.98]',
+};
+
+const sizes: Record<ButtonSize, string> = {
+	sm: 'text-xs px-3.5 py-1.5 gap-1.5',
+	md: 'text-sm px-6 py-3 gap-2',
+	lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5',
+	icon: 'w-8 h-8 p-0 rounded-full',
+};
+
+const iconSizes: Record<ButtonSize, string> = {
+	sm: 'w-3.5 h-3.5',
+	md: 'w-4 h-4',
+	lg: 'w-4 h-4 sm:w-4.5 sm:h-4.5',
+	icon: 'w-4 h-4',
+};
+
+const classes = [baseStyles, variants[variant], sizes[size], className].filter(Boolean).join(' ');
+const iconClass = iconSizes[size];
+---
+
+{
+	href ? (
+		<a href={href} class={classes} {...(rest as HTMLAttributes<'a'>)}>
+			{IconLeading && <IconLeading class={iconClass} />}
+			<slot name="leading" />
+			<slot />
+			<slot name="trailing" />
+			{IconTrailing && <IconTrailing class={iconClass} />}
+		</a>
+	) : (
+		<button class={classes} {...rest}>
+			{IconLeading && <IconLeading class={iconClass} />}
+			<slot name="leading" />
+			<slot />
+			<slot name="trailing" />
+			{IconTrailing && <IconTrailing class={iconClass} />}
+		</button>
+	)
+}

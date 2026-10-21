@@ -1,39 +1,147 @@
 ---
-import '@/styles/global.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import PopularDestinations from '@/components/sections/PopularDestinations.astro';
+import Services from '@/components/sections/Services.astro';
+import EmgsProcess from '@/components/sections/EmgsProcess.astro';
+import WhyChooseUs from '@/components/sections/WhyChooseUs.astro';
+import Testimonials from '@/components/sections/Testimonials.astro';
+import CtaBanner from '@/components/sections/CtaBanner.astro';
+
+import {
+	GraduationCap,
+	House,
+	IdCard,
+	Languages,
+	Luggage,
+	Receipt,
+} from '@lucide/astro';
+
+import { contactConfig } from '@/utils/contact';
+import studentBoy1 from '@/assets/images/student-boy-1.webp';
+import studentBoy2 from '@/assets/images/student-boy-2.webp';
+import studentGirl from '@/assets/images/student-girl.webp';
+import intiNilaiImg from '@/assets/images/universities/inti-nilai.png';
+import lincolnCampusImg from '@/assets/images/universities/lincoln-campus.jpg';
+import uowKduImg from '@/assets/images/universities/uow-kdu.jpg';
+import apuExteriorImg from '@/assets/images/universities/apu-exterior.jpg';
+
+const universities = [
+	{
+		name: 'INTI International University',
+		location: 'Subang Jaya & Nilai',
+		tagline: 'World-recognized dual award UK & US degree transfer programs.',
+		badge: 'Dual Award',
+		image: intiNilaiImg,
+		href: contactConfig.getUniversityWhatsappUrl('INTI International University'),
+	},
+	{
+		name: 'Lincoln University College',
+		location: 'Petaling Jaya, Selangor',
+		tagline: 'Premier healthcare, medicine, nursing, pharmacy and business degrees.',
+		badge: 'Medicine & Health',
+		image: lincolnCampusImg,
+		href: contactConfig.getUniversityWhatsappUrl('Lincoln University College'),
+	},
+	{
+		name: 'UOW Malaysia (Wollongong)',
+		location: 'Glenmarie, Shah Alam',
+		tagline: 'Australian accredited curriculum at affordable Malaysian tuition fees.',
+		badge: 'Australian Degree',
+		image: uowKduImg,
+		href: contactConfig.getUniversityWhatsappUrl('UOW Malaysia'),
+	},
+	{
+		name: 'APU University (Tech & AI)',
+		location: 'Technology Park Malaysia, KL',
+		tagline: '#1 tech & computing university in Malaysia with 100% employability.',
+		badge: 'Top Computing',
+		image: apuExteriorImg,
+		href: contactConfig.getUniversityWhatsappUrl('APU University'),
+	},
+	/* Future Expansion:
+	{
+		name: '50+ Partner Campuses',
+		location: 'KL, Penang & Johor',
+		tagline: 'UCSI, SEGi, MMU, MSU, City University and top accredited institutions.',
+		badge: 'Explore More',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuAWyoOFnyUmjT_22U0EonxTGI2f16u6zPEC3hV5KYAnXSFhL8fqt2m2cKr7gthqxU7gQo26U_ngEDpW3C0XsIsDf19rHZSLD24snzo_5TaUDgZzMygM11hdO5WUxfY6VMH0bx7ZroV3fQ4vxX3DWvu0zoB6YtICZVqEVk5WGZJ9H74_jqKaNg_DQLdPD4sBy0VFXwcYMjW5h8EDokbA_f-sHMtfdwaht6MFjcmtM_o',
+		href: contactConfig.whatsappUrl,
+	},
+	*/
+];
+
+const services = [
+	{
+		title: 'University Selection & Application',
+		desc: 'Assistance in picking accredited universities and colleges across Malaysia and globally.',
+		icon: GraduationCap,
+	},
+	{
+		title: 'EMGS Visa & Documentation',
+		desc: 'End-to-end guidance for Malaysian EMGS processing, VAL approval, and single entry visas.',
+		icon: IdCard,
+	},
+	{
+		title: 'English Language Requirements',
+		desc: 'IELTS, TOEFL, PTE and internal university placement test guidance.',
+		icon: Languages,
+	},
+	{
+		title: 'Scholarship Guidance',
+		desc: 'Merit-based international scholarships, bursaries, and tuition waivers in Malaysia.',
+		icon: Receipt,
+	},
+	{
+		title: 'Pre-Departure Briefing',
+		desc: 'Complete travel preparation, currency exchange, and medical screening checklist.',
+		icon: Luggage,
+	},
+	{
+		title: 'Post-Arrival & Accommodation',
+		desc: 'On-ground assistance with airport reception and safe international student housing in Malaysia.',
+		icon: House,
+	},
+];
+
+const testimonials = [
+	{
+		quote:
+			'Honestly didn’t expect things to move this fast. Bhai helped me fix all my academic papers properly for EMGS, and got my SEV within 2 hours with no interview! Really grateful.',
+		name: 'Siyam Bhuiyan',
+		country: 'Cumilla, Bangladesh',
+		rating: 5,
+		avatar: studentBoy1,
+	},
+	{
+		quote:
+			'Applied for APU with MSVC. Zero file charge or hidden fees, directly guided me through the bank statement and clinic medical clearance. Reached KL safely last week.',
+		name: 'Rahim Ahmed',
+		country: 'Bhola, Bangladesh',
+		rating: 4.5,
+		avatar: studentBoy2,
+	},
+	{
+		quote:
+			'I was really worried about my 2-year study gap and not having IELTS. Vaiya suggested the right university options and handled the whole paperwork. Got my offer letter within 24 hours and VAL cleared smoothly.',
+		name: 'Ayesha Rahman',
+		country: 'Chattogram, Bangladesh',
+		rating: 4.5,
+		avatar: studentGirl,
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>MSVC | Malaysia Student Visa Consultancy</title>
-		<meta
-			name="description"
-			content="MSVC - Malaysia Student Visa Consultancy. Launching soon."
-		/>
-	</head>
-	<body class="min-h-screen bg-white text-zinc-900 flex flex-col justify-between p-8 sm:p-12">
-		<header>
-			<span class="text-xl font-black tracking-tight text-zinc-900 select-none">MSVC</span>
-		</header>
-
-		<main class="max-w-xl my-auto py-16">
-			<span class="inline-block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">
-				Malaysia Student Visa Consultancy
-			</span>
-			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4">
-				We are launching soon.
-			</h1>
-			<p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
-				Your gateway to higher education, admissions, and visa consultancy for studying in Malaysia.
-			</p>
-		</main>
-
-		<footer class="text-xs text-zinc-400">
-			© {new Date().getFullYear()} MSVC. All rights reserved.
-		</footer>
-	</body>
-</html>
+<BaseLayout
+	title="MSVC | Malaysia Student Visa Consultancy"
+	description="MSVC (Malaysia Student Visa Consultancy) is your trusted advisor for university admissions, EMGS visa approval, and global study guidance."
+>
+	<Hero />
+	<PopularDestinations universities={universities} />
+	<Services services={services} />
+	<EmgsProcess />
+	<WhyChooseUs />
+	<Testimonials testimonials={testimonials} />
+	<CtaBanner />
+</BaseLayout>

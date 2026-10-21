@@ -1,0 +1,148 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import ImageCarousel from '@/components/ui/ImageCarousel.astro';
+import type { UniversityData } from '@/data/recruitment';
+import {
+ArrowRight,
+Award,
+CalendarCheck,
+CircleCheck,
+DollarSign,
+ExternalLink,
+GraduationCap,
+MapPin,
+} from '@lucide/astro';
+
+export interface Props {
+	university: UniversityData;
+	class?: string;
+}
+
+const { university: u, class: className = '' } = Astro.props;
+---
+
+<article
+	class:list={[
+		'bg-white rounded-3xl border border-slate-200/90 overflow-hidden hover:border-brand-300 transition-all flex flex-col lg:flex-row',
+		className,
+	]}
+	data-university-id={u.id}
+>
+	<!-- Left / Top: Reusable ImageCarousel component -->
+	<div class="lg:w-5/12 min-h-65 sm:min-h-75 lg:min-h-full">
+		<ImageCarousel
+			images={u.galleryImages}
+			altPrefix={`${u.name} campus view`}
+			class="h-full w-full min-h-65 sm:min-h-75 lg:min-h-full"
+		>
+			<!-- Floating Badges passed via slot -->
+			<div slot="overlay" class="flex flex-wrap gap-2">
+				<Badge variant="dark" size="xs">{u.badge}</Badge>
+				{u.scholarshipAvailable && (
+					<Badge variant="emerald" size="xs" iconLeading={Award}>
+						Scholarship Open
+					</Badge>
+				)}
+			</div>
+		</ImageCarousel>
+	</div>
+
+	<!-- Right / Bottom: Compact Academic Overview & Requirements -->
+	<div class="p-6 sm:p-7 lg:w-7/12 flex flex-col justify-between">
+		<div>
+			<!-- Title & Campus Subtitle -->
+			<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2">
+				<h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-tight">
+					{u.name}
+				</h3>
+				<a
+					href={u.officialWebsite}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:text-brand-700 transition-colors shrink-0"
+				>
+					<span>Official Site</span>
+					<ExternalLink class="w-3.5 h-3.5" />
+				</a>
+			</div>
+
+			<div class="flex items-center gap-1.5 text-xs text-slate-500 mb-3 font-medium">
+				<MapPin class="w-3.5 h-3.5 text-brand-600 shrink-0" />
+				<span>{u.location} • Campuses: {u.campuses.join(', ')}</span>
+			</div>
+
+			<p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5">
+				{u.overview}
+			</p>
+
+			<!-- Compact Meta Grid -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5 pt-3.5 border-t border-slate-100 text-xs">
+				<!-- Intakes -->
+				<div>
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
+						<CalendarCheck class="w-3.5 h-3.5 text-brand-600" />
+						Upcoming Intakes
+					</span>
+					<div class="flex flex-wrap gap-1.5">
+						{u.intakes.map((intake) => (
+							<Badge variant="blue" size="xs">
+								{intake}
+							</Badge>
+						))}
+					</div>
+				</div>
+
+				<!-- Tuition Fees -->
+				<div>
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
+						<DollarSign class="w-3.5 h-3.5 text-emerald-600" />
+						Est. Tuition Fees
+					</span>
+					<p class="font-bold text-slate-800 text-xs sm:text-sm">{u.tuitionRange}</p>
+				</div>
+
+				<!-- Admission Criteria -->
+				<div class="sm:col-span-2">
+					<span class="text-slate-400 font-medium text-xs mb-1 flex items-center gap-1">
+						<GraduationCap class="w-3.5 h-3.5 text-brand-600" />
+						Minimum Entry Criteria
+					</span>
+					<p class="font-medium text-slate-700 text-xs leading-normal">{u.minRequirement}</p>
+				</div>
+
+				<!-- Popular Faculties -->
+				<div class="sm:col-span-2">
+					<span class="text-slate-400 font-medium text-xs mb-1.5 flex items-center gap-1">
+						<CircleCheck class="w-3.5 h-3.5 text-brand-600" />
+						Popular Programs
+					</span>
+					<div class="flex flex-wrap gap-1.5">
+						{u.popularFields.map((field) => (
+							<Badge variant="slate" size="xs">
+								{field}
+							</Badge>
+						))}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Action Footer -->
+		<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3.5 border-t border-slate-100">
+			<span class="text-[11px] text-slate-400 font-medium">
+				⚡ Free offer letter assessment & scholarship review
+			</span>
+			<Button
+				href={u.applyUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				variant="primary"
+				size="sm"
+				iconTrailing={ArrowRight}
+			>
+				Apply to {u.shortName}
+			</Button>
+		</div>
+	</div>
+</article>

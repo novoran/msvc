@@ -1,0 +1,66 @@
+---
+export interface Props {
+	title: string;
+	date: string;
+	tag: string;
+	image: string;
+	href?: string;
+	class?: string;
+}
+
+const { title, date, tag, image, href = '#', class: className = '' } = Astro.props;
+---
+
+<article
+	class:list={[
+		'bg-white rounded-2xl border border-slate-100 card-shadow card-hover overflow-hidden flex flex-col group',
+		className,
+	]}
+>
+	<div class="h-48 overflow-hidden relative">
+		<img
+			alt={title}
+			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+			src={image}
+			loading="lazy"
+		/>
+		<span
+			class="absolute bottom-3 left-3 bg-brand-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm"
+		>
+			{tag}
+		</span>
+	</div>
+	<div class="p-5 flex flex-col flex-1 justify-between">
+		<div>
+			<h3
+				class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition-colors mb-2 leading-snug"
+			>
+				<a href={href} class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded">
+					{title}
+				</a>
+			</h3>
+			<span class="text-xs text-slate-400 font-medium">{date}</span>
+		</div>
+		<div class="pt-4 flex justify-end">
+			<a
+				href={href}
+				aria-label={`Read more: ${title}`}
+				class="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-slate-400 text-xs transition-all duration-300 ease-out"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+				>
+					<path d="M5 12h14"></path>
+					<path d="m12 5 7 7-7 7"></path>
+				</svg>
+			</a>
+		</div>
+	</div>
+</article>

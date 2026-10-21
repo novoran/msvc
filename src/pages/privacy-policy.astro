@@ -1,0 +1,153 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FeatureCard from '@/components/cards/FeatureCard.astro';
+import { CircleCheck, Eye, Lock, ShieldCheck } from '@lucide/astro';
+import { contactConfig } from '@/utils/contact';
+
+const lastUpdated = 'October 15, 2026';
+
+const features = [
+	{
+		title: 'Encrypted Storage',
+		desc: 'Passport & academic scans are stored with strict access controls.',
+		icon: Lock,
+	},
+	{
+		title: 'Official EMGS Use',
+		desc: 'Documents shared strictly with accredited universities & EMGS.',
+		icon: ShieldCheck,
+	},
+	{
+		title: 'No Third-Party Sale',
+		desc: 'We will never sell or rent your personal data to marketing brokers.',
+		icon: Eye,
+	},
+];
+---
+
+<BaseLayout
+	title="Privacy Policy | MSVC - Malaysia Student Visa Consultancy"
+	description="Learn how MSVC collects, handles, and safeguards your educational records, identity documents, and personal information during the admission and EMGS student pass process."
+>
+	<!-- Hero Header with same max-w-7xl grid as home page -->
+	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-slate-50">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
+					Privacy <span class="text-brand-600">Policy</span>
+				</h1>
+				<p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-4">
+					How MSVC protects your personal information, academic credentials, and official documents during your university admission and EMGS student visa processing.
+				</p>
+				<span class="inline-block text-xs text-slate-400 font-medium">
+					Last Updated: {lastUpdated}
+				</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- Content Section matching home page max-w-7xl grid -->
+	<section class="pt-4 pb-16 lg:pb-20">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- Quick Trust Highlights using FeatureCard without shadow -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 lg:mb-12">
+				{features.map((f) => (
+					<FeatureCard
+						title={f.title}
+						desc={f.desc}
+						icon={f.icon}
+					/>
+				))}
+			</div>
+
+			<!-- Main Article Body - Clean, unboxed text flow with no artificial bg, border, or shadow -->
+			<div class="space-y-8 sm:space-y-10 text-slate-600 text-sm sm:text-base leading-relaxed">
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						1. Introduction
+					</h2>
+					<p>
+						Malaysia Student Visa Consultancy (<strong>"MSVC"</strong>, <strong>"we"</strong>, <strong>"our"</strong>, or <strong>"us"</strong>) is committed to safeguarding the privacy of our prospective students, applicants, and visitors. This Privacy Policy details our practices concerning the collection, usage, and protection of personal data provided through our website, consultation sessions, and visa assessment workflows.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						2. Information We Collect
+					</h2>
+					<p class="mb-4">
+						To evaluate student eligibility and process admissions with Malaysian higher educational institutions and EMGS (Education Malaysia Global Services), we collect:
+					</p>
+					<ul class="space-y-3 pl-2">
+						<li class="flex items-start gap-3">
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span><strong>Personal Identification:</strong> Full name, date of birth, nationality, passport copy, and contact details (email, phone, WhatsApp).</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span><strong>Academic Records:</strong> Transcripts, graduation certificates, English proficiency scores (IELTS, TOEFL, PTE, MUET), and statements of purpose.</span>
+						</li>
+						<li class="flex items-start gap-3">
+							<CircleCheck class="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+							<span><strong>Financial & Immigration Documents:</strong> Sponsorship letters, bank solvency declarations, and medical examination reports required for VAL (Visa Approval Letter) processing.</span>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						3. How We Use Your Information
+					</h2>
+					<p class="mb-3">Your data is utilized solely for lawful educational consultancy purposes:</p>
+					<ul class="list-disc pl-6 space-y-2">
+						<li>Filing university admission applications to your selected institutions.</li>
+						<li>Submitting EMGS student pass applications and tracking VAL approval status.</li>
+						<li>Facilitating pre-departure briefings, airport arrival logistics, and student accommodation.</li>
+						<li>Communicating updates, intake schedules, and required documentation.</li>
+					</ul>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						4. Sharing and Disclosure
+					</h2>
+					<p>
+						We only share your information with authorized entities directly involved in your admission and visa issuance:
+					</p>
+					<ul class="list-disc pl-6 space-y-2 mt-3">
+						<li>Accredited Malaysian universities and colleges you have chosen to apply to.</li>
+						<li>Education Malaysia Global Services (EMGS) and the Malaysian Immigration Department.</li>
+						<li>Authorized testing centers and verification agencies as required by Malaysian regulatory bodies.</li>
+					</ul>
+					<p class="mt-3">
+						We do not sell, rent, or trade your personal details with third-party advertising companies.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						5. Data Security & Retention
+					</h2>
+					<p>
+						We adopt robust physical, digital, and procedural security standards to shield your confidential data from unauthorized access or disclosure. Files are retained only for as long as required to complete your study placement or satisfy legal and institutional retention rules.
+					</p>
+				</div>
+
+				<div>
+					<h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-4 flex items-center gap-2.5">
+						<span class="w-2 h-6 bg-brand-600 rounded-full"></span>
+						6. Your Rights
+					</h2>
+					<p>
+						You maintain the right to review, update, or request the deletion of your personal data held by MSVC, subject to statutory visa archiving mandates. To submit a data request, please email our compliance team at <a href={`mailto:${contactConfig.email}`} class="font-semibold text-brand-600 hover:text-brand-700 underline underline-offset-2">{contactConfig.email}</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { AstroComponent } from '@lucide/astro';
+
+export type BadgeVariant =
+	| 'brand'
+	| 'primary'
+	| 'blue'
+	| 'slate'
+	| 'emerald'
+	| 'amber'
+	| 'dark'
+	| 'outline';
+
+export type BadgeSize = 'xs' | 'sm' | 'md';
+
+export type BadgeIcon = AstroComponent;
+
+export interface Props extends HTMLAttributes<'span'> {
+	variant?: BadgeVariant;
+	size?: BadgeSize;
+	iconLeading?: BadgeIcon;
+	iconTrailing?: BadgeIcon;
+	class?: string;
+}
+
+const {
+	variant = 'brand',
+	size = 'sm',
+	iconLeading: IconLeading,
+	iconTrailing: IconTrailing,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const baseStyles =
+	'inline-flex items-center font-semibold rounded-full tracking-wide select-none transition-colors';
+
+const variants: Record<BadgeVariant, string> = {
+	brand: 'bg-blue-100/70 border border-blue-200/50 text-brand-700',
+	primary: 'bg-brand-600 text-white border border-transparent shadow-xs',
+	blue: 'bg-brand-50 border border-brand-200 text-brand-700',
+	slate: 'bg-slate-100 text-slate-700 border border-slate-200',
+	emerald: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+	amber: 'bg-amber-50 text-amber-700 border border-amber-200',
+	dark: 'bg-brand-900/85 backdrop-blur-md text-white border border-white/20',
+	outline: 'bg-transparent text-brand-700 border border-brand-300',
+};
+
+const sizes: Record<BadgeSize, string> = {
+	xs: 'text-[10px] px-2 py-0.5 gap-1',
+	sm: 'text-xs px-2.5 py-1 gap-1.5',
+	md: 'text-xs px-3.5 py-1.5 gap-2 uppercase tracking-wider',
+};
+
+const iconSizes: Record<BadgeSize, string> = {
+	xs: 'w-3 h-3',
+	sm: 'w-3.5 h-3.5',
+	md: 'w-3.5 h-3.5',
+};
+
+const iconClass = iconSizes[size];
+---
+
+<span
+	class:list={[
+		baseStyles,
+		variants[variant],
+		sizes[size],
+		className,
+	]}
+	{...rest}
+>
+	{IconLeading && <IconLeading class={iconClass} />}
+	<slot />
+	{IconTrailing && <IconTrailing class={iconClass} />}
+</span>

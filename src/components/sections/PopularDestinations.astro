@@ -1,0 +1,54 @@
+---
+import type { ImageMetadata } from 'astro';
+import { ArrowRight } from '@lucide/astro';
+import UniversityCard from '@/components/cards/UniversityCard.astro';
+
+export interface UniversityItem {
+	name: string;
+	location: string;
+	tagline: string;
+	badge?: string;
+	image: ImageMetadata | string;
+	href?: string;
+}
+
+export interface Props {
+	universities: UniversityItem[];
+}
+
+const { universities } = Astro.props;
+---
+
+<section class="py-20 bg-white border-t border-slate-100" id="destinations">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+			<div>
+				<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Partner Institutions</span>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Top Malaysian Universities</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2 max-w-xl">
+					Direct university representations across Malaysia with fast-track offer letters, scholarship matching, and guaranteed EMGS VAL assistance.
+				</p>
+			</div>
+			<a
+				class="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors group"
+				href="/destination"
+			>
+				<span>View All Intakes & Requirements</span>
+				<ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+			</a>
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+			{universities.map((u) => (
+				<UniversityCard
+					name={u.name}
+					location={u.location}
+					tagline={u.tagline}
+					badge={u.badge}
+					image={u.image}
+					href={u.href}
+				/>
+			))}
+		</div>
+	</div>
+</section>

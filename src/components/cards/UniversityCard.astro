@@ -1,0 +1,95 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Badge from '@/components/ui/Badge.astro';
+
+export interface Props {
+	name: string;
+	location: string;
+	tagline: string;
+	badge?: string;
+	image: ImageMetadata | string;
+	href?: string;
+	class?: string;
+}
+
+const {
+	name,
+	location,
+	tagline,
+	badge,
+	image,
+	href = '/#consultation',
+	class: className = '',
+} = Astro.props;
+---
+
+<a
+	href={href}
+	target="_blank"
+	rel="noopener noreferrer"
+	class:list={[
+		'bg-white rounded-2xl border border-slate-100 card-shadow card-hover overflow-hidden flex flex-col group block text-inherit no-underline',
+		className,
+	]}
+>
+	<div class="h-36 overflow-hidden relative">
+		{typeof image === 'string' ? (
+			<Image
+				alt={name}
+				width={600}
+				height={300}
+				class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+				src={image}
+				loading="lazy"
+			/>
+		) : (
+			<Image
+				alt={name}
+				width={600}
+				height={300}
+				class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+				src={image}
+				loading="lazy"
+			/>
+		)}
+		{badge && (
+			<div class="absolute top-3 left-3">
+				<Badge variant="dark" size="xs">
+					{badge}
+				</Badge>
+			</div>
+		)}
+	</div>
+	<div class="p-4 flex flex-col flex-1 justify-between">
+		<div>
+			<div class="mb-1">
+				<span class="text-[11px] font-semibold text-brand-600 block uppercase tracking-wider">{location}</span>
+				<h3 class="font-bold text-slate-900 text-base leading-snug">{name}</h3>
+			</div>
+			<p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mt-1.5">{tagline}</p>
+		</div>
+		<div class="pt-4 flex items-center justify-between border-t border-slate-50 mt-3">
+			<span class="text-[11px] font-semibold text-slate-400 group-hover:text-brand-600 transition-colors">
+				Apply with MSVC
+			</span>
+			<span
+				class="w-7 h-7 rounded-full bg-slate-50 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-slate-400 text-xs transition-colors duration-200"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="w-3.5 h-3.5"
+				>
+					<path d="M5 12h14"></path>
+					<path d="m12 5 7 7-7 7"></path>
+				</svg>
+			</span>
+		</div>
+	</div>
+</a>
