@@ -1,0 +1,1020 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import UniversityCardSlider from '@/components/cards/UniversityCardSlider.astro';
+import { recruitmentUniversities } from '@/data/recruitment';
+import { contactConfig } from '@/utils/contact';
+import {
+	CircleCheck,
+	Clock,
+	Award,
+	FileText,
+	Sparkles,
+	ShieldCheck,
+	Building,
+	Mail,
+	GraduationCap,
+	Calendar,
+	Briefcase,
+	ChevronRight,
+	Globe,
+	Landmark,
+} from '@lucide/astro';
+
+// Kept for internal reference / future usage without deleting code
+export const _retainedImports = {
+	recruitmentUniversities,
+	UniversityCardSlider,
+};
+
+const steps = [
+	{
+		step: '01',
+		title: 'Free Profile & Document Review',
+		desc: 'Send your academic certificates (SSC, HSC, transcripts) to MSVC. We verify eligibility for your target program within 24 hours.',
+	},
+	{
+		step: '02',
+		title: 'Fast-Track Offer Letter (LOA)',
+		desc: 'We submit your application directly to the university admissions board to secure your unconditional or conditional Offer Letter.',
+	},
+	{
+		step: '03',
+		title: 'EMGS Visa Approval Letter (VAL)',
+		desc: 'Our visa specialists lodge your EMGS application with full medical report and immigration vetting. Track your yellow/green approval bar.',
+	},
+	{
+		step: '04',
+		title: 'Single Entry Visa (e-Visa) & Fly',
+		desc: 'Receive your eVAL, apply for e-Visa at the Malaysian High Commission, book flights, and receive MSVC airport pickup assistance.',
+	},
+];
+
+const perks = [
+	{
+		icon: Clock,
+		title: '48-Hour Offer Letters',
+		desc: 'Direct liaison with university admission desks means priority processing without third-party bottlenecks.',
+	},
+	{
+		icon: Award,
+		title: 'Up to 50% Scholarships',
+		desc: 'Merit-based scholarships and fee waivers assessed directly upon submitting your application with MSVC.',
+	},
+	{
+		icon: ShieldCheck,
+		title: '100% EMGS Compliance',
+		desc: 'Error-free document preparation guarantees prompt VAL processing by Education Malaysia Global Services.',
+	},
+	{
+		icon: Building,
+		title: 'Hostel & Airport Meet',
+		desc: 'Airport pick-up from KLIA 1/2 and confirmed on-campus or partner student accommodation before you depart.',
+	},
+];
+
+// PFEC Study in Malaysia Content Structure
+const whyStudyMalaysia = [
+	{
+		title: 'Educational Excellence and Recognition',
+		desc: 'Malaysia offers high-quality education through world-class universities providing impactful education. Malaysian degrees are internationally recognized and highly sought after by global employers, with many institutions ranking among the top 200 globally.',
+	},
+	{
+		title: 'Affordable Education Costs',
+		desc: 'Tuition and living costs in Malaysia are highly affordable compared to Western destinations—nearly comparable to private universities in Bangladesh while conferring a globally recognized international qualification.',
+	},
+	{
+		title: 'International Degree Options & UK/AU Campuses',
+		desc: 'Top-ranked UK and Australian universities operate branch campuses across Malaysia. Students can graduate with authentic British or Australian credentials at a fraction of the onshore cost.',
+	},
+	{
+		title: 'Cultural Familiarity and High Safety',
+		desc: 'Ranked the 2nd most peaceful country in Asia and 10th worldwide. A multicultural, welcoming society with accessible halal food, dynamic student lifestyle, and zero language barrier since English is widely used.',
+	},
+	{
+		title: 'Part-Time Work & Swift Immigration',
+		desc: 'International students are eligible for legal part-time employment during semesters and vacations. Seamless EMGS immigration procedures yield rapid student visa clearance for Bangladeshi applicants.',
+	},
+	{
+		title: 'Global Credit Transfer Opportunities',
+		desc: 'Malaysian universities offer structured 1+2 or 2+1 credit transfer pathways to Australia, Canada, the UK, and the USA for students wishing to complete their final years in the West.',
+	},
+];
+
+const popularCourses = [
+	{
+		name: 'MBA (Master of Business Administration)',
+		level: "Master's",
+		feeMYR: 'RM 30,000 - 70,000+',
+		feeBDT: 'BDT 777,000 - 1,813,000+',
+		universities: "Taylor's University, SEGi University, HELP University, APU",
+	},
+	{
+		name: 'Computer Science & Software Engineering',
+		level: "Bachelor's / Master's",
+		feeMYR: 'RM 15,000 - 60,000',
+		feeBDT: 'BDT 388,500 - 1,554,000',
+		universities: "Taylor's University, APU, University of Malaya",
+	},
+	{
+		name: 'Engineering (Mechanical, Civil, Electrical)',
+		level: "Bachelor's / Master's",
+		feeMYR: 'RM 20,000 - 60,000',
+		feeBDT: 'BDT 518,000 - 1,554,000',
+		universities: 'Universiti Teknologi Malaysia, Universiti Putra Malaysia',
+	},
+	{
+		name: 'Medicine & Healthcare Sciences (MBBS)',
+		level: "Bachelor's / Master's",
+		feeMYR: 'RM 40,000 - 80,000',
+		feeBDT: 'BDT 1,036,000 - 2,072,000',
+		universities: "University of Malaya, Taylor's University, SEGi University",
+	},
+	{
+		name: 'Banking, Accounting & Finance',
+		level: "Bachelor's / Master's",
+		feeMYR: 'RM 20,000 - 60,000',
+		feeBDT: 'BDT 518,000 - 1,554,000',
+		universities: "Taylor's University, APU, University of Malaya",
+	},
+];
+
+const publicUniversities = [
+	{ name: 'University of Malaya (UM)', rank: '#58 Globally', note: 'Top public research university in Malaysia' },
+	{ name: 'Universiti Kebangsaan Malaysia (UKM)', rank: '#126 Globally', note: 'National University with leading STEM faculties' },
+	{ name: 'Universiti Sains Malaysia (USM)', rank: '#134 Globally', note: 'Premier apex research institution' },
+	{ name: 'Universiti Putra Malaysia (UPM)', rank: '#134 Globally', note: 'Global leader in agriculture and engineering' },
+	{ name: 'Universiti Teknologi Malaysia (UTM)', rank: '#153 Globally', note: 'Pioneer technical and innovation campus' },
+	{ name: 'Universiti Teknologi Petronas (UTP)', rank: '#251 Globally', note: 'Industry-partnered energy and computing hub' },
+];
+
+const privateUniversities = [
+	{ name: "Taylor's University", rank: '#253 Globally', note: 'Top non-government university in Southeast Asia' },
+	{ name: 'Sunway University', rank: '#410 Globally', note: 'Rapidly rising institution with Lancaster dual awards' },
+	{ name: 'Asia Pacific University (APU)', rank: 'Premier Tech Tier', note: 'Malaysia premier digital technology university' },
+	{ name: 'Lincoln University College', rank: 'Top Tier Medical/Health', note: 'Renowned for healthcare, medicine & nursing' },
+	{ name: 'INTI International University', rank: 'UK/US Dual Degrees', note: 'Direct partnerships with Hertfordshire & SNHU' },
+];
+
+const branchCampuses = [
+	{ name: 'University of Nottingham Malaysia', rank: 'UK Top 20 / World #100', note: 'Direct UK degree awarded in Semenyih campus' },
+	{ name: 'University of Wollongong Malaysia (UOW)', rank: 'Australia Top 10 / World #167', note: 'Prestigious Australian curriculum & credentials' },
+	{ name: 'Swinburne University of Technology Malaysia', rank: 'Australia Top Tier / World #291', note: 'Sarawak branch campus with Melbourne degrees' },
+	{ name: 'Monash University Malaysia', rank: 'Group of Eight / World #37', note: 'Sunway campus offering Australian Group of 8 degrees' },
+];
+
+const privateIntakes = [
+	{ session: 'April Session', deadline: 'February', recommended: '3 months prior' },
+	{ session: 'June Session', deadline: 'April', recommended: '3 months prior' },
+	{ session: 'November Session', deadline: 'September', recommended: '3 months prior' },
+];
+
+const publicCostTable = [
+	{ level: 'Undergraduate Programs', myr: 'RM 9,800 - 22,050', bdt: 'BDT 253,820 - 571,095' },
+	{ level: 'Postgraduate Programs', myr: 'RM 2,450 - 19,600', bdt: 'BDT 63,455 - 507,640' },
+	{ level: 'PhD Programs', myr: 'RM 7,000 - 12,000', bdt: 'BDT 181,300 - 310,800' },
+];
+
+const privateCostTable = [
+	{ level: 'Undergraduate Programs', myr: 'RM 6,615 - 45,570', bdt: 'BDT 171,329 - 1,180,263' },
+	{ level: 'Postgraduate Programs', myr: 'RM 7,350 - 14,700', bdt: 'BDT 190,365 - 380,730' },
+	{ level: 'PhD Programs', myr: 'RM 9,000 - 12,000', bdt: 'BDT 233,100 - 310,800' },
+];
+
+const scholarshipsList = [
+	{
+		title: 'Malaysian Technical Cooperation Programme (MTCP)',
+		type: 'Government Full Scholarship',
+		details: 'Covers full tuition fees and monthly allowances worth RM 3,500 (BDT 90,650), plus return economy airfare. Open for developing countries including Bangladesh.',
+	},
+	{
+		title: 'Malaysia International Scholarship (MIS)',
+		type: 'Government Award',
+		details: 'Funded by the Ministry of Higher Education Malaysia for outstanding postgraduate and PhD candidates.',
+	},
+	{
+		title: 'Commonwealth & University Merit Scholarships',
+		type: 'Merit Fee Waiver (20% – 50%)',
+		details: 'Direct waivers on first-year or entire tuition granted by institutions like Taylor’s, Sunway, APU, and INTI based on HSC/A-Level results.',
+	},
+	{
+		title: 'Graduate Research & Teaching Assistantships',
+		type: 'Stipend + Tuition Relief',
+		details: 'Available for Master by Research and PhD students covering living stipends and research support.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Can I study in Malaysia without IELTS from Bangladesh?',
+		a: 'Yes, you can study in Malaysia without IELTS depending on your chosen university and academic stream. Many private institutions accept an English Medium of Instruction (MOI) certificate from your college/university or allow you to take an internal university English placement test upon arrival.',
+	},
+	{
+		q: 'How long does it take to get a student visa (VAL) for Malaysia?',
+		a: 'EMGS (Education Malaysia Global Services) typically processes the electronic Visa Approval Letter (eVAL) within 3 to 5 weeks once all verified documents and medical declarations are lodged. The subsequent Single Entry Visa takes roughly 3 to 7 working days.',
+	},
+	{
+		q: 'Are Malaysian degrees recognized internationally and by employers?',
+		a: 'Yes. Malaysian qualifications comply strictly with the Malaysian Qualifications Agency (MQA) and are globally recognized by employers, WES, and international credential evaluation boards. Dual-award programs also grant accredited UK or Australian university certifications.',
+	},
+	{
+		q: 'Can I transfer credits from Malaysian universities to Australia, UK, or Canada?',
+		a: 'Yes. Most universities offer 1+2, 2+1, or 2+2 credit transfer programs to partner universities in Australia, the UK, the US, and Canada, enabling you to save significant tuition fees before concluding your degree abroad.',
+	},
+	{
+		q: 'What is the best time to apply for Malaysian universities?',
+		a: 'It is highly recommended to apply at least 3 months prior to the course commencement. September/October is the primary intake offering the widest selection of programs, while February, April, and June offer additional flexible admission windows.',
+	},
+	{
+		q: 'How much does it cost to study in Malaysia compared to Bangladesh?',
+		a: 'The annual tuition fee in Malaysia is very close to private universities in Bangladesh (starting from RM 15,000 / ~BDT 3.9 Lac per year), but provides international campus life, high QS rankings, global exposure, and internationally transferable degrees.',
+	},
+	{
+		q: 'Is Malaysia safe and welcoming for Bangladeshi students?',
+		a: 'Yes. Malaysia is ranked the 2nd most peaceful country in Asia and 10th globally by the Global Peace Index. Bangladesh ranks 2nd in total international students in Malaysia, fostering a familiar, secure, and culturally comfortable environment with abundant halal cuisine.',
+	},
+	{
+		q: 'Do I need to learn Bahasa Malaysia to study and live comfortably?',
+		a: 'No. English is the official medium of instruction in international programs and is widely spoken in daily business, campus life, transit, and retail across Kuala Lumpur and other states.',
+	},
+];
+---
+
+<BaseLayout
+	title="Study in Malaysia for Bangladeshi Students 2026/2027 | MSVC Official Guide"
+	description="Comprehensive guide for Bangladeshi students to study in Malaysia. Explore top public & private universities, course fees in BDT, admission requirements, intakes, scholarships, and EMGS visa support."
+>
+	<!-- Hero Section -->
+	<section class="relative overflow-hidden pt-12 pb-14 lg:pt-16 lg:pb-16 bg-linear-to-b from-white via-blue-50/20 to-slate-50 border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl">
+				<Badge
+					variant="blue"
+					size="sm"
+					iconLeading={Sparkles}
+					class="mb-4"
+				>
+					Study in Malaysia Guide 2026 / 2027
+				</Badge>
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.12] mb-6">
+					Study in Malaysia <br class="hidden sm:inline" />
+					<span class="text-brand-600">for Bangladeshi Students</span>
+				</h1>
+				<p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
+					Malaysia has emerged as one of the most preferred study destinations for Bangladeshi students, offering world-class education at affordable costs. Currently hosting 170,000–200,000 international students with Bangladesh ranking 2nd worldwide.
+				</p>
+				<div class="flex flex-wrap items-center gap-4">
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="lg"
+					>
+						Book Free Consultation
+					</Button>
+					<Button
+						href="#courses"
+						variant="secondary"
+						size="lg"
+					>
+						Explore Courses & Fees
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Key Overview Stats -->
+	<section class="py-10 bg-white border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+				<div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+					<span class="text-3xl font-extrabold text-brand-600">#2</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Student Origin</h3>
+					<p class="text-sm font-bold text-slate-800 mt-0.5">Bangladesh #2 Worldwide</p>
+				</div>
+				<div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+					<span class="text-3xl font-extrabold text-brand-600">29</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">QS Ranked Unis</h3>
+					<p class="text-sm font-bold text-slate-800 mt-0.5">In World Top Rankings</p>
+				</div>
+				<div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+					<span class="text-3xl font-extrabold text-brand-600">#2</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Peace Index</h3>
+					<p class="text-sm font-bold text-slate-800 mt-0.5">2nd Most Peaceful in Asia</p>
+				</div>
+				<div class="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+					<span class="text-3xl font-extrabold text-brand-600">590+</span>
+					<h3 class="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-1">Institutions</h3>
+					<p class="text-sm font-bold text-slate-800 mt-0.5">Higher Education Centers</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Quick Benefits Cards -->
+	<section class="py-12 bg-white border-b border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{perks.map((p) => (
+					<div class="flex flex-col p-6 rounded-2xl bg-slate-50/70 border border-slate-100 hover:border-brand-200 transition-colors">
+						<div class="w-10 h-10 rounded-xl bg-brand-600/10 text-brand-600 flex items-center justify-center mb-4">
+							<p.icon class="w-5 h-5" />
+						</div>
+						<h3 class="font-bold text-slate-900 text-base mb-1.5">{p.title}</h3>
+						<p class="text-slate-500 text-xs sm:text-sm leading-relaxed">{p.desc}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ========================================== -->
+	<!-- PFEC REPLACEMENT CONTENT: STUDY IN MALAYSIA -->
+	<!-- ========================================== -->
+
+	<!-- 1. Why Study in Malaysia? -->
+	<section class="py-16 lg:py-20 bg-slate-50" id="why-malaysia">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Key Advantages</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Why Study in Malaysia?</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Discover why thousands of Bangladeshi learners choose Malaysia for world-class qualifications, safety, and rapid career progression.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{whyStudyMalaysia.map((item, idx) => (
+					<div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 shadow-xs hover:border-brand-300 transition-all flex flex-col justify-between">
+						<div>
+							<div class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 font-extrabold flex items-center justify-center text-sm mb-4">
+								0{idx + 1}
+							</div>
+							<h3 class="text-lg font-bold text-slate-900 mb-2.5">{item.title}</h3>
+							<p class="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. Top Courses & Popular Course Details and Fees -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100" id="courses">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Academic Programs</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Top Courses to Study in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Comprehensive breakdown of popular fields, degree levels, annual tuition costs in RM and BDT, and premier universities.
+				</p>
+			</div>
+
+			<!-- Course Categories Highlight -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+					<div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+						<GraduationCap class="w-5 h-5" />
+					</div>
+					<h3 class="text-base font-bold text-slate-900 mb-2">Medical & Healthcare</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-1.5">
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> MBBS & Medicine (5–6 Years)</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Pharmacy & Biomedical Science</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Healthcare & Allied Health Sciences</li>
+					</ul>
+				</div>
+				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+					<div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4">
+						<Sparkles class="w-5 h-5" />
+					</div>
+					<h3 class="text-base font-bold text-slate-900 mb-2">Engineering & Technology</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-1.5">
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Computer Science, Software & AI</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Data Science & Big Data Analytics</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Electrical, Mechanical, Civil & Chemical</li>
+					</ul>
+				</div>
+				<div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+					<div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
+						<Briefcase class="w-5 h-5" />
+					</div>
+					<h3 class="text-base font-bold text-slate-900 mb-2">Business & Management</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-1.5">
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Master of Business Admin (MBA)</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Banking, Accounting & Finance</li>
+						<li class="flex items-center gap-1.5"><CircleCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" /> Tourism, Events & Hospitality Management</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Popular Courses and Fees Table -->
+			<div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-xs">
+				<table class="w-full text-left border-collapse text-sm">
+					<thead>
+						<tr class="bg-slate-100/80 text-slate-900 font-bold border-b border-slate-200">
+							<th class="p-4 sm:px-6">Course Stream</th>
+							<th class="p-4">Degree Level</th>
+							<th class="p-4">Annual Fees (MYR)</th>
+							<th class="p-4">Annual Fees (BDT)</th>
+							<th class="p-4 sm:px-6">Premier Universities</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-slate-100">
+						{popularCourses.map((c) => (
+							<tr class="hover:bg-slate-50/60 transition-colors">
+								<td class="p-4 sm:px-6 font-semibold text-slate-900">{c.name}</td>
+								<td class="p-4 text-slate-600">{c.level}</td>
+								<td class="p-4 font-mono font-medium text-brand-700">{c.feeMYR}</td>
+								<td class="p-4 font-mono font-medium text-emerald-700">{c.feeBDT}</td>
+								<td class="p-4 sm:px-6 text-slate-600 text-xs sm:text-sm">{c.universities}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- 3. Top Universities in Malaysia (Public, Private & International Branch Campuses) -->
+	<section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100" id="universities">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Global Rankings</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Top Universities in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Featuring 29 QS World Ranked institutions across prestigious Public research universities, Private centres of excellence, and International Branch Campuses.
+				</p>
+			</div>
+
+			<div class="space-y-10">
+				<!-- Public Universities -->
+				<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
+					<div class="flex items-center gap-3 mb-6">
+						<div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+							<Landmark class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="text-xl font-bold text-slate-900">Public Universities</h3>
+							<p class="text-xs sm:text-sm text-slate-500">Government research institutions with world-renowned faculties and affordable fees</p>
+						</div>
+					</div>
+
+					<div class="overflow-x-auto">
+						<table class="w-full text-left text-sm border-collapse">
+							<thead>
+								<tr class="bg-slate-50 border-y border-slate-100 text-slate-700 font-semibold">
+									<th class="py-3 px-4">University Name</th>
+									<th class="py-3 px-4">QS World Rank</th>
+									<th class="py-3 px-4">Institutional Profile</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-slate-100">
+								{publicUniversities.map((u) => (
+									<tr class="hover:bg-slate-50/50">
+										<td class="py-3 px-4 font-semibold text-slate-900">{u.name}</td>
+										<td class="py-3 px-4"><Badge variant="blue" size="xs">{u.rank}</Badge></td>
+										<td class="py-3 px-4 text-slate-600 text-xs sm:text-sm">{u.note}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Private Universities & International Branch Campuses -->
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<!-- Private Universities -->
+					<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center">
+								<GraduationCap class="w-5 h-5" />
+							</div>
+							<div>
+								<h3 class="text-xl font-bold text-slate-900">Private Universities</h3>
+								<p class="text-xs sm:text-sm text-slate-500">Industry-aligned modern campuses with dual award degrees</p>
+							</div>
+						</div>
+						<div class="space-y-4">
+							{privateUniversities.map((u) => (
+								<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start justify-between gap-4">
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm">{u.name}</h4>
+										<p class="text-xs text-slate-500 mt-0.5">{u.note}</p>
+									</div>
+									<Badge variant="blue" size="xs" class="shrink-0">{u.rank}</Badge>
+								</div>
+							))}
+						</div>
+					</div>
+
+					<!-- International Branch Campuses -->
+					<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+								<Globe class="w-5 h-5" />
+							</div>
+							<div>
+								<h3 class="text-xl font-bold text-slate-900">International Branch Campuses</h3>
+								<p class="text-xs sm:text-sm text-slate-500">UK and Australian universities awarding direct parent-institution degrees</p>
+							</div>
+						</div>
+						<div class="space-y-4">
+							{branchCampuses.map((u) => (
+								<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start justify-between gap-4">
+									<div>
+										<h4 class="font-bold text-slate-900 text-sm">{u.name}</h4>
+										<p class="text-xs text-slate-500 mt-0.5">{u.note}</p>
+									</div>
+									<Badge variant="emerald" size="xs" class="shrink-0">{u.rank}</Badge>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 4. Requirements to Study in Malaysia -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100" id="requirements">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Admission Criteria</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Requirements to Study in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Academic standards, language scores, and application criteria for undergraduate, master's, and doctorate admissions.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+				<!-- Undergraduate -->
+				<div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/90">
+					<span class="text-xs uppercase font-extrabold tracking-wider text-brand-600 block mb-2">Bachelor Degree</span>
+					<h3 class="text-lg font-bold text-slate-900 mb-3">Undergraduate Programs</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>HSC / A-Level / Alim with minimum GPA of 3.50 out of 5.00</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>12 years of formal schooling or recognized foundation equivalent</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Program-specific prerequisite subjects (e.g. Math for CS/Engineering)</span>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Postgraduate -->
+				<div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/90">
+					<span class="text-xs uppercase font-extrabold tracking-wider text-purple-600 block mb-2">Master Degree</span>
+					<h3 class="text-lg font-bold text-slate-900 mb-3">Postgraduate Programs</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Recognized Bachelor’s degree with min CGPA 2.50 out of 4.00</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Two academic or professional reference letters</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Relevant work experience and CV (specifically for Executive MBAs)</span>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Doctoral -->
+				<div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/90">
+					<span class="text-xs uppercase font-extrabold tracking-wider text-emerald-600 block mb-2">Doctorate (PhD)</span>
+					<h3 class="text-lg font-bold text-slate-900 mb-3">Doctoral Programs</h3>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Master’s degree with documented research coursework/thesis</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Comprehensive Research Proposal aligned with faculty advisors</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+							<span>Published peer-reviewed journal papers (where available)</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Language Proficiency Card -->
+			<div class="p-6 sm:p-8 rounded-3xl bg-brand-50/60 border border-brand-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+				<div class="max-w-3xl">
+					<span class="text-xs font-bold text-brand-700 uppercase tracking-wider block mb-1">Language Criteria</span>
+					<h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">English Language Requirements & MOI Flexibility</h3>
+					<p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+						Standard requirements range between IELTS 5.5 to 6.5 (or TOEFL / PTE equivalent). However, many universities accept an <strong>English Medium of Instruction (MOI) certificate</strong> or permit prospective students to take internal university placement exams upon arrival.
+					</p>
+				</div>
+				<Button
+					href={contactConfig.whatsappUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					variant="primary"
+					size="sm"
+					class="shrink-0"
+				>
+					Check Without IELTS Options
+				</Button>
+			</div>
+		</div>
+	</section>
+
+	<!-- 5. Intakes & Timelines to Study in Malaysia -->
+	<section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100" id="intakes">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Calendar & Deadlines</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Intakes to Study in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Plan your academic timeline. Apply at least 3 months ahead of your intended intake session to allow for seamless EMGS visa clearance.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+				<!-- Public Universities Intakes -->
+				<div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between">
+					<div>
+						<div class="flex items-center gap-3 mb-4">
+							<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
+								<Calendar class="w-5 h-5" />
+							</div>
+							<div>
+								<h3 class="text-lg font-bold text-slate-900">Public Universities (2 Intakes/Year)</h3>
+								<p class="text-xs text-slate-500">Government admissions calendar</p>
+							</div>
+						</div>
+						<div class="space-y-3 mt-4">
+							<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+								<span class="text-xs font-bold text-brand-600 uppercase">Main Intake Season</span>
+								<h4 class="font-bold text-slate-900 text-base mt-0.5">September / October</h4>
+								<p class="text-xs text-slate-500 mt-1">Offers the complete roster of undergraduate, master's, and STEM research courses.</p>
+							</div>
+							<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+								<span class="text-xs font-bold text-slate-600 uppercase">Secondary Intake</span>
+								<h4 class="font-bold text-slate-900 text-base mt-0.5">February / March</h4>
+								<p class="text-xs text-slate-500 mt-1">Select faculties, postgraduate by research, and modular admissions.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Private Universities Intakes -->
+				<div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-xs">
+					<div class="flex items-center gap-3 mb-4">
+						<div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+							<Clock class="w-5 h-5" />
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-slate-900">Private Universities (Flexible 3 Intakes/Year)</h3>
+							<p class="text-xs text-slate-500">Fast enrollment windows throughout the year</p>
+						</div>
+					</div>
+
+					<div class="overflow-x-auto mt-4">
+						<table class="w-full text-left text-xs sm:text-sm border-collapse">
+							<thead>
+								<tr class="bg-slate-50 border-y border-slate-100 text-slate-700 font-semibold">
+									<th class="py-2.5 px-3">Intake Period</th>
+									<th class="py-2.5 px-3">Application Deadline</th>
+									<th class="py-2.5 px-3">Recommended Submission</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-slate-100">
+								{privateIntakes.map((i) => (
+									<tr class="hover:bg-slate-50/50">
+										<td class="py-3 px-3 font-semibold text-slate-900">{i.session}</td>
+										<td class="py-3 px-3 text-red-600 font-medium">{i.deadline}</td>
+										<td class="py-3 px-3 text-slate-600">{i.recommended}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 6. Cost of Studying in Malaysia (Public vs Private & Living Costs) -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100" id="costs">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Tuition & Living Budgets</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Cost of Studying in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Affordable tuition benchmarks in Malaysian Ringgit (MYR) with direct Bangladeshi Taka (BDT) equivalent calculations.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+				<!-- Public Universities Tuition -->
+				<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
+					<h3 class="text-lg font-bold text-slate-900 mb-1">Public Universities Tuition Fees</h3>
+					<p class="text-xs text-slate-500 mb-5">Subsidized government university standard rates</p>
+					<div class="overflow-x-auto">
+						<table class="w-full text-left text-xs sm:text-sm border-collapse">
+							<thead>
+								<tr class="bg-slate-50 border-y border-slate-100 text-slate-700 font-semibold">
+									<th class="py-2.5 px-3">Study Level</th>
+									<th class="py-2.5 px-3">Annual Fees (MYR)</th>
+									<th class="py-2.5 px-3">BDT Equivalent</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-slate-100">
+								{publicCostTable.map((t) => (
+									<tr>
+										<td class="py-3 px-3 font-medium text-slate-900">{t.level}</td>
+										<td class="py-3 px-3 font-mono text-brand-700">{t.myr}</td>
+										<td class="py-3 px-3 font-mono text-emerald-700 font-semibold">{t.bdt}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Private Universities Tuition -->
+				<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-xs">
+					<h3 class="text-lg font-bold text-slate-900 mb-1">Private Universities Tuition Fees</h3>
+					<p class="text-xs text-slate-500 mb-5">Independent institutions & dual-award universities</p>
+					<div class="overflow-x-auto">
+						<table class="w-full text-left text-xs sm:text-sm border-collapse">
+							<thead>
+								<tr class="bg-slate-50 border-y border-slate-100 text-slate-700 font-semibold">
+									<th class="py-2.5 px-3">Study Level</th>
+									<th class="py-2.5 px-3">Annual Fees (MYR)</th>
+									<th class="py-2.5 px-3">BDT Equivalent</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-slate-100">
+								{privateCostTable.map((t) => (
+									<tr>
+										<td class="py-3 px-3 font-medium text-slate-900">{t.level}</td>
+										<td class="py-3 px-3 font-mono text-brand-700">{t.myr}</td>
+										<td class="py-3 px-3 font-mono text-emerald-700 font-semibold">{t.bdt}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Living Costs Summary Callout -->
+			<div class="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/90 grid grid-cols-1 md:grid-cols-3 gap-6">
+				<div>
+					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Accommodation</span>
+					<h4 class="text-base font-bold text-slate-900">RM 400 – RM 1,000 / mo</h4>
+					<p class="text-xs text-slate-500 mt-1">On-campus university halls or off-campus condominiums near metro lines (LRT/MRT).</p>
+				</div>
+				<div>
+					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Food & Groceries</span>
+					<h4 class="text-base font-bold text-slate-900">RM 600 – RM 900 / mo</h4>
+					<p class="text-xs text-slate-500 mt-1">Extensive halal food stalls, mamak cafes, and Bangladeshi dining venues across town.</p>
+				</div>
+				<div>
+					<span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Total Monthly Budget</span>
+					<h4 class="text-base font-bold text-emerald-700">~RM 1,200 – RM 1,800 / mo</h4>
+					<p class="text-xs text-slate-500 mt-1">Total living cost is approximately BDT 32,000 to 48,000 per month including local transit.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 7. Scholarships to Study in Malaysia -->
+	<section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100" id="scholarships">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Funding & Grants</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Scholarships to Study in Malaysia</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Government funding initiatives and university-specific merit awards for qualifying Bangladeshi applicants.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{scholarshipsList.map((s) => (
+					<div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-xs flex flex-col justify-between">
+						<div>
+							<Badge variant="emerald" size="xs" class="mb-3">{s.type}</Badge>
+							<h3 class="text-lg font-bold text-slate-900 mb-2">{s.title}</h3>
+							<p class="text-slate-600 text-xs sm:text-sm leading-relaxed">{s.details}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- 8. Post-Study Work Opportunities in Malaysia -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100" id="work-opportunities">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Career Horizons</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Post-Study Work Opportunities</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Gain hands-on global professional exposure through part-time student work, corporate internships, and emerging tech hubs in Southeast Asia.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				<div class="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/90">
+					<div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center mb-4">
+						<Briefcase class="w-5 h-5" />
+					</div>
+					<h3 class="text-xl font-bold text-slate-900 mb-3">Part-Time Work During Studies</h3>
+					<p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+						International students in Malaysia are permitted to work up to 20 hours per week during semester breaks and holidays of more than seven days in restaurants, petrol kiosks, mini markets, and hotels.
+					</p>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+						<li class="flex items-center gap-2"><CircleCheck class="w-4 h-4 text-emerald-600 shrink-0" /> Supplement living costs during academic semesters</li>
+						<li class="flex items-center gap-2"><CircleCheck class="w-4 h-4 text-emerald-600 shrink-0" /> Gain valuable cross-cultural work communication skills</li>
+					</ul>
+				</div>
+
+				<div class="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/90">
+					<div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+						<Globe class="w-5 h-5" />
+					</div>
+					<h3 class="text-xl font-bold text-slate-900 mb-3">Post-Graduation Employment</h3>
+					<p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+						Malaysia serves as the regional headquarters for hundreds of Fortune 500 multinationals (MNCs) in Greater Kuala Lumpur, Cyberjaya, and Penang, generating high demand for bilingual engineering, software, and finance professionals.
+					</p>
+					<ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+						<li class="flex items-center gap-2"><CircleCheck class="w-4 h-4 text-emerald-600 shrink-0" /> Digital Economy (MDEC) & Tech Innovation Hubs</li>
+						<li class="flex items-center gap-2"><CircleCheck class="w-4 h-4 text-emerald-600 shrink-0" /> Strategic stepping stone for ASEAN & global career mobility</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 9. Frequently Asked Questions (FAQ) -->
+	<section class="py-16 lg:py-20 bg-slate-50 border-t border-slate-100" id="faq">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mb-12">
+				<Badge variant="blue" size="sm" class="mb-2">Clarifications</Badge>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					Everything Bangladeshi students and parents need to know about Malaysian higher education and student visas.
+				</p>
+			</div>
+
+			<div class="max-w-4xl mx-auto space-y-4">
+				{faqs.map((faq) => (
+					<details class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs">
+						<summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer select-none font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition-colors">
+							<span>{faq.q}</span>
+							<span class="w-7 h-7 rounded-full bg-slate-100 group-open:bg-brand-50 text-slate-500 group-open:text-brand-600 flex items-center justify-center shrink-0 ml-4 group-open:rotate-90 transition-transform">
+								<ChevronRight class="w-4 h-4" />
+							</span>
+						</summary>
+						<div class="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100/60">
+							{faq.a}
+						</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Step by Step Recruitment Roadmap -->
+	<section class="py-16 lg:py-20 bg-white border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14">
+				<span class="text-xs font-bold text-brand-600 tracking-wider uppercase mb-2 block">Application Roadmap</span>
+				<h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">How to Apply with MSVC</h2>
+				<p class="text-slate-500 text-sm sm:text-base mt-2">
+					A transparent 4-step journey from submitting your academic transcripts to receiving your student visa and landing in Malaysia.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+				{steps.map((s) => (
+					<div class="relative p-6 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex flex-col justify-between">
+						<div>
+							<span class="text-3xl font-black text-brand-600/30 mb-3 block">{s.step}</span>
+							<h3 class="text-base font-bold text-slate-900 mb-2">{s.title}</h3>
+							<p class="text-slate-500 text-xs sm:text-sm leading-relaxed">{s.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Documents Checklist Section -->
+	<section class="py-16 bg-slate-50 border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl mx-auto rounded-3xl bg-white border border-slate-200/90 p-8 sm:p-10">
+				<div class="flex items-center gap-3 mb-6">
+					<div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+						<FileText class="w-5 h-5" />
+					</div>
+					<div>
+						<h3 class="text-xl sm:text-2xl font-bold text-slate-900">Required Documents Checklist</h3>
+						<p class="text-xs sm:text-sm text-slate-500">Prepare soft copies (PDF/Clear Scans) for immediate assessment</p>
+					</div>
+				</div>
+
+				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Passport all pages (min. 18 months validity)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>High School / HSC / O & A-Level Certificate & Transcripts</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Passport-size photo with white background (35x45mm)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Bachelor Degree Certificate & Transcripts (for Master/PhD)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>IELTS / TOEFL / PTE score sheet (if already taken)</span>
+					</li>
+					<li class="flex items-start gap-2.5">
+						<CircleCheck class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+						<span>Updated CV / Resume (for postgraduate applicants)</span>
+					</li>
+				</ul>
+
+				<div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+					<span class="text-xs text-slate-500 text-center sm:text-left">
+						Need help scanning or checking your certificate equivalents?
+					</span>
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="sm"
+					>
+						Send Documents via WhatsApp
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Bottom Consultation Banner -->
+	<section class="py-16 bg-white border-t border-slate-100">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="bg-linear-to-r from-brand-900 to-brand-800 rounded-3xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8">
+				<div class="max-w-2xl">
+					<span class="text-brand-300 text-xs font-bold tracking-wider uppercase mb-2 block">Direct Admission Assistance</span>
+					<h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">
+						Ready to Begin Your Malaysian Degree?
+					</h2>
+					<p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+						Speak directly with an MSVC senior counselor on WhatsApp. We will evaluate your profile, recommend the highest scholarship options, and guide you through the EMGS visa timeline.
+					</p>
+				</div>
+				<div class="shrink-0 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+					<Button
+						href={contactConfig.whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="primary"
+						size="lg"
+						class="w-full sm:w-auto justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-lg shadow-[#25D366]/30 active:scale-[0.98] border border-white/20"
+					>
+						<svg slot="leading" class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+							<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+						</svg>
+						<span>Chat on WhatsApp</span>
+					</Button>
+					<Button
+						href={`mailto:${contactConfig.email}?subject=Student%20Recruitment%20Inquiry`}
+						variant="outline"
+						size="lg"
+						iconLeading={Mail}
+						class="w-full sm:w-auto justify-center bg-white/10 text-white hover:bg-white/20 border-white/20"
+					>
+						Email Us
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
