@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import { ArrowRight, Handshake, ShieldCheck, SlidersHorizontal, UserCheck } from '@lucide/astro';
-import Button from '@/components/ui/Button.astro';
+import { contactConfig } from '@/utils/contact';
 import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 ---
 
-<section class="py-20 bg-white border-t border-slate-100 overflow-hidden" id="about">
+<section class="py-20 bg-slate-50 border-t border-slate-100 overflow-hidden" id="about">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="grid lg:grid-cols-12 gap-12 items-center">
 			<div class="lg:col-span-7">
@@ -18,7 +18,7 @@ import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 				</p>
 
 				<div class="grid sm:grid-cols-2 gap-6 mb-8">
-					<div class="flex items-start gap-4">
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
 						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
 							<UserCheck class="w-5 h-5" />
 						</div>
@@ -27,7 +27,7 @@ import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 							<p class="text-xs text-slate-500 leading-relaxed">Direct consultation on VAL approvals, medical clearance, and immigration rules.</p>
 						</div>
 					</div>
-					<div class="flex items-start gap-4">
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
 						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
 							<Handshake class="w-5 h-5" />
 						</div>
@@ -36,7 +36,7 @@ import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 							<p class="text-xs text-slate-500 leading-relaxed">Direct representations with premier public and private universities in KL & across Malaysia.</p>
 						</div>
 					</div>
-					<div class="flex items-start gap-4">
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
 						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
 							<SlidersHorizontal class="w-5 h-5" />
 						</div>
@@ -45,7 +45,7 @@ import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 							<p class="text-xs text-slate-500 leading-relaxed">No hidden charges. Clear roadmap from offer letter to airport arrival in Malaysia.</p>
 						</div>
 					</div>
-					<div class="flex items-start gap-4">
+					<div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-xs">
 						<div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center shrink-0">
 							<ShieldCheck class="w-5 h-5" />
 						</div>
@@ -56,9 +56,15 @@ import whyChooseUsImg from '@/assets/images/why-choose-us.png';
 					</div>
 				</div>
 
-				<Button href="#about" variant="primary" size="md" iconTrailing={ArrowRight}>
-					Learn More
-				</Button>
+				<a
+					href={contactConfig.whatsappUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors group"
+				>
+					<span>Speak with an Advisor on WhatsApp</span>
+					<ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+				</a>
 			</div>
 
 			<div class="lg:col-span-5 flex justify-center relative">
