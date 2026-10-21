@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FeatureCard from '@/components/cards/FeatureCard.astro';
 import { CircleAlert, CircleCheck, GraduationCap, Scale } from '@lucide/astro';
+import { contactConfig } from '@/utils/contact';
 
 const lastUpdated = 'October 15, 2026';
 
@@ -29,7 +30,7 @@ const features = [
 	description="Review the service terms, student responsibilities, fee transparency, and consultancy agreement for university admission and EMGS visa support with MSVC."
 >
 	<!-- Hero Header with same max-w-7xl grid as home page -->
-	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-[#F8FAFC]">
+	<section class="relative overflow-hidden pt-12 pb-8 lg:pt-16 lg:pb-10 bg-linear-to-b from-white via-blue-50/20 to-slate-50">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
 				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
@@ -134,7 +135,7 @@ const features = [
 						6. Governing Law & Contact
 					</h2>
 					<p>
-						These terms are governed by the applicable laws of Malaysia. For inquiries or clarification regarding these Terms & Conditions, please contact us at <a href="mailto:ssss@gmail.com" class="font-semibold text-brand-600 hover:text-brand-700 underline underline-offset-2">ssss@gmail.com</a>.
+						These terms are governed by the applicable laws of Malaysia. For inquiries or clarification regarding these Terms & Conditions, please contact us at <a href={`mailto:${contactConfig.email}`} class="font-semibold text-brand-600 hover:text-brand-700 underline underline-offset-2">{contactConfig.email}</a>.
 					</p>
 				</div>
 			</div>
